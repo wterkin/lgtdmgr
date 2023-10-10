@@ -1,0 +1,8 @@
+backup/*
+lib/*
+*.db
+*.dll
+*.dbg
+*.exe
+*.res
+ppas.bat

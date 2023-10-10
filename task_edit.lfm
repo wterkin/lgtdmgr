@@ -1,0 +1,174 @@
+object fmTaskEdit: TfmTaskEdit
+  Left = 655
+  Height = 409
+  Top = 332
+  Width = 653
+  BorderStyle = bsDialog
+  Caption = 'Свойства задачи'
+  ClientHeight = 409
+  ClientWidth = 653
+  LCLVersion = '2.2.6.0'
+  object Panel1: TPanel
+    Left = 8
+    Height = 344
+    Top = 8
+    Width = 634
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    ClientHeight = 344
+    ClientWidth = 634
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 616
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Наименование задачи'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object edTaskName: TEdit
+      Left = 8
+      Height = 26
+      Top = 40
+      Width = 616
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -15
+      Font.Name = 'Verdana'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
+      TabOrder = 0
+    end
+    object Label2: TLabel
+      Left = 8
+      Height = 25
+      Top = 72
+      Width = 616
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Содержание задачи'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object meContent: TMemo
+      Left = 8
+      Height = 192
+      Top = 104
+      Width = 616
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -15
+      Font.Name = 'Verdana'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
+      TabOrder = 1
+    end
+    object Label3: TLabel
+      Left = 16
+      Height = 25
+      Top = 304
+      Width = 160
+      AutoSize = False
+      Caption = 'Крайний срок сдачи'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object DateTimePicker1: TDateTimePicker
+      Left = 176
+      Height = 23
+      Top = 305
+      Width = 79
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 2
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 45209
+      Time = 0.66085303240834
+      UseDefaultSeparators = True
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+    end
+    object Label4: TLabel
+      Left = 440
+      Height = 25
+      Top = 304
+      Width = 72
+      AutoSize = False
+      Caption = 'Контекст'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object cbContentFilter: TComboBox
+      Left = 524
+      Height = 26
+      Top = 303
+      Width = 100
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ItemHeight = 18
+      ParentFont = False
+      Style = csDropDownList
+      TabOrder = 3
+    end
+  end
+  object bbtOk: TBitBtn
+    Left = 327
+    Height = 30
+    Top = 368
+    Width = 155
+    Caption = 'Принять'
+    ImageIndex = 1
+    OnClick = bbtOkClick
+    TabOrder = 1
+  end
+  object bbtCancel: TBitBtn
+    Left = 487
+    Height = 30
+    Top = 368
+    Width = 155
+    Caption = 'Отмена'
+    ModalResult = 2
+    ImageIndex = 8
+    TabOrder = 2
+  end
+  object qrTaskEdit: TSQLQuery
+    FieldDefs = <>
+    Params = <>
+    Macros = <>
+    Left = 24
+    Top = 360
+  end
+end
