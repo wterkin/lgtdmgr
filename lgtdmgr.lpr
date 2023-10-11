@@ -20,7 +20,7 @@ begin
 			Application.Scaled:=True;
       Application.Initialize;
 		Application.CreateForm(TfmMain, fmMain);
-		Application.CreateForm(TfrmTaskEdit, frmTaskEdit);
+		Application.CreateForm(TfmTaskEdit, fmTaskEdit);
       Application.Run;
 end.
 

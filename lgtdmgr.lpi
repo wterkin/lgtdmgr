@@ -50,7 +50,7 @@
       <Unit>
         <Filename Value="task_edit.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="frmTaskEdit"/>
+        <ComponentName Value="fmTaskEdit"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>

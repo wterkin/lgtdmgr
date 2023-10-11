@@ -91,7 +91,7 @@ object fmTaskEdit: TfmTaskEdit
       ParentColor = False
       ParentFont = False
     end
-    object DateTimePicker1: TDateTimePicker
+    object dtpDeadLine: TDateTimePicker
       Left = 176
       Height = 23
       Top = 305
@@ -128,7 +128,7 @@ object fmTaskEdit: TfmTaskEdit
       ParentColor = False
       ParentFont = False
     end
-    object cbContentFilter: TComboBox
+    object cbContexts: TComboBox
       Left = 524
       Height = 26
       Top = 303
@@ -150,6 +150,7 @@ object fmTaskEdit: TfmTaskEdit
     Top = 368
     Width = 155
     Caption = 'Принять'
+    Images = fmMain.ImageList
     ImageIndex = 1
     OnClick = bbtOkClick
     TabOrder = 1
@@ -161,14 +162,26 @@ object fmTaskEdit: TfmTaskEdit
     Width = 155
     Caption = 'Отмена'
     ModalResult = 2
+    Images = fmMain.ImageList
     ImageIndex = 8
     TabOrder = 2
   end
-  object qrTaskEdit: TSQLQuery
+  object qrTask: TSQLQuery
     FieldDefs = <>
+    Database = fmMain.SQLite
+    Transaction = fmMain.Transaction
     Params = <>
     Macros = <>
     Left = 24
+    Top = 360
+  end
+  object qrTaskEx: TSQLQuery
+    FieldDefs = <>
+    Database = fmMain.SQLite
+    Transaction = fmMain.Transaction
+    Params = <>
+    Macros = <>
+    Left = 88
     Top = 360
   end
 end

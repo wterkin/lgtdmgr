@@ -75,7 +75,7 @@ object fmMain: TfmMain
       ParentFont = False
       TabOrder = 2
     end
-    object bbtDelayed: TBitBtn
+    object bbtToTrash: TBitBtn
       Left = 448
       Height = 30
       Top = 34
@@ -195,14 +195,14 @@ object fmMain: TfmMain
     Columns = <    
       item
         Title.Caption = 'Входящие'
-        FieldName = 'ainput'
+        FieldName = 'fname'
       end>
     DataSource = dsInput
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 2
     OnCellClick = dbgInputCellClick
   end
-  object dbgToWork: TDBGrid
+  object dbgWork: TDBGrid
     Left = 224
     Height = 313
     Top = 67
@@ -212,14 +212,13 @@ object fmMain: TfmMain
     Color = clWindow
     Columns = <    
       item
-        Title.Caption = 'В работу'
-        FieldName = 'atodo'
+        Title.Caption = 'К исполнению'
+        FieldName = 'fname'
       end>
-    DataSource = dsToWork
-    DefaultDrawing = False
+    DataSource = dsWork
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 3
-    OnCellClick = dbgToWorkCellClick
+    OnCellClick = dbgWorkCellClick
   end
   object Splitter1: TSplitter
     Left = 216
@@ -246,7 +245,7 @@ object fmMain: TfmMain
     Columns = <    
       item
         Title.Caption = 'Корзина'
-        FieldName = 'atrash'
+        FieldName = 'fname'
       end>
     DataSource = dsTrash
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
@@ -271,7 +270,7 @@ object fmMain: TfmMain
     Columns = <    
       item
         Title.Caption = 'Сделано'
-        FieldName = 'adone'
+        FieldName = 'fname'
       end>
     DataSource = dsDone
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
@@ -297,36 +296,7 @@ object fmMain: TfmMain
   object qrInput: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
     MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'id'
-        DataType = ftAutoInc
-        Precision = -1
-      end    
-      item
-        Name = 'ainput'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end    
-      item
-        Name = 'atodo'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end    
-      item
-        Name = 'adone'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end    
-      item
-        Name = 'atrash'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end>
+    FieldDefs = <>
     Database = SQLite
     Transaction = Transaction
     SQL.Strings = (
@@ -342,38 +312,13 @@ object fmMain: TfmMain
     Left = 120
     Top = 328
   end
-  object qrToWork: TSQLQuery
+  object qrWork: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
     MaxIndexesCount = 4
     FieldDefs = <    
       item
-        Name = 'id'
-        DataType = ftAutoInc
-        Precision = -1
-      end    
-      item
-        Name = 'ainput'
+        Name = 'fname'
         DataType = ftString
-        Precision = -1
-        Size = 255
-      end    
-      item
-        Name = 'atodo'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end    
-      item
-        Name = 'adone'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end    
-      item
-        Name = 'atrash'
-        DataType = ftString
-        Precision = -1
-        Size = 255
       end>
     Database = SQLite
     Transaction = Transaction
@@ -388,36 +333,7 @@ object fmMain: TfmMain
   object qrTrash: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
     MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'id'
-        DataType = ftAutoInc
-        Precision = -1
-      end    
-      item
-        Name = 'ainput'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end    
-      item
-        Name = 'atodo'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end    
-      item
-        Name = 'adone'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end    
-      item
-        Name = 'atrash'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end>
+    FieldDefs = <>
     Database = SQLite
     Transaction = Transaction
     SQL.Strings = (
@@ -431,18 +347,7 @@ object fmMain: TfmMain
   object qrDone: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
     MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'id'
-        DataType = ftAutoInc
-        Precision = -1
-      end    
-      item
-        Name = 'adone'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end>
+    FieldDefs = <>
     Database = SQLite
     Transaction = Transaction
     SQL.Strings = (
@@ -453,9 +358,9 @@ object fmMain: TfmMain
     Left = 840
     Top = 328
   end
-  object dsToWork: TDataSource
-    DataSet = qrToWork
-    Left = 344
+  object dsWork: TDataSource
+    DataSet = qrWork
+    Left = 336
     Top = 328
   end
   object dsTrash: TDataSource
@@ -696,11 +601,13 @@ object fmMain: TfmMain
       Category = 'Тулбар'
       Hint = 'Изменить задачу'
       ImageIndex = 4
+      OnExecute = actChangeTaskExecute
     end
     object actDeleteTask: TAction
       Category = 'Тулбар'
       Hint = 'Удалить задачу'
       ImageIndex = 6
+      OnExecute = actDeleteTaskExecute
     end
     object actQuit: TAction
       Category = 'Тулбар'
@@ -716,6 +623,15 @@ object fmMain: TfmMain
     Params = <>
     Macros = <>
     Left = 912
+    Top = 304
+  end
+  object qrTaskExt: TSQLQuery
+    FieldDefs = <>
+    Database = SQLite
+    Transaction = Transaction
+    Params = <>
+    Macros = <>
+    Left = 984
     Top = 304
   end
 end
