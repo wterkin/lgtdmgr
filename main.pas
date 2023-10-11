@@ -18,6 +18,7 @@ type
       TfmMain = class(TForm)
 						actChangeTask : TAction;
 						actDeleteTask : TAction;
+						actSetup : TAction;
 						actQuit : TAction;
 						actNewTask : TAction;
 					  actToCompleted : TAction;
@@ -62,6 +63,7 @@ type
 				procedure actDeleteTaskExecute(Sender : TObject);
         procedure actNewTaskExecute(Sender : TObject);
         procedure actQuitExecute(Sender : TObject);
+				procedure actSetupExecute(Sender : TObject);
         procedure actToCompletedExecute(Sender : TObject);
 		    procedure actToInputBoxExecute(Sender : TObject);
 				procedure actToTrashBinExecute(Sender : TObject);
@@ -351,6 +353,13 @@ begin
 end;
 
 
+procedure TfmMain.actSetupExecute(Sender : TObject);
+begin
+
+  //
+end;
+
+
 procedure TfmMain.actNewTaskExecute(Sender : TObject);
 begin
 
@@ -365,6 +374,7 @@ begin
   fmTaskEdit.viewRecord();
   reopenTable();
 end;
+
 
 procedure TfmMain.actDeleteTaskExecute(Sender : TObject);
 begin
