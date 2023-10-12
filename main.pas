@@ -7,7 +7,7 @@ interface
 uses
       Classes, SysUtils, SQLite3Conn, SQLDB, DB, Forms, Controls, Graphics,
 			Dialogs, ExtCtrls, ComCtrls, DBGrids, StdCtrls, Buttons, ActnList, Windows
-      , task_edit
+      , task_edit, setup
       , tapp , tdb, tmsg, tlookup
       ;
 
@@ -121,7 +121,9 @@ const csSQLCreateContextsTable =
         '         autoincrement not null on conflict abort '+
         '         unique on conflict abort,'#13+
         '    "fname" text not null on conflict abort,'#13+
-        '    "fstatus" integer not null on conflict abort default(1)'#13+
+        '    "fstatus" integer not null on conflict abort default(1),'#13+
+        '    "fcreated" datetime, '#13+
+        '    "fupdated" datetime '#13+
         ');';
 
       csSQLCreateTasksTable =
@@ -135,6 +137,8 @@ const csSQLCreateContextsTable =
         '    "fdeadline" datetime, '#13+
         '    "fstate" integer not null on conflict abort default(1),'#13+
         '    "fstatus" integer not null on conflict abort default(1),'#13+
+        '    "fcreated" datetime, '#13+
+        '    "fupdated" datetime, '#13+
         '    foreign key(fcontext) references tblcontexts(id)'#13+
         ');';
 
@@ -204,10 +208,10 @@ begin
     SQLite.Connected := True;
 
     EnableMovingActions(False);
-    dbgInput.Columns[0].Width := dbgInput.Width - ciColumnWidthDiff;
-    dbgWork.Columns[0].Width := dbgWork.Width - ciColumnWidthDiff;
-    dbgTrash.Columns[0].Width := dbgTrash.Width - ciColumnWidthDiff;
-    dbgDone.Columns[0].Width := dbgDone.Width - ciColumnWidthDiff;
+    //dbgInput.Columns[0].Width := dbgInput.Width - ciColumnWidthDiff;
+    //dbgWork.Columns[0].Width := dbgWork.Width - ciColumnWidthDiff;
+    //dbgTrash.Columns[0].Width := dbgTrash.Width - ciColumnWidthDiff;
+    //dbgDone.Columns[0].Width := dbgDone.Width - ciColumnWidthDiff;
 
     moContextsCombo := TEasyLookupCombo.Create();
     moContextsCombo.setComboBox(cbContexts);
@@ -356,7 +360,8 @@ end;
 procedure TfmMain.actSetupExecute(Sender : TObject);
 begin
 
-  //
+  fmSetup.ShowModal();
+  reopenTable();
 end;
 
 
@@ -418,6 +423,7 @@ procedure TfmMain.reopenTable;
 const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext'#13+
 						      '  from tbltasks'#13+
                   ' where fstate = :pstate';
+//var      i:integer;
 begin
 
   try

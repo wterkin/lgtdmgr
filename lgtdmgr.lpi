@@ -58,6 +58,7 @@
         <Filename Value="setup.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmSetup"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
     </Units>

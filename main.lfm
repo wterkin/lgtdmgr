@@ -194,10 +194,12 @@ object fmMain: TfmMain
     Width = 216
     Align = alLeft
     AutoEdit = False
+    AutoFillColumns = True
     Color = clWindow
     Columns = <    
       item
         Title.Caption = 'Входящие'
+        Width = 183
         FieldName = 'fname'
       end>
     DataSource = dsInput
@@ -212,10 +214,12 @@ object fmMain: TfmMain
     Width = 216
     Align = alLeft
     AutoEdit = False
+    AutoFillColumns = True
     Color = clWindow
     Columns = <    
       item
         Title.Caption = 'К исполнению'
+        Width = 183
         FieldName = 'fname'
       end>
     DataSource = dsWork
@@ -244,10 +248,12 @@ object fmMain: TfmMain
     Width = 216
     Align = alLeft
     AutoEdit = False
+    AutoFillColumns = True
     Color = clWindow
     Columns = <    
       item
         Title.Caption = 'Корзина'
+        Width = 183
         FieldName = 'fname'
       end>
     DataSource = dsTrash
@@ -269,10 +275,12 @@ object fmMain: TfmMain
     Width = 216
     Align = alLeft
     AutoEdit = False
+    AutoFillColumns = True
     Color = clWindow
     Columns = <    
       item
         Title.Caption = 'Сделано'
+        Width = 183
         FieldName = 'fname'
       end>
     DataSource = dsDone

@@ -62,7 +62,8 @@ const csInsertSQL =
 		    '                      ftext,'#13+
 		    '                      fdeadline,'#13+
 		    '                      fstate,'#13+
-		    '                      fstatus'#13+
+		    '                      fstatus,'#13+
+		    '                      fcreated'#13+
 		    '                  )'#13+
 		    '                  VALUES ('#13+
 		    '                      :pcontext,'#13+
@@ -70,14 +71,16 @@ const csInsertSQL =
 		    '                      :ptext,'#13+
 		    '                      :pdeadline,'#13+
 		    '                      1,'#13+
-		    '                      1'#13+
+		    '                      1,'#13+
+		    '                      :pcreated'#13+
 		    '                  );'#13;
       csUpdateSQL =
         'UPDATE tbltasks'#13+
         '  SET fcontext = :pcontext,'#13+
         '      fname = :pname,'#13+
         '      ftext = :ptext,'#13+
-        '      fdeadline = :pdeadline'#13+
+        '      fdeadline = :pdeadline,'#13+
+        '      fupdated = :pupdated'#13+
         '  WHERE id = :pid'#13;
 begin
 
@@ -137,6 +140,11 @@ begin
   begin
 
     qrTaskEx.ParamByName('pid').AsInteger := MainForm.getLastRecordID();
+    qrTaskEx.ParamByName('pupdated').AsDateTime := Now;
+  end else
+  begin
+
+    qrTaskEx.ParamByName('pcreated').AsDateTime := Now;
 	end;
 end;
 
