@@ -12,13 +12,13 @@ object fmMain: TfmMain
   LCLVersion = '2.2.6.0'
   object Panel1: TPanel
     Left = 0
-    Height = 67
+    Height = 35
     Top = 0
     Width = 1027
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvLowered
-    ClientHeight = 67
+    ClientHeight = 35
     ClientWidth = 1027
     TabOrder = 0
     object cbContexts: TComboBox
@@ -43,38 +43,6 @@ object fmMain: TfmMain
       TabOrder = 0
       Text = 'Все'
     end
-    object bbtToDone: TBitBtn
-      Left = 672
-      Height = 30
-      Top = 34
-      Width = 216
-      Action = actToCompleted
-      Font.CharSet = RUSSIAN_CHARSET
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Pitch = fpVariable
-      Font.Quality = fqDraft
-      Images = ImageList
-      ImageIndex = 1
-      ParentFont = False
-      TabOrder = 1
-    end
-    object bbtToTrash: TBitBtn
-      Left = 448
-      Height = 30
-      Top = 34
-      Width = 216
-      Action = actToTrashBin
-      Font.CharSet = RUSSIAN_CHARSET
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Pitch = fpVariable
-      Font.Quality = fqDraft
-      Images = ImageList
-      ImageIndex = 2
-      ParentFont = False
-      TabOrder = 2
-    end
     object cbPeriod: TComboBox
       Left = 483
       Height = 26
@@ -97,7 +65,7 @@ object fmMain: TfmMain
       )
       ParentFont = False
       Style = csDropDownList
-      TabOrder = 3
+      TabOrder = 1
       Text = 'За неделю'
     end
     object SpeedButton1: TSpeedButton
@@ -159,70 +127,25 @@ object fmMain: TfmMain
     Cursor = crVSplit
     Left = 0
     Height = 8
-    Top = 67
+    Top = 320
     Width = 1027
     Align = alTop
     Beveled = True
     ResizeAnchor = akTop
   end
-  object dbgTrash: TDBGrid
-    Left = 536
-    Height = 313
-    Top = 408
-    Width = 216
-    AutoEdit = False
-    AutoFillColumns = True
-    Color = clWindow
-    Columns = <    
-      item
-        Title.Caption = 'Корзина'
-        Width = 183
-        FieldName = 'fname'
-      end>
-    DataSource = dsTrash
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-    TabOrder = 3
-    OnCellClick = dbgTrashCellClick
-  end
-  object Splitter3: TSplitter
-    Left = 0
-    Height = 380
-    Top = 360
-    Width = 8
-    Beveled = True
-  end
-  object dbgDone: TDBGrid
-    Left = 768
-    Height = 313
-    Top = 408
-    Width = 216
-    AutoEdit = False
-    AutoFillColumns = True
-    Color = clWindow
-    Columns = <    
-      item
-        Title.Caption = 'Сделано'
-        Width = 183
-        FieldName = 'fname'
-      end>
-    DataSource = dsDone
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-    TabOrder = 5
-    OnCellClick = dbgDoneCellClick
-  end
   object Panel2: TPanel
     Left = 0
     Height = 285
-    Top = 75
+    Top = 35
     Width = 1027
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ClientHeight = 285
     ClientWidth = 1027
-    TabOrder = 6
+    TabOrder = 3
     object Splitter1: TSplitter
-      Left = 476
+      Left = 512
       Height = 281
       Top = 2
       Width = 8
@@ -232,18 +155,18 @@ object fmMain: TfmMain
       Left = 2
       Height = 281
       Top = 2
-      Width = 474
+      Width = 510
       Align = alLeft
       BevelInner = bvRaised
       BevelOuter = bvLowered
       ClientHeight = 281
-      ClientWidth = 474
+      ClientWidth = 510
       TabOrder = 1
       object bbtToInput: TBitBtn
         Left = 2
         Height = 30
         Top = 2
-        Width = 470
+        Width = 506
         Action = actToInputBox
         Align = alTop
         Font.CharSet = RUSSIAN_CHARSET
@@ -260,7 +183,7 @@ object fmMain: TfmMain
         Left = 2
         Height = 247
         Top = 32
-        Width = 470
+        Width = 506
         Align = alClient
         AutoEdit = False
         AutoFillColumns = True
@@ -268,7 +191,7 @@ object fmMain: TfmMain
         Columns = <        
           item
             Title.Caption = 'Входящие'
-            Width = 437
+            Width = 473
             FieldName = 'fname'
           end>
         DataSource = dsInput
@@ -278,21 +201,21 @@ object fmMain: TfmMain
       end
     end
     object Panel4: TPanel
-      Left = 484
+      Left = 520
       Height = 281
       Top = 2
-      Width = 541
+      Width = 505
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       ClientHeight = 281
-      ClientWidth = 541
+      ClientWidth = 505
       TabOrder = 2
       object bbtToWork: TBitBtn
         Left = 2
         Height = 30
         Top = 2
-        Width = 537
+        Width = 501
         Action = actToWork
         Align = alTop
         Font.CharSet = RUSSIAN_CHARSET
@@ -309,7 +232,7 @@ object fmMain: TfmMain
         Left = 2
         Height = 247
         Top = 32
-        Width = 537
+        Width = 501
         Align = alClient
         AutoEdit = False
         AutoFillColumns = True
@@ -317,7 +240,7 @@ object fmMain: TfmMain
         Columns = <        
           item
             Title.Caption = 'К исполнению'
-            Width = 504
+            Width = 468
             FieldName = 'fname'
           end>
         DataSource = dsWork
@@ -325,6 +248,123 @@ object fmMain: TfmMain
         TabOrder = 1
         OnCellClick = dbgWorkCellClick
       end
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Height = 412
+    Top = 328
+    Width = 1027
+    Align = alClient
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    ClientHeight = 412
+    ClientWidth = 1027
+    TabOrder = 4
+    object Panel6: TPanel
+      Left = 2
+      Height = 408
+      Top = 2
+      Width = 510
+      Align = alLeft
+      BevelInner = bvRaised
+      BevelOuter = bvLowered
+      ClientHeight = 408
+      ClientWidth = 510
+      TabOrder = 0
+      object bbtToTrash: TBitBtn
+        Left = 2
+        Height = 30
+        Top = 2
+        Width = 506
+        Action = actToTrashBin
+        Align = alTop
+        Font.CharSet = RUSSIAN_CHARSET
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Images = ImageList
+        ImageIndex = 2
+        ParentFont = False
+        TabOrder = 0
+      end
+      object dbgTrash: TDBGrid
+        Left = 2
+        Height = 374
+        Top = 32
+        Width = 506
+        Align = alClient
+        AutoEdit = False
+        AutoFillColumns = True
+        Color = clWindow
+        Columns = <        
+          item
+            Title.Caption = 'Корзина'
+            Width = 473
+            FieldName = 'fname'
+          end>
+        DataSource = dsTrash
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        OnCellClick = dbgTrashCellClick
+      end
+    end
+    object Panel7: TPanel
+      Left = 520
+      Height = 408
+      Top = 2
+      Width = 505
+      Align = alClient
+      BevelInner = bvRaised
+      BevelOuter = bvLowered
+      ClientHeight = 408
+      ClientWidth = 505
+      TabOrder = 1
+      object bbtToDone: TBitBtn
+        Left = 2
+        Height = 30
+        Top = 2
+        Width = 501
+        Action = actToCompleted
+        Align = alTop
+        Font.CharSet = RUSSIAN_CHARSET
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Images = ImageList
+        ImageIndex = 1
+        ParentFont = False
+        TabOrder = 0
+      end
+      object dbgDone: TDBGrid
+        Left = 2
+        Height = 374
+        Top = 32
+        Width = 501
+        Align = alClient
+        AutoEdit = False
+        AutoFillColumns = True
+        Color = clWindow
+        Columns = <        
+          item
+            Title.Caption = 'Сделано'
+            Width = 468
+            FieldName = 'fname'
+          end>
+        DataSource = dsDone
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        OnCellClick = dbgDoneCellClick
+      end
+    end
+    object Splitter3: TSplitter
+      Left = 512
+      Height = 408
+      Top = 2
+      Width = 8
+      Beveled = True
     end
   end
   object SQLite: TSQLite3Connection
