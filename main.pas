@@ -26,15 +26,15 @@ type
 					  actToInputBox : TAction;
 					  actToWork : TAction;
 					  ActionList : TActionList;
-					  bbtToInput : TBitBtn;
-					  bbtToWork : TBitBtn;
+						bbtToInput : TBitBtn;
 					  bbtToDone : TBitBtn;
 					  bbtToTrash : TBitBtn;
+						bbtToWork : TBitBtn;
 					  cbContexts : TComboBox;
 					  cbPeriod : TComboBox;
+						dbgInput : TDBGrid;
+						dbgWork : TDBGrid;
 					  dsInput : TDataSource;
-					  dbgInput : TDBGrid;
-					  dbgWork : TDBGrid;
 					  dbgTrash : TDBGrid;
 					  dbgDone : TDBGrid;
 					  dsWork : TDataSource;
@@ -42,6 +42,9 @@ type
 					  dsDone : TDataSource;
 					  ImageList : TImageList;
 					  Panel1 : TPanel;
+						Panel2 : TPanel;
+						Panel3 : TPanel;
+						Panel4 : TPanel;
 					  qrWork : TSQLQuery;
 					  qrTrash : TSQLQuery;
 					  qrDone : TSQLQuery;
@@ -50,7 +53,7 @@ type
 						SpeedButton3 : TSpeedButton;
 						SpeedButton4 : TSpeedButton;
 						SpeedButton5 : TSpeedButton;
-					  Splitter1 : TSplitter;
+						Splitter1 : TSplitter;
 					  Splitter2 : TSplitter;
 					  Splitter3 : TSplitter;
 					  SQLite : TSQLite3Connection;
