@@ -200,7 +200,7 @@ object fmMain: TfmMain
             FieldName = 'fname'
           end>
         DataSource = dsInput
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
         OnCellClick = dbgInputCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
@@ -254,7 +254,7 @@ object fmMain: TfmMain
             FieldName = 'fname'
           end>
         DataSource = dsWork
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
         OnCellClick = dbgWorkCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
@@ -320,9 +320,10 @@ object fmMain: TfmMain
             FieldName = 'fname'
           end>
         DataSource = dsTrash
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
         OnCellClick = dbgTrashCellClick
+        OnPrepareCanvas = dbgInputPrepareCanvas
       end
     end
     object Panel7: TPanel
@@ -373,9 +374,10 @@ object fmMain: TfmMain
             FieldName = 'fname'
           end>
         DataSource = dsDone
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
         OnCellClick = dbgDoneCellClick
+        OnPrepareCanvas = dbgInputPrepareCanvas
       end
     end
     object Splitter3: TSplitter

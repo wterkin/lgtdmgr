@@ -232,13 +232,20 @@ begin
 
     dbgInput.Columns[0].Width := ciDateColumnWidth;
     dbgInput.Columns[1].Width := dbgInput.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+    dbgInput.SelectedColor := $DDDDDD;
+    dbgInput.FocusColor:=clNavy;
     dbgWork.Columns[0].Width := ciDateColumnWidth;
     dbgWork.Columns[1].Width := dbgWork.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+    dbgWork.SelectedColor := $DDDDDD;
+    dbgWork.FocusColor:=clNavy;
     dbgTrash.Columns[0].Width := ciDateColumnWidth;
     dbgTrash.Columns[1].Width := dbgTrash.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+    dbgTrash.SelectedColor := $DDDDDD;
+    dbgTrash.FocusColor:=clNavy;
     dbgDone.Columns[0].Width := ciDateColumnWidth;
     dbgDone.Columns[1].Width := dbgDone.Width - (ciColumnWidthDiff + ciDateColumnWidth);
-
+    dbgDone.SelectedColor := $DDDDDD;
+    dbgDone.FocusColor:=clNavy;
 	finally
 
 	end;
@@ -318,22 +325,44 @@ end;
 procedure TfmMain.dbgInputPrepareCanvas(sender : TObject; DataCol : Integer;
 		Column : TColumn; AState : TGridDrawState);
 var ldtDeadLine : TDate;
+    ldtDateEnd : TDate;
     loGrid : TDBGrid;
     liDays : Integer;
 begin
 
-  //dbgMain.Canvas.Brush.Color:=liColor;
   loGrid := sender as TDBGrid;
+  if loGrid.DataSource.DataSet.FieldByName('fname').AsString = 'Картошка' then
+
+    write;
+
   if not loGrid.DataSource.DataSet.FieldByName('fdeadline').IsNull then
   begin
 
     ldtDeadLine := loGrid.DataSource.DataSet.FieldByName('fdeadline').AsDateTime;
-	  liDays := DaysBetween(Now, ldtDeadLine);
-	  if (ldtDeadLine < Now) and (liDays > 0) then
+    if (loGrid.Name = 'dbgTrash') or (loGrid.Name = 'dbgDone') then
+    begin
+
+      if not loGrid.DataSource.DataSet.FieldByName('fupdated').IsNull then
+      begin
+
+        ldtDateEnd := loGrid.DataSource.DataSet.FieldByName('fupdated').AsDateTime;
+      end else
+      begin
+
+        ldtDateEnd := loGrid.DataSource.DataSet.FieldByName('fcreated').AsDateTime;
+      end;
+    end else
+    begin
+
+      ldtDateEnd := Now;
+		end;
+
+		liDays := DaysBetween(ldtDateEnd, ldtDeadLine);
+	  if (ldtDeadLine < ldtDateEnd) and (liDays > 0) then
 	  begin
 
 	    // *** Просроченные задания
-	    loGrid.Canvas.Brush.Color := $C6A3FE; // $99B7EE;//  FEA3C6
+	    loGrid.Canvas.Font.Color := $5200C1; // $99B7EE;//  FEA3C6 // C10052
 	  end else
 	  begin
 
@@ -341,7 +370,7 @@ begin
 	    begin
 
 	      // *** Срок выполнения истекает сегодня
-	      loGrid.Canvas.Brush.Color := $B7FEFE; // FEFEB7
+	      loGrid.Canvas.Font.Color := $047299; // 997204
 	    end else
 	    begin
 
@@ -349,12 +378,12 @@ begin
 	      begin
 
 	        // *** Срок исполнения на этой неделе
-	        loGrid.Canvas.Brush.Color := $B8F9E6; // E6F9B8
+	        loGrid.Canvas.Font.Color := $2D7000; // 00702D
 	      end else
 	      begin
 
 	        // *** Не срочное дело
-	        loGrid.Canvas.Brush.Color := $FDE2AE; // AEE2FD
+	        loGrid.Canvas.Font.Color := $99310F; // 0F3199
 	  	  end;
 		  end;
   	end;
@@ -485,7 +514,7 @@ procedure TfmMain.reopenTable;
 const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext,'#13+
                   '        strftime(''%d-%m-%Y'', fcreated) as fdate,'#13+
                   '        strftime(''%h:%m'', fcreated) as ftime,'#13+
-                  '        fdeadline'#13+
+                  '        fdeadline, fcreated, fupdated'#13+
 						      '  from tbltasks'#13+
                   ' where fstate = :pstate';
 //var      i:integer;

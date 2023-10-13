@@ -1,21 +1,21 @@
 object fmTaskEdit: TfmTaskEdit
   Left = 655
-  Height = 409
+  Height = 444
   Top = 332
   Width = 653
   BorderStyle = bsDialog
   Caption = 'Свойства задачи'
-  ClientHeight = 409
+  ClientHeight = 444
   ClientWidth = 653
   LCLVersion = '2.2.6.0'
   object Panel1: TPanel
     Left = 8
-    Height = 344
+    Height = 392
     Top = 8
     Width = 634
     BevelInner = bvRaised
     BevelOuter = bvLowered
-    ClientHeight = 344
+    ClientHeight = 392
     ClientWidth = 634
     TabOrder = 0
     object Label1: TLabel
@@ -143,11 +143,41 @@ object fmTaskEdit: TfmTaskEdit
       Style = csDropDownList
       TabOrder = 3
     end
+    object lblCreated: TLabel
+      Left = 16
+      Height = 25
+      Top = 336
+      Width = 288
+      AutoSize = False
+      Caption = 'Задача создана'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblUpdated: TLabel
+      Left = 328
+      Height = 25
+      Top = 336
+      Width = 296
+      AutoSize = False
+      Caption = 'Задача изменена'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
   end
   object bbtOk: TBitBtn
     Left = 327
     Height = 30
-    Top = 368
+    Top = 400
     Width = 155
     Caption = 'Принять'
     Images = fmMain.ImageList
@@ -158,7 +188,7 @@ object fmTaskEdit: TfmTaskEdit
   object bbtCancel: TBitBtn
     Left = 487
     Height = 30
-    Top = 368
+    Top = 400
     Width = 155
     Caption = 'Отмена'
     ModalResult = 2
@@ -173,7 +203,7 @@ object fmTaskEdit: TfmTaskEdit
     Params = <>
     Macros = <>
     Left = 24
-    Top = 360
+    Top = 392
   end
   object qrTaskEx: TSQLQuery
     FieldDefs = <>
@@ -182,6 +212,6 @@ object fmTaskEdit: TfmTaskEdit
     Params = <>
     Macros = <>
     Left = 88
-    Top = 360
+    Top = 392
   end
 end

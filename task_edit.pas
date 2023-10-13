@@ -24,6 +24,8 @@ type
 				Label2 : TLabel;
 				Label3 : TLabel;
 				Label4 : TLabel;
+				lblCreated : TLabel;
+				lblUpdated : TLabel;
 				meContent : TMemo;
 				Panel1 : TPanel;
 				qrTask : TSQLQuery;
@@ -125,6 +127,7 @@ begin
   moContextsCombo.setSQL('select * from tblcontexts where fstatus>0');
   moContextsCombo.setKeyField('id');
   moContextsCombo.setListField('fname');
+  lblCreated.Caption := DateToStr(Now);
   moContextsCombo.fill();
 end;
 
@@ -158,7 +161,13 @@ begin
   edTaskName.Text := qrTask.FieldByName('fname').AsString;
   meContent.Text := qrTask.FieldByName('ftext').AsString;
   dtpDeadLine.Date := qrTask.FieldByName('fdeadline').AsDateTime;
-  liContextKey := qrTask.FieldByName('fcontext').AsInteger;
+  lblCreated.Caption := 'Задача создана ' + DateToStr(qrTask.FieldByName('fcreated').AsDateTime);
+  if not qrTask.FieldByName('fcreated').IsNull then
+  begin
+
+    lblUpdated.Caption := 'Задача изменена ' + DateToStr(qrTask.FieldByName('fupdated').AsDateTime);
+	end;
+	liContextKey := qrTask.FieldByName('fcontext').AsInteger;
   moContextsCombo := TEasyLookupCombo.Create();
   moContextsCombo.setComboBox(cbContexts);
   moContextsCombo.setQuery(MainForm.qrContexts);
