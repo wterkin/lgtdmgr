@@ -329,11 +329,11 @@ begin
 
     ldtDeadLine := loGrid.DataSource.DataSet.FieldByName('fdeadline').AsDateTime;
 	  liDays := DaysBetween(Now, ldtDeadLine);
-	  if liDays > 0 then
+	  if (ldtDeadLine < Now) and (liDays > 0) then
 	  begin
 
 	    // *** Просроченные задания
-	    loGrid.Canvas.Brush.Color := $99B7EE;// EEB799
+	    loGrid.Canvas.Brush.Color := $C6A3FE; // $99B7EE;//  FEA3C6
 	  end else
 	  begin
 
@@ -341,7 +341,7 @@ begin
 	    begin
 
 	      // *** Срок выполнения истекает сегодня
-	      loGrid.Canvas.Brush.Color := $C1F1F5; // F5F1C1
+	      loGrid.Canvas.Brush.Color := $B7FEFE; // FEFEB7
 	    end else
 	    begin
 
