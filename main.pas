@@ -102,8 +102,9 @@ const ciInputType = 1;
       ciWorkType = 2;
       ciTrashType = 3;
       ciDoneType = 4;
-      ciColumnWidthDiff = 34;
+      ciColumnWidthDiff = 40;
       csDatabaseFileName = 'lgtdmgr.db';
+      ciDateColumnWidth = 68;
 
 var fmMain : TfmMain;
     MainForm : TfmMain;
@@ -214,10 +215,6 @@ begin
     SQLite.Connected := True;
 
     EnableMovingActions(False);
-    //dbgInput.Columns[0].Width := dbgInput.Width - ciColumnWidthDiff;
-    //dbgWork.Columns[0].Width := dbgWork.Width - ciColumnWidthDiff;
-    //dbgTrash.Columns[0].Width := dbgTrash.Width - ciColumnWidthDiff;
-    //dbgDone.Columns[0].Width := dbgDone.Width - ciColumnWidthDiff;
 
     moContextsCombo := TEasyLookupCombo.Create();
     moContextsCombo.setComboBox(cbContexts);
@@ -229,6 +226,15 @@ begin
 
     reopenTable();
     actChangeTask.Enabled := False;
+
+    dbgInput.Columns[0].Width := ciDateColumnWidth;
+    dbgInput.Columns[1].Width := dbgInput.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+    dbgWork.Columns[0].Width := ciDateColumnWidth;
+    dbgWork.Columns[1].Width := dbgWork.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+    dbgTrash.Columns[0].Width := ciDateColumnWidth;
+    dbgTrash.Columns[1].Width := dbgTrash.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+    dbgDone.Columns[0].Width := ciDateColumnWidth;
+    dbgDone.Columns[1].Width := dbgDone.Width - (ciColumnWidthDiff + ciDateColumnWidth);
 
 	finally
 
@@ -426,7 +432,9 @@ end;
 
 
 procedure TfmMain.reopenTable;
-const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext'#13+
+const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext,'#13+
+                  '        strftime(''%d-%m-%Y'', fcreated) as fdate,'#13+
+                  '        strftime(''%h:%m'', fcreated) as ftime'#13+
 						      '  from tbltasks'#13+
                   ' where fstate = :pstate';
 //var      i:integer;

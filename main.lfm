@@ -186,12 +186,17 @@ object fmMain: TfmMain
         Width = 506
         Align = alClient
         AutoEdit = False
-        AutoFillColumns = True
         Color = clWindow
         Columns = <        
           item
+            MaxSize = 51
+            Title.Caption = 'Дата'
+            Width = 236
+            FieldName = 'fdate'
+          end        
+          item
             Title.Caption = 'Входящие'
-            Width = 473
+            Width = 237
             FieldName = 'fname'
           end>
         DataSource = dsInput
@@ -235,12 +240,16 @@ object fmMain: TfmMain
         Width = 501
         Align = alClient
         AutoEdit = False
-        AutoFillColumns = True
         Color = clWindow
         Columns = <        
           item
+            Title.Caption = 'Дата'
+            Width = 234
+            FieldName = 'fdate'
+          end        
+          item
             Title.Caption = 'К исполнению'
-            Width = 468
+            Width = 234
             FieldName = 'fname'
           end>
         DataSource = dsWork
@@ -296,12 +305,16 @@ object fmMain: TfmMain
         Width = 506
         Align = alClient
         AutoEdit = False
-        AutoFillColumns = True
         Color = clWindow
         Columns = <        
           item
+            Title.Caption = 'Дата'
+            Width = 236
+            FieldName = 'fdate'
+          end        
+          item
             Title.Caption = 'Корзина'
-            Width = 473
+            Width = 237
             FieldName = 'fname'
           end>
         DataSource = dsTrash
@@ -345,12 +358,16 @@ object fmMain: TfmMain
         Width = 501
         Align = alClient
         AutoEdit = False
-        AutoFillColumns = True
         Color = clWindow
         Columns = <        
           item
+            Title.Caption = 'Дата'
+            Width = 234
+            FieldName = 'fdate'
+          end        
+          item
             Title.Caption = 'Сделано'
-            Width = 468
+            Width = 234
             FieldName = 'fname'
           end>
         DataSource = dsDone

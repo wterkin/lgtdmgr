@@ -17,7 +17,7 @@ uses
 
 begin
       RequireDerivedFormResource:=True;
-			Application.Scaled:=True;
+		Application.Scaled:=True;
       Application.Initialize;
 		Application.CreateForm(TfmMain, fmMain);
 		Application.CreateForm(TfmTaskEdit, fmTaskEdit);
