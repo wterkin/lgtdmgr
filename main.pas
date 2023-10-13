@@ -7,9 +7,10 @@ interface
 uses
       Classes, SysUtils, SQLite3Conn, SQLDB, DB, Forms, Controls, Graphics,
 			Dialogs, ExtCtrls, ComCtrls, DBGrids, StdCtrls, Buttons, ActnList, Windows
+      , DateUtils
       , task_edit, setup
       , tapp , tdb, tmsg, tlookup
-      ;
+      , Grids;
 
 type
 
@@ -76,6 +77,8 @@ type
 				procedure actToWorkExecute(Sender : TObject);
 				procedure dbgDoneCellClick({%H-}Column : TColumn);
 				procedure dbgInputCellClick({%H-}Column : TColumn);
+				procedure dbgInputPrepareCanvas(sender : TObject; {%H-}DataCol : Integer;
+						{%H-}Column : TColumn; {%H-}AState : TGridDrawState);
 				procedure dbgWorkCellClick({%H-}Column : TColumn);
 				procedure dbgTrashCellClick({%H-}Column : TColumn);
 		    procedure FormCreate(Sender : TObject);
@@ -312,6 +315,53 @@ begin
 end;
 
 
+procedure TfmMain.dbgInputPrepareCanvas(sender : TObject; DataCol : Integer;
+		Column : TColumn; AState : TGridDrawState);
+var ldtDeadLine : TDate;
+    loGrid : TDBGrid;
+    liDays : Integer;
+begin
+
+  //dbgMain.Canvas.Brush.Color:=liColor;
+  loGrid := sender as TDBGrid;
+  if not loGrid.DataSource.DataSet.FieldByName('fdeadline').IsNull then
+  begin
+
+    ldtDeadLine := loGrid.DataSource.DataSet.FieldByName('fdeadline').AsDateTime;
+	  liDays := DaysBetween(Now, ldtDeadLine);
+	  if liDays > 0 then
+	  begin
+
+	    // *** Просроченные задания
+	    loGrid.Canvas.Brush.Color := $99B7EE;// EEB799
+	  end else
+	  begin
+
+	    if liDays = 0 then
+	    begin
+
+	      // *** Срок выполнения истекает сегодня
+	      loGrid.Canvas.Brush.Color := $C1F1F5; // F5F1C1
+	    end else
+	    begin
+
+	      if liDays <= 7 then
+	      begin
+
+	        // *** Срок исполнения на этой неделе
+	        loGrid.Canvas.Brush.Color := $B8F9E6; // E6F9B8
+	      end else
+	      begin
+
+	        // *** Не срочное дело
+	        loGrid.Canvas.Brush.Color := $FDE2AE; // AEE2FD
+	  	  end;
+		  end;
+  	end;
+	end;
+end;
+
+
 procedure TfmMain.dbgWorkCellClick(Column : TColumn);
 begin
 
@@ -434,7 +484,8 @@ end;
 procedure TfmMain.reopenTable;
 const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext,'#13+
                   '        strftime(''%d-%m-%Y'', fcreated) as fdate,'#13+
-                  '        strftime(''%h:%m'', fcreated) as ftime'#13+
+                  '        strftime(''%h:%m'', fcreated) as ftime,'#13+
+                  '        fdeadline'#13+
 						      '  from tbltasks'#13+
                   ' where fstate = :pstate';
 //var      i:integer;

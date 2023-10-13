@@ -127,7 +127,7 @@ object fmMain: TfmMain
     Cursor = crVSplit
     Left = 0
     Height = 8
-    Top = 320
+    Top = 360
     Width = 1027
     Align = alTop
     Beveled = True
@@ -135,31 +135,31 @@ object fmMain: TfmMain
   end
   object Panel2: TPanel
     Left = 0
-    Height = 285
+    Height = 325
     Top = 35
     Width = 1027
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvLowered
-    ClientHeight = 285
+    ClientHeight = 325
     ClientWidth = 1027
     TabOrder = 3
     object Splitter1: TSplitter
       Left = 512
-      Height = 281
+      Height = 321
       Top = 2
       Width = 8
       Beveled = True
     end
     object Panel3: TPanel
       Left = 2
-      Height = 281
+      Height = 321
       Top = 2
       Width = 510
       Align = alLeft
       BevelInner = bvRaised
       BevelOuter = bvLowered
-      ClientHeight = 281
+      ClientHeight = 321
       ClientWidth = 510
       TabOrder = 1
       object bbtToInput: TBitBtn
@@ -181,7 +181,7 @@ object fmMain: TfmMain
       end
       object dbgInput: TDBGrid
         Left = 2
-        Height = 247
+        Height = 287
         Top = 32
         Width = 506
         Align = alClient
@@ -203,17 +203,18 @@ object fmMain: TfmMain
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
         OnCellClick = dbgInputCellClick
+        OnPrepareCanvas = dbgInputPrepareCanvas
       end
     end
     object Panel4: TPanel
       Left = 520
-      Height = 281
+      Height = 321
       Top = 2
       Width = 505
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
-      ClientHeight = 281
+      ClientHeight = 321
       ClientWidth = 505
       TabOrder = 2
       object bbtToWork: TBitBtn
@@ -235,7 +236,7 @@ object fmMain: TfmMain
       end
       object dbgWork: TDBGrid
         Left = 2
-        Height = 247
+        Height = 287
         Top = 32
         Width = 501
         Align = alClient
@@ -256,29 +257,30 @@ object fmMain: TfmMain
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
         OnCellClick = dbgWorkCellClick
+        OnPrepareCanvas = dbgInputPrepareCanvas
       end
     end
   end
   object Panel5: TPanel
     Left = 0
-    Height = 412
-    Top = 328
+    Height = 372
+    Top = 368
     Width = 1027
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvLowered
-    ClientHeight = 412
+    ClientHeight = 372
     ClientWidth = 1027
     TabOrder = 4
     object Panel6: TPanel
       Left = 2
-      Height = 408
+      Height = 368
       Top = 2
       Width = 510
       Align = alLeft
       BevelInner = bvRaised
       BevelOuter = bvLowered
-      ClientHeight = 408
+      ClientHeight = 368
       ClientWidth = 510
       TabOrder = 0
       object bbtToTrash: TBitBtn
@@ -300,7 +302,7 @@ object fmMain: TfmMain
       end
       object dbgTrash: TDBGrid
         Left = 2
-        Height = 374
+        Height = 334
         Top = 32
         Width = 506
         Align = alClient
@@ -325,13 +327,13 @@ object fmMain: TfmMain
     end
     object Panel7: TPanel
       Left = 520
-      Height = 408
+      Height = 368
       Top = 2
       Width = 505
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
-      ClientHeight = 408
+      ClientHeight = 368
       ClientWidth = 505
       TabOrder = 1
       object bbtToDone: TBitBtn
@@ -353,7 +355,7 @@ object fmMain: TfmMain
       end
       object dbgDone: TDBGrid
         Left = 2
-        Height = 374
+        Height = 334
         Top = 32
         Width = 501
         Align = alClient
@@ -378,7 +380,7 @@ object fmMain: TfmMain
     end
     object Splitter3: TSplitter
       Left = 512
-      Height = 408
+      Height = 368
       Top = 2
       Width = 8
       Beveled = True
