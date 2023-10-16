@@ -75,6 +75,7 @@ type
 		    procedure actToInputBoxExecute(Sender : TObject);
 				procedure actToTrashBinExecute(Sender : TObject);
 				procedure actToWorkExecute(Sender : TObject);
+				procedure cbContextsChange(Sender : TObject);
 				procedure dbgDoneCellClick({%H-}Column : TColumn);
 				procedure dbgInputCellClick({%H-}Column : TColumn);
 				procedure dbgInputPrepareCanvas(sender : TObject; {%H-}DataCol : Integer;
@@ -105,16 +106,19 @@ const ciInputType = 1;
       ciWorkType = 2;
       ciTrashType = 3;
       ciDoneType = 4;
+
+      ciTodayTasks = 0;
+      ciWeekTasks = 1;
+      ciMonthTasks = 2;
+      ciYearTasks = 3;
+      ciAllTasks = 4;
+
       ciColumnWidthDiff = 40;
       csDatabaseFileName = 'lgtdmgr.db';
       ciDateColumnWidth = 68;
 
 var fmMain : TfmMain;
     MainForm : TfmMain;
-
-
-{ToDo: Хорошо бы добавить поле дедлайна и помечать красным просроченные задания}
-{      А оранжевым - за неделю до дедлайна}
 
 
 implementation
@@ -254,8 +258,10 @@ end;
 
 procedure TfmMain.FormKeyDown(Sender : TObject; var Key : Word;
 		Shift : TShiftState);
+var liIndex : Integer;
 begin
 
+  liIndex := cbContexts.ItemIndex;
   if (ssCtrl in Shift) and (Key = VK_Q) then
   begin
 
@@ -267,22 +273,59 @@ begin
 
       VK_F1 : begin
 
-        actToInputBoxExecute(Nil);
+        if actToInputBox.Enabled then
+        begin
+
+          actToInputBoxExecute(Nil);
+        end;
 			end;
       VK_F2: begin
 
-        actToWorkExecute(Nil);
+        if actToWork.Enabled then
+        begin
+
+          actToWorkExecute(Nil);
+        end;
 			end;
       VK_F3: begin
 
-        actToTrashBinExecute(Nil);
+        if actToTrashBin.Enabled then
+        begin
+
+          actToTrashBinExecute(Nil);
+        end;
 			end;
       VK_F4: begin
 
-        actToCompletedExecute(Nil);
+        if actToCompleted.Enabled then
+        begin
+
+          actToCompletedExecute(Nil);
+        end;
+			end;
+      VK_PRIOR: begin
+
+        if liIndex > 0 then
+        begin
+
+          dec(liIndex);
+          cbContexts.ItemIndex := liIndex;
+          cbContexts.OnChange(Nil);
+				end;
+			end;
+      VK_NEXT: begin
+
+        if liIndex + 1 < cbContexts.Items.Count then
+        begin
+
+          inc(liIndex);
+          cbContexts.ItemIndex := liIndex;
+          cbContexts.OnChange(Nil);
+				end;
 			end;
 		end;
   end;
+  write;
 end;
 
 
@@ -509,6 +552,12 @@ begin
   changeState(ciWorkType);
 end;
 
+procedure TfmMain.cbContextsChange(Sender : TObject);
+begin
+
+  reopenTable();
+end;
+
 
 procedure TfmMain.reopenTable;
 const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext,'#13+
@@ -516,7 +565,8 @@ const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext,'#13+
                   '        strftime(''%h:%m'', fcreated) as ftime,'#13+
                   '        fdeadline, fcreated, fupdated'#13+
 						      '  from tbltasks'#13+
-                  ' where fstate = :pstate';
+                  ' where     fstate = :pstate'#13+
+                  '       and fcontext = :pcontext';
 //var      i:integer;
 begin
 
@@ -525,18 +575,22 @@ begin
     restartTransaction(Transaction);
     initializeQuery(qrInput, csMainSQL, False);
     qrInput.ParamByName('pstate').AsInteger := ciInputType;
+    qrInput.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
     qrInput.Open();
 
     initializeQuery(qrWork, csMainSQL, False);
     qrWork.ParamByName('pstate').AsInteger := ciWorkType;
+    qrWork.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
     qrWork.Open();
 
     initializeQuery(qrTrash, csMainSQL, False);
     qrTrash.ParamByName('pstate').AsInteger := ciTrashType;
+    qrTrash.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
     qrTrash.Open();
 
     initializeQuery(qrDone, csMainSQL, False);
     qrDone.ParamByName('pstate').AsInteger := ciDoneType;
+    qrDone.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();;
     qrDone.Open();
     (*
     if qrInput.RecordCount > 0 then
