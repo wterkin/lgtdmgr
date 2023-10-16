@@ -31,6 +31,7 @@ type
 						bbtToInput : TBitBtn;
 						bbtToTrash : TBitBtn;
 						bbtToWork : TBitBtn;
+						Bevel1 : TBevel;
 					  cbContexts : TComboBox;
 					  cbPeriod : TComboBox;
 						dbgDone : TDBGrid;
@@ -82,6 +83,7 @@ type
 						{%H-}Column : TColumn; {%H-}AState : TGridDrawState);
 				procedure dbgWorkCellClick({%H-}Column : TColumn);
 				procedure dbgTrashCellClick({%H-}Column : TColumn);
+				procedure FormClose(Sender : TObject; var CloseAction : TCloseAction);
 		    procedure FormCreate(Sender : TObject);
 				procedure FormKeyDown(Sender : TObject; var Key : Word;
 								Shift : TShiftState);
@@ -90,6 +92,7 @@ type
             miLastRecordID : Integer;
             moContextsCombo : TEasyLookupCombo;
             msDataBasePath : String;
+            miContext : Integer;
         procedure createDatabaseIfNeeded();
         procedure reopenTable();
         procedure EnableMovingActions(pblEnabled : Boolean = True);
@@ -99,7 +102,8 @@ type
         procedure processError(psDesc, psDetail : String);
         procedure processException(psDesc : String; poException : Exception);
         procedure changeState(piState: Integer);
-        procedure loadConfig;
+        procedure loadConfig();
+        procedure saveConfig();
       end;
 
 
@@ -116,13 +120,14 @@ const ciInputType = 1;
 
       ciColumnWidthDiff = 40;
       csDatabaseFileName = 'lgtdmgr.db';
-      ciDateColumnWidth = 68;
+      ciDateColumnWidth = 84;
 
       ciExpiredColor = $5200C1;
       ciLastDayColor = $047299;
       ciThisWeekColor = $2D7000;
       ciSomeDayColor = $99310F;
       csIniFile = 'lgtdmgr.ini';
+      csVersion = '1.0RC1';
 
 var fmMain : TfmMain;
     MainForm : TfmMain;
@@ -219,6 +224,7 @@ begin
   try
 
     MainForm := fmMain;
+    Caption := Caption + ' ver. ' + csVersion;
     loadConfig();
     createDatabaseIfNeeded();
 
@@ -238,7 +244,7 @@ begin
     moContextsCombo.setKeyField('id');
     moContextsCombo.setListField('fname');
     moContextsCombo.fill();
-
+    cbContexts.ItemIndex := miContext;
     reopenTable();
     actChangeTask.Enabled := False;
 
@@ -482,6 +488,13 @@ begin
 end;
 
 
+procedure TfmMain.FormClose(Sender : TObject; var CloseAction : TCloseAction);
+begin
+
+  saveConfig();
+end;
+
+
 procedure TfmMain.actToInputBoxExecute(Sender : TObject);
 begin
 
@@ -717,8 +730,19 @@ begin
 
 	  loIniMgr := TEasyIniManager.Create(getAppFolder + csIniFile);
 	  msDataBasePath := loIniMgr.read('main', 'database', msDataBasePath);
-	  FreeAndNil(loIniMgr);
+    miContext := loIniMgr.read('main', 'context', cbContexts.ItemIndex);
+    FreeAndNil(loIniMgr);
 	end;
+end;
+
+
+procedure TfmMain.saveConfig;
+var loIniMgr : TEasyIniManager;
+begin
+
+  loIniMgr := TEasyIniManager.Create(getAppFolder + csIniFile);
+  loIniMgr.write('main', 'context', cbContexts.ItemIndex);
+  FreeAndNil(loIniMgr);
 end;
 
 

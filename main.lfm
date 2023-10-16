@@ -7,6 +7,7 @@ object fmMain: TfmMain
   ClientHeight = 763
   ClientWidth = 1027
   KeyPreview = True
+  OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   LCLVersion = '2.2.6.0'
@@ -22,7 +23,7 @@ object fmMain: TfmMain
     ClientWidth = 1027
     TabOrder = 2
     object cbContexts: TComboBox
-      Left = 379
+      Left = 176
       Height = 26
       Top = 5
       Width = 100
@@ -45,7 +46,7 @@ object fmMain: TfmMain
       Text = 'Все'
     end
     object cbPeriod: TComboBox
-      Left = 483
+      Left = 280
       Height = 26
       Top = 5
       Width = 120
@@ -112,6 +113,13 @@ object fmMain: TfmMain
       Action = actSetup
       Images = ImageList
       ImageIndex = 0
+    end
+    object Bevel1: TBevel
+      Left = 168
+      Height = 28
+      Top = 3
+      Width = 17
+      Shape = bsLeftLine
     end
   end
   object StatusBar: TStatusBar
@@ -200,7 +208,13 @@ object fmMain: TfmMain
             FieldName = 'fname'
           end>
         DataSource = dsInput
+        Font.CharSet = RUSSIAN_CHARSET
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
         TabOrder = 1
         OnCellClick = dbgInputCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
@@ -254,7 +268,13 @@ object fmMain: TfmMain
             FieldName = 'fname'
           end>
         DataSource = dsWork
+        Font.CharSet = RUSSIAN_CHARSET
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
         TabOrder = 1
         OnCellClick = dbgWorkCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
@@ -320,7 +340,13 @@ object fmMain: TfmMain
             FieldName = 'fname'
           end>
         DataSource = dsTrash
+        Font.CharSet = RUSSIAN_CHARSET
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
         TabOrder = 1
         OnCellClick = dbgTrashCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
@@ -374,7 +400,13 @@ object fmMain: TfmMain
             FieldName = 'fname'
           end>
         DataSource = dsDone
+        Font.CharSet = RUSSIAN_CHARSET
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
         TabOrder = 1
         OnCellClick = dbgDoneCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
