@@ -11,7 +11,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="13"/>
-        <UsageCount Value="98"/>
+        <UsageCount Value="99"/>
       </Unit>
       <Unit>
         <Filename Value="main.pas"/>
@@ -19,13 +19,14 @@
         <ComponentName Value="fmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="412"/>
-        <CursorPos X="28" Y="422"/>
-        <FoldState Value=" T3k50$2 pjWlU0F119]B7lg043 pidjC074 PUV0="/>
-        <UsageCount Value="98"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="683"/>
+        <CursorPos X="20" Y="707"/>
+        <FoldState Value=" T3n80*3 pjElA0FC pkKlV074 PUV0Z"/>
+        <UsageCount Value="99"/>
         <Bookmarks Count="2">
-          <Item0 Y="120" ID="2"/>
-          <Item1 X="55" Y="429" ID="1"/>
+          <Item0 Y="121" ID="2"/>
+          <Item1 X="55" Y="432" ID="1"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -36,11 +37,10 @@
         <ComponentName Value="fmTaskEdit"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="159"/>
-        <CursorPos X="56" Y="170"/>
-        <UsageCount Value="89"/>
+        <CursorPos X="48" Y="169"/>
+        <UsageCount Value="90"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -50,11 +50,11 @@
         <ComponentName Value="fmSetup"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="39"/>
         <CursorPos Y="49"/>
         <FoldState Value=" T3iA0Il"/>
-        <UsageCount Value="75"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -67,7 +67,7 @@
       </Unit>
       <Unit>
         <Filename Value="..\tlib5\tdb.pas"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="29"/>
         <CursorPos X="11" Y="43"/>
         <UsageCount Value="46"/>
@@ -75,7 +75,7 @@
       </Unit>
       <Unit>
         <Filename Value="..\tlib5\tdbguard.pas"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="37"/>
         <CursorPos X="28" Y="48"/>
         <UsageCount Value="46"/>
@@ -83,7 +83,7 @@
       </Unit>
       <Unit>
         <Filename Value="..\tlib5\tlookup.pas"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="88"/>
         <CursorPos Y="88"/>
         <UsageCount Value="45"/>
@@ -127,8 +127,8 @@
       <Unit>
         <Filename Value="D:\langs\lazarus-2.2.6\fpc\3.2.2\source\packages\rtl-objpas\src\inc\dateutils.pp"/>
         <UnitName Value="DateUtils"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -138,55 +138,19 @@
         <CursorPos Y="79"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\tlib5\tini.pas"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="234"/>
+        <CursorPos Y="238"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
     </Units>
     <Debugger>
       <Backend Value="{DEB953A3-D333-41C7-9F55-F7AFA6DA4C99}"/>
     </Debugger>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="325" Column="9" TopLine="304"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="322" Column="6" TopLine="306"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="313" TopLine="310"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="324" Column="30" TopLine="303"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="313" Column="34" TopLine="302"/>
-      </Position>
-      <Position>
-        <Filename Value="task_edit.pas"/>
-        <Caret Line="158" Column="18" TopLine="153"/>
-      </Position>
-      <Position>
-        <Filename Value="task_edit.pas"/>
-        <Caret Line="103" Column="25" TopLine="90"/>
-      </Position>
-      <Position>
-        <Filename Value="task_edit.pas"/>
-        <Caret Line="39" Column="17" TopLine="28"/>
-      </Position>
-      <Position>
-        <Filename Value="task_edit.pas"/>
-        <Caret Line="140" Column="60" TopLine="134"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="120" Column="21" TopLine="107"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="410" Column="34" TopLine="400"/>
-      </Position>
       <Position>
         <Filename Value="main.pas"/>
         <Caret Line="120" Column="7" TopLine="108"/>
@@ -260,6 +224,48 @@
       </Position>
       <Position>
         <Filename Value="D:\langs\lazarus-2.2.6\fpc\3.2.2\source\packages\rtl-objpas\src\inc\dateutils.pp"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="102" Column="26" TopLine="85"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="704" Column="5" TopLine="700"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="47" Column="34" TopLine="37"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="702" Column="20" TopLine="649"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="..\tlib5\tini.pas"/>
+        <Caret TopLine="7"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="125" Column="16" TopLine="109"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="118" Column="25" TopLine="110"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="92" Column="27" TopLine="81"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="222" Column="17" TopLine="213"/>
       </Position>
     </JumpHistory>
     <RunParams>

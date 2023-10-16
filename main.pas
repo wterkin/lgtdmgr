@@ -9,7 +9,7 @@ uses
 			Dialogs, ExtCtrls, ComCtrls, DBGrids, StdCtrls, Buttons, ActnList, Windows
       , DateUtils
       , task_edit, setup
-      , tapp , tdb, tmsg, tlookup
+      , tapp , tdb, tmsg, tlookup, tini
       , Grids;
 
 type
@@ -89,7 +89,7 @@ type
 
             miLastRecordID : Integer;
             moContextsCombo : TEasyLookupCombo;
-
+            msDataBasePath : String;
         procedure createDatabaseIfNeeded();
         procedure reopenTable();
         procedure EnableMovingActions(pblEnabled : Boolean = True);
@@ -99,6 +99,7 @@ type
         procedure processError(psDesc, psDetail : String);
         procedure processException(psDesc : String; poException : Exception);
         procedure changeState(piState: Integer);
+        procedure loadConfig;
       end;
 
 
@@ -121,6 +122,7 @@ const ciInputType = 1;
       ciLastDayColor = $047299;
       ciThisWeekColor = $2D7000;
       ciSomeDayColor = $99310F;
+      csIniFile = 'lgtdmgr.ini';
 
 var fmMain : TfmMain;
     MainForm : TfmMain;
@@ -182,7 +184,7 @@ begin
   try
 
     // *** Открываем соединение с БД
-    sqlite.DatabaseName := getAppFolder()+csDatabaseFileName;
+    sqlite.DatabaseName := msDataBasePath;
     lblDatabaseExists := FileExists(sqlite.DatabaseName);
     sqlite.Open;
     sqlite.Connected := True;
@@ -217,6 +219,7 @@ begin
   try
 
     MainForm := fmMain;
+    loadConfig();
     createDatabaseIfNeeded();
 
     qrInput.Active := False;
@@ -694,6 +697,27 @@ begin
       MainForm.Transaction.Rollback;
       MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
 		end;
+	end;
+end;
+
+
+procedure TfmMain.loadConfig;
+var loIniMgr : TEasyIniManager;
+begin
+
+  msDataBasePath := getAppFolder + csDatabaseFileName;
+  if not FileExists(getAppFolder + csIniFile) then
+  begin
+
+    loIniMgr := TEasyIniManager.Create(getAppFolder + csIniFile);
+    loIniMgr.write('main', 'database', msDataBasePath);
+    FreeAndNil(loIniMgr);
+	end else
+  begin
+
+	  loIniMgr := TEasyIniManager.Create(getAppFolder + csIniFile);
+	  msDataBasePath := loIniMgr.read('main', 'database', msDataBasePath);
+	  FreeAndNil(loIniMgr);
 	end;
 end;
 
