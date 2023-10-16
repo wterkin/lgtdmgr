@@ -117,6 +117,11 @@ const ciInputType = 1;
       csDatabaseFileName = 'lgtdmgr.db';
       ciDateColumnWidth = 68;
 
+      ciExpiredColor = $5200C1;
+      ciLastDayColor = $047299;
+      ciThisWeekColor = $2D7000;
+      ciSomeDayColor = $99310F;
+
 var fmMain : TfmMain;
     MainForm : TfmMain;
 
@@ -405,7 +410,7 @@ begin
 	  begin
 
 	    // *** Просроченные задания
-	    loGrid.Canvas.Font.Color := $5200C1; // $99B7EE;//  FEA3C6 // C10052
+	    loGrid.Canvas.Font.Color := ciExpiredColor;
 	  end else
 	  begin
 
@@ -413,7 +418,7 @@ begin
 	    begin
 
 	      // *** Срок выполнения истекает сегодня
-	      loGrid.Canvas.Font.Color := $047299; // 997204
+	      loGrid.Canvas.Font.Color := ciLastDayColor;
 	    end else
 	    begin
 
@@ -421,15 +426,19 @@ begin
 	      begin
 
 	        // *** Срок исполнения на этой неделе
-	        loGrid.Canvas.Font.Color := $2D7000; // 00702D
+	        loGrid.Canvas.Font.Color := ciThisWeekColor;
 	      end else
 	      begin
 
 	        // *** Не срочное дело
-	        loGrid.Canvas.Font.Color := $99310F; // 0F3199
+	        loGrid.Canvas.Font.Color := ciSomeDayColor;
 	  	  end;
 		  end;
   	end;
+  end else
+  begin
+
+    loGrid.Canvas.Font.Color := ciSomeDayColor;
 	end;
 end;
 
@@ -551,6 +560,7 @@ begin
 
   changeState(ciWorkType);
 end;
+
 
 procedure TfmMain.cbContextsChange(Sender : TObject);
 begin

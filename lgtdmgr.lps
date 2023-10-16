@@ -11,7 +11,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="13"/>
-        <UsageCount Value="97"/>
+        <UsageCount Value="98"/>
       </Unit>
       <Unit>
         <Filename Value="main.pas"/>
@@ -19,10 +19,14 @@
         <ComponentName Value="fmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="312"/>
-        <CursorPos X="34" Y="323"/>
-        <UsageCount Value="97"/>
+        <TopLine Value="412"/>
+        <CursorPos X="28" Y="422"/>
+        <FoldState Value=" T3k50$2 pjWlU0F119]B7lg043 pidjC074 PUV0="/>
+        <UsageCount Value="98"/>
+        <Bookmarks Count="2">
+          <Item0 Y="120" ID="2"/>
+          <Item1 X="55" Y="429" ID="1"/>
+        </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -32,10 +36,11 @@
         <ComponentName Value="fmTaskEdit"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="153"/>
-        <CursorPos X="18" Y="158"/>
-        <UsageCount Value="88"/>
+        <TopLine Value="159"/>
+        <CursorPos X="56" Y="170"/>
+        <UsageCount Value="89"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -46,9 +51,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="54"/>
-        <CursorPos X="14" Y="71"/>
-        <UsageCount Value="74"/>
+        <TopLine Value="39"/>
+        <CursorPos Y="49"/>
+        <FoldState Value=" T3iA0Il"/>
+        <UsageCount Value="75"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -64,7 +70,7 @@
         <EditorIndex Value="6"/>
         <TopLine Value="29"/>
         <CursorPos X="11" Y="43"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="46"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -72,7 +78,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="37"/>
         <CursorPos X="28" Y="48"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="46"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -80,7 +86,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="88"/>
         <CursorPos Y="88"/>
-        <UsageCount Value="44"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -99,10 +105,9 @@
       </Unit>
       <Unit>
         <Filename Value="..\tlib5\tmsg.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="13"/>
         <UsageCount Value="38"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="D:\langs\lazarus-2.2.6\lcl\include\application.inc"/>
@@ -111,111 +116,33 @@
         <CursorPos Y="2206"/>
         <UsageCount Value="6"/>
       </Unit>
+      <Unit>
+        <Filename Value="D:\langs\lazarus-2.2.6\components\datetimectrls\datetimepicker.pas"/>
+        <UnitName Value="DateTimePicker"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="44"/>
+        <CursorPos X="3" Y="55"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="D:\langs\lazarus-2.2.6\fpc\3.2.2\source\packages\rtl-objpas\src\inc\dateutils.pp"/>
+        <UnitName Value="DateUtils"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="D:\langs\lazarus-2.2.6\fpc\3.2.2\source\packages\rtl-objpas\src\inc\dateutil.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="78"/>
+        <CursorPos Y="79"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
     <Debugger>
       <Backend Value="{DEB953A3-D333-41C7-9F55-F7AFA6DA4C99}"/>
     </Debugger>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="341" TopLine="331"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="342" TopLine="331"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="345" TopLine="331"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="348" TopLine="331"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="360" TopLine="349"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="361" TopLine="349"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="367" Column="32" TopLine="355"/>
-      </Position>
-      <Position>
-        <Filename Value="task_edit.pas"/>
-        <Caret Line="72" Column="58" TopLine="71"/>
-      </Position>
-      <Position>
-        <Filename Value="task_edit.pas"/>
-        <Caret Line="73" Column="58" TopLine="72"/>
-      </Position>
-      <Position>
-        <Filename Value="task_edit.pas"/>
-        <Caret Line="167" Column="57" TopLine="154"/>
-      </Position>
-      <Position>
-        <Filename Value="task_edit.pas"/>
-        <Caret Line="130" Column="38" TopLine="118"/>
-      </Position>
-      <Position>
-        <Filename Value="task_edit.pas"/>
-        <Caret Line="164" Column="73" TopLine="153"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="551" Column="5" TopLine="533"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="531" Column="34" TopLine="512"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="314" TopLine="298"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="317" TopLine="299"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="322" TopLine="311"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="306" Column="23" TopLine="295"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="317" TopLine="304"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="316" TopLine="301"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="324" TopLine="313"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="308" TopLine="297"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="311" TopLine="297"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="324" TopLine="313"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="276" Column="17" TopLine="271"/>
-      </Position>
       <Position>
         <Filename Value="main.pas"/>
         <Caret Line="325" Column="9" TopLine="304"/>
@@ -235,6 +162,104 @@
       <Position>
         <Filename Value="main.pas"/>
         <Caret Line="313" Column="34" TopLine="302"/>
+      </Position>
+      <Position>
+        <Filename Value="task_edit.pas"/>
+        <Caret Line="158" Column="18" TopLine="153"/>
+      </Position>
+      <Position>
+        <Filename Value="task_edit.pas"/>
+        <Caret Line="103" Column="25" TopLine="90"/>
+      </Position>
+      <Position>
+        <Filename Value="task_edit.pas"/>
+        <Caret Line="39" Column="17" TopLine="28"/>
+      </Position>
+      <Position>
+        <Filename Value="task_edit.pas"/>
+        <Caret Line="140" Column="60" TopLine="134"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="120" Column="21" TopLine="107"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="410" Column="34" TopLine="400"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="120" Column="7" TopLine="108"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="418" Column="43" TopLine="400"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="121" Column="21" TopLine="108"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="120" Column="7" TopLine="108"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="420" Column="34" TopLine="401"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="411" Column="34" TopLine="401"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="120" Column="7" TopLine="108"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="427" Column="45" TopLine="408"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="122" Column="22" TopLine="108"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="699" TopLine="679"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="122" Column="22" TopLine="112"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="433" Column="38" TopLine="416"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="123" Column="21" TopLine="108"/>
+      </Position>
+      <Position>
+        <Filename Value="task_edit.pas"/>
+        <Caret Line="140" Column="43" TopLine="134"/>
+      </Position>
+      <Position>
+        <Filename Value="task_edit.pas"/>
+        <Caret Line="9" Column="45"/>
+      </Position>
+      <Position>
+        <Filename Value="D:\langs\lazarus-2.2.6\fpc\3.2.2\source\packages\rtl-objpas\src\inc\dateutils.pp"/>
+      </Position>
+      <Position>
+        <Filename Value="task_edit.pas"/>
+        <Caret Line="170" Column="34" TopLine="151"/>
+      </Position>
+      <Position>
+        <Filename Value="task_edit.pas"/>
+        <Caret Column="26"/>
+      </Position>
+      <Position>
+        <Filename Value="D:\langs\lazarus-2.2.6\fpc\3.2.2\source\packages\rtl-objpas\src\inc\dateutils.pp"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -261,6 +286,9 @@
       </Item>
       <Item>
         <Expression Value="liIndex"/>
+      </Item>
+      <Item>
+        <Expression Value="dtpDeadLine.fDatetime"/>
       </Item>
     </Watches>
   </Debugging>

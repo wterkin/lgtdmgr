@@ -6,7 +6,7 @@ interface
 
 uses
     Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Buttons,
-		StdCtrls, DateTimePicker, SQLDB
+		StdCtrls, DateTimePicker, SQLDB, DateUtils
     ,tdb, tlookup
     ;
 
@@ -137,8 +137,12 @@ begin
 
   qrTaskEx.ParamByName('pname').Text := edTaskName.Text;
   qrTaskEx.ParamByName('ptext').Text := meContent.Text;
-  qrTaskEx.ParamByName('pdeadline').AsDate := dtpDeadLine.Date;
-  qrTaskEx.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
+  if (dtpDeadLine.Date <> NullDate) then // and (dtpDeadLine.Date <> EncodeDate(1899, 12, 30)) then
+  begin
+
+    qrTaskEx.ParamByName('pdeadline').AsDate := dtpDeadLine.Date;
+	end;
+	qrTaskEx.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
   if moMode = dmUpdate then
   begin
 
@@ -160,8 +164,16 @@ begin
   //s:=qrTask.FieldByName('fname').AsString;
   edTaskName.Text := qrTask.FieldByName('fname').AsString;
   meContent.Text := qrTask.FieldByName('ftext').AsString;
-  dtpDeadLine.Date := qrTask.FieldByName('fdeadline').AsDateTime;
-  lblCreated.Caption := 'Задача создана ' + DateToStr(qrTask.FieldByName('fcreated').AsDateTime);
+  if DateOf(qrTask.FieldByName('fdeadline').AsDateTime) = EncodeDate(1899, 12, 30) then
+  begin
+
+    dtpDeadLine.Date := NullDate;
+  end else
+  begin
+
+    dtpDeadLine.Date := qrTask.FieldByName('fdeadline').AsDateTime;
+	end;
+	lblCreated.Caption := 'Задача создана ' + DateToStr(qrTask.FieldByName('fcreated').AsDateTime);
   if not qrTask.FieldByName('fcreated').IsNull then
   begin
 
