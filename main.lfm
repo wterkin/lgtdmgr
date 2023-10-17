@@ -13,17 +13,17 @@ object fmMain: TfmMain
   LCLVersion = '2.2.6.0'
   object Panel1: TPanel
     Left = 0
-    Height = 35
+    Height = 36
     Top = 0
     Width = 1027
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvLowered
-    ClientHeight = 35
+    ClientHeight = 36
     ClientWidth = 1027
     TabOrder = 2
     object cbContexts: TComboBox
-      Left = 176
+      Left = 248
       Height = 26
       Top = 5
       Width = 100
@@ -46,7 +46,7 @@ object fmMain: TfmMain
       Text = 'Все'
     end
     object cbPeriod: TComboBox
-      Left = 280
+      Left = 424
       Height = 26
       Top = 5
       Width = 120
@@ -64,6 +64,7 @@ object fmMain: TfmMain
         'За год'
         'Все'
       )
+      OnChange = cbPeriodChange
       ParentFont = False
       Style = csDropDownList
       TabOrder = 1
@@ -116,9 +117,44 @@ object fmMain: TfmMain
     end
     object Bevel1: TBevel
       Left = 168
-      Height = 28
-      Top = 3
-      Width = 17
+      Height = 32
+      Top = 2
+      Width = 8
+      Shape = bsLeftLine
+    end
+    object Label1: TLabel
+      Left = 177
+      Height = 16
+      Top = 9
+      Width = 68
+      Caption = 'Контекст:'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 368
+      Height = 16
+      Top = 9
+      Width = 49
+      Caption = 'Период'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object Bevel2: TBevel
+      Left = 352
+      Height = 32
+      Top = 2
+      Width = 8
       Shape = bsLeftLine
     end
   end
@@ -135,7 +171,7 @@ object fmMain: TfmMain
     Cursor = crVSplit
     Left = 0
     Height = 8
-    Top = 360
+    Top = 361
     Width = 1027
     Align = alTop
     Beveled = True
@@ -144,7 +180,7 @@ object fmMain: TfmMain
   object Panel2: TPanel
     Left = 0
     Height = 325
-    Top = 35
+    Top = 36
     Width = 1027
     Align = alTop
     BevelInner = bvRaised
@@ -283,24 +319,24 @@ object fmMain: TfmMain
   end
   object Panel5: TPanel
     Left = 0
-    Height = 372
-    Top = 368
+    Height = 371
+    Top = 369
     Width = 1027
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvLowered
-    ClientHeight = 372
+    ClientHeight = 371
     ClientWidth = 1027
     TabOrder = 1
     object Panel6: TPanel
       Left = 2
-      Height = 368
+      Height = 367
       Top = 2
       Width = 510
       Align = alLeft
       BevelInner = bvRaised
       BevelOuter = bvLowered
-      ClientHeight = 368
+      ClientHeight = 367
       ClientWidth = 510
       TabOrder = 0
       object bbtToTrash: TBitBtn
@@ -322,7 +358,7 @@ object fmMain: TfmMain
       end
       object dbgTrash: TDBGrid
         Left = 2
-        Height = 334
+        Height = 333
         Top = 32
         Width = 506
         Align = alClient
@@ -354,13 +390,13 @@ object fmMain: TfmMain
     end
     object Panel7: TPanel
       Left = 520
-      Height = 368
+      Height = 367
       Top = 2
       Width = 505
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
-      ClientHeight = 368
+      ClientHeight = 367
       ClientWidth = 505
       TabOrder = 1
       object bbtToDone: TBitBtn
@@ -382,7 +418,7 @@ object fmMain: TfmMain
       end
       object dbgDone: TDBGrid
         Left = 2
-        Height = 334
+        Height = 333
         Top = 32
         Width = 501
         Align = alClient
@@ -414,7 +450,7 @@ object fmMain: TfmMain
     end
     object Splitter3: TSplitter
       Left = 512
-      Height = 368
+      Height = 367
       Top = 2
       Width = 8
       Beveled = True

@@ -40,10 +40,10 @@ type
       procedure loadData();
       function  validateData() : Boolean;
     public
+
       { public declarations }
       procedure viewRecord();
       procedure appendRecord();
-
     end;
 
 var

@@ -32,6 +32,7 @@ type
 						bbtToTrash : TBitBtn;
 						bbtToWork : TBitBtn;
 						Bevel1 : TBevel;
+						Bevel2 : TBevel;
 					  cbContexts : TComboBox;
 					  cbPeriod : TComboBox;
 						dbgDone : TDBGrid;
@@ -43,6 +44,8 @@ type
 					  dsTrash : TDataSource;
 					  dsDone : TDataSource;
 					  ImageList : TImageList;
+						Label1 : TLabel;
+						Label2 : TLabel;
 					  Panel1 : TPanel;
 						Panel2 : TPanel;
 						Panel3 : TPanel;
@@ -77,13 +80,14 @@ type
 				procedure actToTrashBinExecute(Sender : TObject);
 				procedure actToWorkExecute(Sender : TObject);
 				procedure cbContextsChange(Sender : TObject);
+				procedure cbPeriodChange(Sender : TObject);
 				procedure dbgDoneCellClick({%H-}Column : TColumn);
 				procedure dbgInputCellClick({%H-}Column : TColumn);
 				procedure dbgInputPrepareCanvas(sender : TObject; {%H-}DataCol : Integer;
 						{%H-}Column : TColumn; {%H-}AState : TGridDrawState);
 				procedure dbgWorkCellClick({%H-}Column : TColumn);
 				procedure dbgTrashCellClick({%H-}Column : TColumn);
-				procedure FormClose(Sender : TObject; var CloseAction : TCloseAction);
+				procedure FormClose(Sender : TObject; var {%H-}CloseAction : TCloseAction);
 		    procedure FormCreate(Sender : TObject);
 				procedure FormKeyDown(Sender : TObject; var Key : Word;
 								Shift : TShiftState);
@@ -96,6 +100,7 @@ type
         procedure createDatabaseIfNeeded();
         procedure reopenTable();
         procedure EnableMovingActions(pblEnabled : Boolean = True);
+        function  getSelectedPeriodBegin() : TDate;
       public
 
         function getLastRecordID() : Integer;
@@ -585,38 +590,51 @@ begin
 end;
 
 
+procedure TfmMain.cbPeriodChange(Sender : TObject);
+begin
+
+  reopenTable();
+end;
+
+
 procedure TfmMain.reopenTable;
 const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext,'#13+
                   '        strftime(''%d-%m-%Y'', fcreated) as fdate,'#13+
                   '        strftime(''%h:%m'', fcreated) as ftime,'#13+
                   '        fdeadline, fcreated, fupdated'#13+
 						      '  from tbltasks'#13+
-                  ' where     fstate = :pstate'#13+
-                  '       and fcontext = :pcontext';
-//var      i:integer;
+                  ' where     (fstate = :pstate)'#13+
+                  '       and (fcontext = :pcontext)'#13+
+                  '       and (fcreated > :pdatebegin)';
+var ldtDateBegin : TDate;
 begin
 
+  ldtDateBegin := getSelectedPeriodBegin();
   try
 
     restartTransaction(Transaction);
     initializeQuery(qrInput, csMainSQL, False);
     qrInput.ParamByName('pstate').AsInteger := ciInputType;
     qrInput.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
+    qrInput.ParamByName('pdatebegin').AsDate := ldtDateBegin;
     qrInput.Open();
 
     initializeQuery(qrWork, csMainSQL, False);
     qrWork.ParamByName('pstate').AsInteger := ciWorkType;
     qrWork.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
+    qrWork.ParamByName('pdatebegin').AsDate := ldtDateBegin;
     qrWork.Open();
 
     initializeQuery(qrTrash, csMainSQL, False);
     qrTrash.ParamByName('pstate').AsInteger := ciTrashType;
     qrTrash.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
+    qrTrash.ParamByName('pdatebegin').AsDate := ldtDateBegin;
     qrTrash.Open();
 
     initializeQuery(qrDone, csMainSQL, False);
     qrDone.ParamByName('pstate').AsInteger := ciDoneType;
-    qrDone.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();;
+    qrDone.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
+    qrDone.ParamByName('pdatebegin').AsDate := ldtDateBegin;
     qrDone.Open();
     (*
     if qrInput.RecordCount > 0 then
@@ -669,6 +687,39 @@ begin
   actToInputBox.Enabled := pblEnabled;
   actToTrashBin.Enabled := pblEnabled;
   actToWork.Enabled := pblEnabled;
+end;
+
+
+function TfmMain.getSelectedPeriodBegin : TDate;
+var liDays : Integer;
+    ldtDateBegin : TDate;
+begin
+
+  case cbPeriod.ItemIndex of
+
+    ciTodayTasks: begin
+
+      liDays := 0;
+    end;
+	  ciWeekTasks: begin
+
+      liDays := -7;
+		end;
+    ciMonthTasks: begin
+
+      liDays := -30;
+		end;
+    ciYearTasks: begin
+
+      liDays := -365;
+		end;
+    ciAllTasks: begin
+
+      liDays := -36500;
+		end;
+  end;
+  ldtDateBegin := IncDay(DateOf(Now), liDays);
+  Result := ldtDateBegin;
 end;
 
 

@@ -1,0 +1,86 @@
+object fmContextEdit: TfmContextEdit
+  Left = 563
+  Height = 119
+  Top = 252
+  Width = 449
+  Caption = 'Редактирование контекста'
+  ClientHeight = 119
+  ClientWidth = 449
+  LCLVersion = '2.2.6.0'
+  object Panel1: TPanel
+    Left = 8
+    Height = 104
+    Top = 8
+    Width = 344
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    ClientHeight = 104
+    ClientWidth = 344
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Height = 18
+      Top = 8
+      Width = 328
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Наименование'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object edName: TEdit
+      Left = 8
+      Height = 23
+      Top = 32
+      Width = 328
+      TabOrder = 0
+    end
+    object bbtOk: TBitBtn
+      Left = 8
+      Height = 30
+      Top = 64
+      Width = 160
+      Caption = 'Принять'
+      Default = True
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Images = fmMain.ImageList
+      ImageIndex = 1
+      OnClick = bbtOkClick
+      ParentFont = False
+      TabOrder = 1
+    end
+    object bbtCancel: TBitBtn
+      Left = 176
+      Height = 30
+      Top = 64
+      Width = 160
+      Caption = 'Отмена'
+      Font.CharSet = RUSSIAN_CHARSET
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ModalResult = 2
+      Images = fmMain.ImageList
+      ImageIndex = 8
+      ParentFont = False
+      TabOrder = 2
+    end
+  end
+  object qrContexts: TSQLQuery
+    FieldDefs = <>
+    Params = <>
+    Macros = <>
+    Left = 382
+    Top = 24
+  end
+end

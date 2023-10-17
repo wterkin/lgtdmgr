@@ -180,9 +180,15 @@ object fmTaskEdit: TfmTaskEdit
     Top = 400
     Width = 155
     Caption = 'Принять'
+    Font.CharSet = RUSSIAN_CHARSET
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     Images = fmMain.ImageList
     ImageIndex = 1
     OnClick = bbtOkClick
+    ParentFont = False
     TabOrder = 1
   end
   object bbtCancel: TBitBtn
@@ -191,9 +197,15 @@ object fmTaskEdit: TfmTaskEdit
     Top = 400
     Width = 155
     Caption = 'Отмена'
+    Font.CharSet = RUSSIAN_CHARSET
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ModalResult = 2
     Images = fmMain.ImageList
     ImageIndex = 8
+    ParentFont = False
     TabOrder = 2
   end
   object qrTask: TSQLQuery

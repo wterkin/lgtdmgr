@@ -46,36 +46,36 @@ object fmSetup: TfmSetup
       ClientHeight = 37
       ClientWidth = 286
       TabOrder = 1
-      object SpeedButton1: TSpeedButton
+      object sbCreateContext: TSpeedButton
         Left = 2
         Height = 32
         Top = 2
         Width = 33
         Images = fmMain.ImageList
         ImageIndex = 5
-        OnClick = SpeedButton1Click
+        OnClick = sbCreateContextClick
         ShowHint = True
         ParentShowHint = False
       end
-      object SpeedButton2: TSpeedButton
+      object sbChangeContext: TSpeedButton
         Left = 35
         Height = 32
         Top = 2
         Width = 33
         Images = fmMain.ImageList
         ImageIndex = 4
-        OnClick = SpeedButton2Click
+        OnClick = sbChangeContextClick
         ShowHint = True
         ParentShowHint = False
       end
-      object SpeedButton3: TSpeedButton
+      object sbDeleteContext: TSpeedButton
         Left = 68
         Height = 32
         Top = 2
         Width = 33
         Images = fmMain.ImageList
         ImageIndex = 6
-        OnClick = SpeedButton3Click
+        OnClick = sbDeleteContextClick
         ShowHint = True
         ParentShowHint = False
       end

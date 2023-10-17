@@ -21,13 +21,13 @@ type
 				Panel2 : TPanel;
 				qrContexts : TSQLQuery;
 				qrContextEx : TSQLQuery;
-				SpeedButton1 : TSpeedButton;
-				SpeedButton2 : TSpeedButton;
-				SpeedButton3 : TSpeedButton;
+				sbCreateContext : TSpeedButton;
+				sbChangeContext : TSpeedButton;
+				sbDeleteContext : TSpeedButton;
 				procedure FormShow(Sender : TObject);
-    procedure SpeedButton1Click(Sender : TObject);
-				procedure SpeedButton2Click(Sender : TObject);
-				procedure SpeedButton3Click(Sender : TObject);
+    procedure sbCreateContextClick(Sender : TObject);
+				procedure sbChangeContextClick(Sender : TObject);
+				procedure sbDeleteContextClick(Sender : TObject);
     private
 
     public
@@ -45,7 +45,7 @@ uses main;
 
 { TfmSetup }
 
-procedure TfmSetup.SpeedButton1Click(Sender : TObject);
+procedure TfmSetup.sbCreateContextClick(Sender : TObject);
 begin
 
   //
@@ -71,13 +71,13 @@ begin
   end;
 end;
 
-procedure TfmSetup.SpeedButton2Click(Sender : TObject);
+procedure TfmSetup.sbChangeContextClick(Sender : TObject);
 begin
 
   //
 end;
 
-procedure TfmSetup.SpeedButton3Click(Sender : TObject);
+procedure TfmSetup.sbDeleteContextClick(Sender : TObject);
 begin
 
   //
