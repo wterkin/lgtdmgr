@@ -6,8 +6,11 @@ interface
 
 uses
     Classes, SysUtils, SQLDB, DB, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-		ComCtrls, Buttons, DBGrids,
-    tdb;
+		ComCtrls, Buttons, DBGrids
+    , context_edit
+    , tdb
+
+    ;
 
 type
 
@@ -48,8 +51,9 @@ uses main;
 procedure TfmSetup.sbCreateContextClick(Sender : TObject);
 begin
 
-  //
+  fmContextEdit.appendRecord();
 end;
+
 
 procedure TfmSetup.FormShow(Sender : TObject);
 const csSelectContexts =
@@ -71,10 +75,11 @@ begin
   end;
 end;
 
+
 procedure TfmSetup.sbChangeContextClick(Sender : TObject);
 begin
 
-  //
+  fmContextEdit.viewRecord();
 end;
 
 procedure TfmSetup.sbDeleteContextClick(Sender : TObject);

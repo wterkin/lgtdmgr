@@ -80,7 +80,16 @@ object fmContextEdit: TfmContextEdit
     FieldDefs = <>
     Params = <>
     Macros = <>
-    Left = 382
-    Top = 24
+    Left = 376
+    Top = 8
+  end
+  object qrContextsEx: TSQLQuery
+    FieldDefs = <>
+    Database = fmMain.SQLite
+    Transaction = fmMain.Transaction
+    Params = <>
+    Macros = <>
+    Left = 376
+    Top = 64
   end
 end
