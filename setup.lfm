@@ -33,7 +33,9 @@ object fmSetup: TfmSetup
           FieldName = 'fname'
         end>
       DataSource = dsContexts
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
+      OnCellClick = dbgContextsCellClick
     end
     object Panel2: TPanel
       Left = 2

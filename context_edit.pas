@@ -6,8 +6,8 @@ interface
 
 uses
     Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-		Buttons
-    , tdb, SQLDB
+		Buttons, SQLDB
+    , tdb, tstr
     ;
 
 type
@@ -25,14 +25,14 @@ type
 				procedure bbtOkClick(Sender : TObject);
     private
         moMode : TDBMode;
-
+        miID : Integer;
         procedure initData();
         procedure storeData();
         procedure loadData();
         function  validateData() : Boolean;
     public
 
-        procedure viewRecord();
+        procedure viewRecord(piID: Integer);
         procedure appendRecord();
     end;
 
@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses setup;
+uses main;
 
 {$R *.lfm}
 
@@ -51,13 +51,16 @@ procedure TfmContextEdit.bbtOkClick(Sender : TObject);
 const csInsertSQL =
         'insert into tblcontexts ('#13+
 		    '                      fname,'#13+
+		    '                      fcreated'#13+
 		    '                  )'#13+
 		    '                  VALUES ('#13+
 		    '                      :pname,'#13+
+		    '                      :pcreated'#13+
 		    '                  );'#13;
       csUpdateSQL =
-        'UPDATE tbltasks'#13+
-        '  SET fname = :pname'#13+
+        'UPDATE tblcontexts'#13+
+        '  SET fname = :pname,'#13+
+        '      fupdated = :pupdated'#13+
         '  WHERE id = :pid'#13;
 begin
 
@@ -89,6 +92,7 @@ begin
 	end;
 end;
 
+
 procedure TfmContextEdit.initData;
 begin
 
@@ -99,10 +103,11 @@ end;
 procedure TfmContextEdit.storeData;
 begin
 
+  qrContextsEx.ParamByName('pname').Text := edName.Text;
   if moMode = dmUpdate then
   begin
 
-    qrContextsEx.ParamByName('pid').AsInteger := fmSetup.qrContexts.FieldByName('id').AsInteger;
+    qrContextsEx.ParamByName('pid').AsInteger := miID;
     qrContextsEx.ParamByName('pupdated').AsDateTime := Now;
   end else
   begin
@@ -122,17 +127,17 @@ end;
 function TfmContextEdit.validateData : Boolean;
 begin
 
-  Result := True;
+  Result := not isEmpty(edName.Text);
 end;
 
 
-procedure TfmContextEdit.viewRecord;
+procedure TfmContextEdit.viewRecord(piID : Integer);
 begin
 
   try
-
+    miID := piID;
     initializeQuery(qrContexts,'select * from tblcontexts where id = :pid');
-    qrContexts.ParamByName('pid').AsInteger := fmSetup.qrContexts.FieldByName('id').AsInteger;
+    qrContexts.ParamByName('pid').AsInteger := miID;
     qrContexts.Open();
  	except on E: Exception do
 

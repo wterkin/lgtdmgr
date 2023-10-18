@@ -78,6 +78,8 @@ object fmContextEdit: TfmContextEdit
   end
   object qrContexts: TSQLQuery
     FieldDefs = <>
+    Database = fmMain.SQLite
+    Transaction = fmMain.Transaction
     Params = <>
     Macros = <>
     Left = 376

@@ -416,7 +416,7 @@ object fmMain: TfmMain
         ParentFont = False
         TabOrder = 0
       end
-      object dbgDone: TDBGrid
+      object dbgCompleted: TDBGrid
         Left = 2
         Height = 333
         Top = 32
@@ -435,7 +435,7 @@ object fmMain: TfmMain
             Width = 234
             FieldName = 'fname'
           end>
-        DataSource = dsDone
+        DataSource = dsCompleted
         Font.CharSet = RUSSIAN_CHARSET
         Font.Height = -15
         Font.Name = 'Tahoma'
@@ -444,7 +444,7 @@ object fmMain: TfmMain
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         ParentFont = False
         TabOrder = 1
-        OnCellClick = dbgDoneCellClick
+        OnCellClick = dbgCompletedCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
       end
     end
@@ -463,14 +463,12 @@ object fmMain: TfmMain
     KeepConnection = False
     Transaction = Transaction
     AlwaysUseBigint = False
-    Left = 912
-    Top = 72
+    Left = 552
   end
   object Transaction: TSQLTransaction
     Active = False
     Database = SQLite
-    Left = 912
-    Top = 128
+    Left = 608
   end
   object qrInput: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
@@ -483,13 +481,13 @@ object fmMain: TfmMain
     )
     Params = <>
     Macros = <>
-    Left = 176
-    Top = 328
+    Left = 448
+    Top = 104
   end
   object dsInput: TDataSource
     DataSet = qrInput
-    Left = 120
-    Top = 328
+    Left = 408
+    Top = 104
   end
   object qrWork: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
@@ -506,8 +504,8 @@ object fmMain: TfmMain
     )
     Params = <>
     Macros = <>
-    Left = 392
-    Top = 328
+    Left = 968
+    Top = 104
   end
   object qrTrash: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
@@ -520,10 +518,10 @@ object fmMain: TfmMain
     )
     Params = <>
     Macros = <>
-    Left = 616
-    Top = 328
+    Left = 448
+    Top = 432
   end
-  object qrDone: TSQLQuery
+  object qrCompleted: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
     MaxIndexesCount = 4
     FieldDefs = <>
@@ -534,29 +532,28 @@ object fmMain: TfmMain
     )
     Params = <>
     Macros = <>
-    Left = 840
-    Top = 328
+    Left = 976
+    Top = 432
   end
   object dsWork: TDataSource
     DataSet = qrWork
-    Left = 336
-    Top = 328
+    Left = 920
+    Top = 104
   end
   object dsTrash: TDataSource
     DataSet = qrTrash
-    Left = 568
-    Top = 328
+    Left = 408
+    Top = 432
   end
-  object dsDone: TDataSource
-    DataSet = qrDone
-    Left = 792
-    Top = 328
+  object dsCompleted: TDataSource
+    DataSet = qrCompleted
+    Left = 896
+    Top = 432
   end
   object ImageList: TImageList
     Height = 22
     Width = 22
-    Left = 912
-    Top = 192
+    Left = 672
     Bitmap = {
       4C7A0A0000001600000016000000311A00000000000078DAED9C075814E7BAC7
       41398989B92639DE6B3C31399A98764F8A1A0BA0688CF5E8B52BD6686C68C482
@@ -773,8 +770,7 @@ object fmMain: TfmMain
   end
   object ActionList: TActionList
     Images = ImageList
-    Left = 912
-    Top = 248
+    Left = 728
     object actToInputBox: TAction
       Category = 'Действия'
       Caption = 'Во входящие (F1)'
@@ -836,8 +832,7 @@ object fmMain: TfmMain
     Transaction = Transaction
     Params = <>
     Macros = <>
-    Left = 912
-    Top = 304
+    Left = 784
   end
   object qrTaskExt: TSQLQuery
     FieldDefs = <>
@@ -845,7 +840,7 @@ object fmMain: TfmMain
     Transaction = Transaction
     Params = <>
     Macros = <>
-    Left = 984
-    Top = 304
+    Left = 888
+    Top = 8
   end
 end

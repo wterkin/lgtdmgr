@@ -65,6 +65,7 @@
         <Filename Value="context_edit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fmContextEdit"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
     </Units>

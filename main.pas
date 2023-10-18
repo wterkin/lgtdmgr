@@ -35,14 +35,14 @@ type
 						Bevel2 : TBevel;
 					  cbContexts : TComboBox;
 					  cbPeriod : TComboBox;
-						dbgDone : TDBGrid;
+						dbgCompleted : TDBGrid;
 						dbgInput : TDBGrid;
 						dbgTrash : TDBGrid;
 						dbgWork : TDBGrid;
 					  dsInput : TDataSource;
 					  dsWork : TDataSource;
 					  dsTrash : TDataSource;
-					  dsDone : TDataSource;
+					  dsCompleted : TDataSource;
 					  ImageList : TImageList;
 						Label1 : TLabel;
 						Label2 : TLabel;
@@ -55,7 +55,7 @@ type
 						Panel7 : TPanel;
 					  qrWork : TSQLQuery;
 					  qrTrash : TSQLQuery;
-					  qrDone : TSQLQuery;
+					  qrCompleted : TSQLQuery;
 						SpeedButton1 : TSpeedButton;
 						SpeedButton2 : TSpeedButton;
 						SpeedButton3 : TSpeedButton;
@@ -81,7 +81,7 @@ type
 				procedure actToWorkExecute(Sender : TObject);
 				procedure cbContextsChange(Sender : TObject);
 				procedure cbPeriodChange(Sender : TObject);
-				procedure dbgDoneCellClick({%H-}Column : TColumn);
+				procedure dbgCompletedCellClick({%H-}Column : TColumn);
 				procedure dbgInputCellClick({%H-}Column : TColumn);
 				procedure dbgInputPrepareCanvas(sender : TObject; {%H-}DataCol : Integer;
 						{%H-}Column : TColumn; {%H-}AState : TGridDrawState);
@@ -93,10 +93,10 @@ type
 								Shift : TShiftState);
       private
 
-            miLastRecordID : Integer;
-            moContextsCombo : TEasyLookupCombo;
-            msDataBasePath : String;
-            miContext : Integer;
+        miLastRecordID : Integer;
+        moContextsCombo : TEasyLookupCombo;
+        msDataBasePath : String;
+        miContext : Integer;
         procedure createDatabaseIfNeeded();
         procedure reopenTable();
         procedure EnableMovingActions(pblEnabled : Boolean = True);
@@ -236,7 +236,7 @@ begin
     qrInput.Active := False;
     qrWork.Active := False;
     qrTrash.Active := False;
-    qrDone.Active := False;
+    qrCompleted.Active := False;
 
     SQLite.Connected := True;
 
@@ -265,10 +265,10 @@ begin
     dbgTrash.Columns[1].Width := dbgTrash.Width - (ciColumnWidthDiff + ciDateColumnWidth);
     dbgTrash.SelectedColor := $DDDDDD;
     dbgTrash.FocusColor:=clNavy;
-    dbgDone.Columns[0].Width := ciDateColumnWidth;
-    dbgDone.Columns[1].Width := dbgDone.Width - (ciColumnWidthDiff + ciDateColumnWidth);
-    dbgDone.SelectedColor := $DDDDDD;
-    dbgDone.FocusColor:=clNavy;
+    dbgCompleted.Columns[0].Width := ciDateColumnWidth;
+    dbgCompleted.Columns[1].Width := dbgCompleted.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+    dbgCompleted.SelectedColor := $DDDDDD;
+    dbgCompleted.FocusColor:=clNavy;
 	finally
 
 	end;
@@ -348,16 +348,16 @@ begin
 end;
 
 
-procedure TfmMain.dbgDoneCellClick(Column : TColumn);
+procedure TfmMain.dbgCompletedCellClick(Column : TColumn);
 begin
 
-  if qrDone.RecordCount > 0 then
+  if qrCompleted.RecordCount > 0 then
   begin
 
     EnableMovingActions();
-    actChangeTask.Enabled := qrDone.RecordCount > 0;
+    actChangeTask.Enabled := qrCompleted.RecordCount > 0;
     actToCompleted.Enabled := False;
-    miLastRecordID := qrDone.FieldByName('id').AsInteger;
+    miLastRecordID := qrCompleted.FieldByName('id').AsInteger;
   end else
   begin
 
@@ -631,11 +631,11 @@ begin
     qrTrash.ParamByName('pdatebegin').AsDate := ldtDateBegin;
     qrTrash.Open();
 
-    initializeQuery(qrDone, csMainSQL, False);
-    qrDone.ParamByName('pstate').AsInteger := ciDoneType;
-    qrDone.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
-    qrDone.ParamByName('pdatebegin').AsDate := ldtDateBegin;
-    qrDone.Open();
+    initializeQuery(qrCompleted, csMainSQL, False);
+    qrCompleted.ParamByName('pstate').AsInteger := ciDoneType;
+    qrCompleted.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
+    qrCompleted.ParamByName('pdatebegin').AsDate := ldtDateBegin;
+    qrCompleted.Open();
     (*
     if qrInput.RecordCount > 0 then
     begin
@@ -658,10 +658,10 @@ begin
         end else
         begin
 
-          if qrDone.RecordCount >0 then
+          if qrCompleted.RecordCount >0 then
           begin
 
-            miLastRecordID := qrDone.FieldByName('id').AsInteger;
+            miLastRecordID := qrCompleted.FieldByName('id').AsInteger;
           end else
           begin
 
@@ -672,7 +672,7 @@ begin
 			end;
 		end;
     *)
-		//i:=qrDone.RecordCount;
+		//i:=qrCompleted.RecordCount;
 	except on E : Exception do
 
     fatalError('Ошибка!', E.Message);
