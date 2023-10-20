@@ -1,11 +1,11 @@
 object fmMain: TfmMain
-  Left = 536
+  Left = 459
   Height = 763
   Top = 155
-  Width = 1027
+  Width = 1104
   Caption = 'GTD Manager'
   ClientHeight = 763
-  ClientWidth = 1027
+  ClientWidth = 1104
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
@@ -15,12 +15,12 @@ object fmMain: TfmMain
     Left = 0
     Height = 36
     Top = 0
-    Width = 1027
+    Width = 1104
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ClientHeight = 36
-    ClientWidth = 1027
+    ClientWidth = 1104
     TabOrder = 2
     object cbContexts: TComboBox
       Left = 248
@@ -84,7 +84,7 @@ object fmMain: TfmMain
       Height = 32
       Top = 2
       Width = 32
-      Action = actDeleteTask
+      Action = actDeleteInputTask
       Images = ImageList
       ImageIndex = 6
     end
@@ -93,7 +93,7 @@ object fmMain: TfmMain
       Height = 32
       Top = 2
       Width = 32
-      Action = actChangeTask
+      Action = actChangeInputTask
       Images = ImageList
       ImageIndex = 4
     end
@@ -162,7 +162,7 @@ object fmMain: TfmMain
     Left = 0
     Height = 23
     Top = 740
-    Width = 1027
+    Width = 1104
     Panels = <>
     ParentShowHint = False
     ShowHint = True
@@ -172,7 +172,7 @@ object fmMain: TfmMain
     Left = 0
     Height = 8
     Top = 361
-    Width = 1027
+    Width = 1104
     Align = alTop
     Beveled = True
     ResizeAnchor = akTop
@@ -181,12 +181,12 @@ object fmMain: TfmMain
     Left = 0
     Height = 325
     Top = 36
-    Width = 1027
+    Width = 1104
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ClientHeight = 325
-    ClientWidth = 1027
+    ClientWidth = 1104
     TabOrder = 0
     object Splitter1: TSplitter
       Left = 512
@@ -206,27 +206,10 @@ object fmMain: TfmMain
       ClientHeight = 321
       ClientWidth = 510
       TabOrder = 1
-      object bbtToInput: TBitBtn
-        Left = 2
-        Height = 30
-        Top = 2
-        Width = 506
-        Action = actToInputBox
-        Align = alTop
-        Font.CharSet = RUSSIAN_CHARSET
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Pitch = fpVariable
-        Font.Quality = fqDraft
-        Images = ImageList
-        ImageIndex = 3
-        ParentFont = False
-        TabOrder = 0
-      end
       object dbgInput: TDBGrid
         Left = 2
-        Height = 287
-        Top = 32
+        Height = 281
+        Top = 38
         Width = 506
         Align = alClient
         AutoEdit = False
@@ -251,44 +234,74 @@ object fmMain: TfmMain
         Font.Quality = fqDraft
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
         OnCellClick = dbgInputCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
+      end
+      object Panel8: TPanel
+        Left = 2
+        Height = 36
+        Top = 2
+        Width = 506
+        Align = alTop
+        BevelInner = bvRaised
+        BevelOuter = bvLowered
+        ClientHeight = 36
+        ClientWidth = 506
+        TabOrder = 1
+        object SpeedButton6: TSpeedButton
+          Left = 2
+          Height = 32
+          Top = 2
+          Width = 32
+          Action = actChangeInputTask
+          Images = ImageList
+          ImageIndex = 4
+        end
+        object SpeedButton7: TSpeedButton
+          Left = 33
+          Height = 32
+          Top = 2
+          Width = 32
+          Action = actDeleteInputTask
+          Images = ImageList
+          ImageIndex = 6
+        end
+        object bbtToInput: TBitBtn
+          Left = 64
+          Height = 32
+          Top = 2
+          Width = 440
+          Action = actToInputBox
+          Align = alRight
+          Font.CharSet = RUSSIAN_CHARSET
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          Images = ImageList
+          ImageIndex = 3
+          ParentFont = False
+          TabOrder = 0
+        end
       end
     end
     object Panel4: TPanel
       Left = 520
       Height = 321
       Top = 2
-      Width = 505
+      Width = 582
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       ClientHeight = 321
-      ClientWidth = 505
+      ClientWidth = 582
       TabOrder = 2
-      object bbtToWork: TBitBtn
-        Left = 2
-        Height = 30
-        Top = 2
-        Width = 501
-        Action = actToWork
-        Align = alTop
-        Font.CharSet = RUSSIAN_CHARSET
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Pitch = fpVariable
-        Font.Quality = fqDraft
-        Images = ImageList
-        ImageIndex = 9
-        ParentFont = False
-        TabOrder = 0
-      end
       object dbgWork: TDBGrid
         Left = 2
-        Height = 287
-        Top = 32
-        Width = 501
+        Height = 281
+        Top = 38
+        Width = 578
         Align = alClient
         AutoEdit = False
         Color = clWindow
@@ -311,9 +324,56 @@ object fmMain: TfmMain
         Font.Quality = fqDraft
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
         OnCellClick = dbgWorkCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
+      end
+      object Panel9: TPanel
+        Left = 2
+        Height = 36
+        Top = 2
+        Width = 578
+        Align = alTop
+        BevelInner = bvRaised
+        BevelOuter = bvLowered
+        ClientHeight = 36
+        ClientWidth = 578
+        TabOrder = 1
+        object sbChangeWorkTask: TSpeedButton
+          Left = 2
+          Height = 32
+          Top = 2
+          Width = 32
+          Action = actChangeWorkTask
+          Images = ImageList
+          ImageIndex = 4
+        end
+        object sbDeleteWorkTask: TSpeedButton
+          Left = 33
+          Height = 32
+          Top = 2
+          Width = 32
+          Action = actDeleteWorkTask
+          Images = ImageList
+          ImageIndex = 6
+        end
+        object bbtToWork: TBitBtn
+          Left = 64
+          Height = 32
+          Top = 2
+          Width = 512
+          Action = actToWork
+          Align = alRight
+          Font.CharSet = RUSSIAN_CHARSET
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          Images = ImageList
+          ImageIndex = 9
+          ParentFont = False
+          TabOrder = 0
+        end
       end
     end
   end
@@ -321,12 +381,12 @@ object fmMain: TfmMain
     Left = 0
     Height = 371
     Top = 369
-    Width = 1027
+    Width = 1104
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ClientHeight = 371
-    ClientWidth = 1027
+    ClientWidth = 1104
     TabOrder = 1
     object Panel6: TPanel
       Left = 2
@@ -339,27 +399,10 @@ object fmMain: TfmMain
       ClientHeight = 367
       ClientWidth = 510
       TabOrder = 0
-      object bbtToTrash: TBitBtn
-        Left = 2
-        Height = 30
-        Top = 2
-        Width = 506
-        Action = actToTrashBin
-        Align = alTop
-        Font.CharSet = RUSSIAN_CHARSET
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Pitch = fpVariable
-        Font.Quality = fqDraft
-        Images = ImageList
-        ImageIndex = 2
-        ParentFont = False
-        TabOrder = 0
-      end
       object dbgTrash: TDBGrid
         Left = 2
-        Height = 333
-        Top = 32
+        Height = 327
+        Top = 38
         Width = 506
         Align = alClient
         AutoEdit = False
@@ -383,44 +426,74 @@ object fmMain: TfmMain
         Font.Quality = fqDraft
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
         OnCellClick = dbgTrashCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
+      end
+      object Panel10: TPanel
+        Left = 2
+        Height = 36
+        Top = 2
+        Width = 506
+        Align = alTop
+        BevelInner = bvRaised
+        BevelOuter = bvLowered
+        ClientHeight = 36
+        ClientWidth = 506
+        TabOrder = 1
+        object sbChangeTrashTask: TSpeedButton
+          Left = 2
+          Height = 32
+          Top = 2
+          Width = 32
+          Action = actChangeTrashTask
+          Images = ImageList
+          ImageIndex = 4
+        end
+        object sbDeleteTrashTask: TSpeedButton
+          Left = 33
+          Height = 32
+          Top = 2
+          Width = 32
+          Action = actDeleteTrashTask
+          Images = ImageList
+          ImageIndex = 6
+        end
+        object bbtToTrash: TBitBtn
+          Left = 64
+          Height = 32
+          Top = 2
+          Width = 440
+          Action = actToTrashBin
+          Align = alRight
+          Font.CharSet = RUSSIAN_CHARSET
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          Images = ImageList
+          ImageIndex = 2
+          ParentFont = False
+          TabOrder = 0
+        end
       end
     end
     object Panel7: TPanel
       Left = 520
       Height = 367
       Top = 2
-      Width = 505
+      Width = 582
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       ClientHeight = 367
-      ClientWidth = 505
+      ClientWidth = 582
       TabOrder = 1
-      object bbtToDone: TBitBtn
-        Left = 2
-        Height = 30
-        Top = 2
-        Width = 501
-        Action = actToCompleted
-        Align = alTop
-        Font.CharSet = RUSSIAN_CHARSET
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Pitch = fpVariable
-        Font.Quality = fqDraft
-        Images = ImageList
-        ImageIndex = 1
-        ParentFont = False
-        TabOrder = 0
-      end
       object dbgCompleted: TDBGrid
         Left = 2
-        Height = 333
-        Top = 32
-        Width = 501
+        Height = 327
+        Top = 38
+        Width = 578
         Align = alClient
         AutoEdit = False
         Color = clWindow
@@ -443,9 +516,56 @@ object fmMain: TfmMain
         Font.Quality = fqDraft
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
         OnCellClick = dbgCompletedCellClick
         OnPrepareCanvas = dbgInputPrepareCanvas
+      end
+      object Panel11: TPanel
+        Left = 2
+        Height = 36
+        Top = 2
+        Width = 578
+        Align = alTop
+        BevelInner = bvRaised
+        BevelOuter = bvLowered
+        ClientHeight = 36
+        ClientWidth = 578
+        TabOrder = 1
+        object sbChangeCompletedTask: TSpeedButton
+          Left = 2
+          Height = 32
+          Top = 2
+          Width = 32
+          Action = actChangeCompletedTask
+          Images = ImageList
+          ImageIndex = 4
+        end
+        object sbDeleteCompletedTask: TSpeedButton
+          Left = 33
+          Height = 32
+          Top = 2
+          Width = 32
+          Action = actDeleteCompletedTask
+          Images = ImageList
+          ImageIndex = 6
+        end
+        object bbtToDone: TBitBtn
+          Left = 64
+          Height = 32
+          Top = 2
+          Width = 512
+          Action = actToCompleted
+          Align = alRight
+          Font.CharSet = RUSSIAN_CHARSET
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          Images = ImageList
+          ImageIndex = 1
+          ParentFont = False
+          TabOrder = 0
+        end
       end
     end
     object Splitter3: TSplitter
@@ -486,7 +606,7 @@ object fmMain: TfmMain
   end
   object dsInput: TDataSource
     DataSet = qrInput
-    Left = 408
+    Left = 400
     Top = 104
   end
   object qrWork: TSQLQuery
@@ -542,7 +662,7 @@ object fmMain: TfmMain
   end
   object dsTrash: TDataSource
     DataSet = qrTrash
-    Left = 408
+    Left = 400
     Top = 432
   end
   object dsCompleted: TDataSource
@@ -801,17 +921,17 @@ object fmMain: TfmMain
       ImageIndex = 5
       OnExecute = actNewTaskExecute
     end
-    object actChangeTask: TAction
-      Category = 'Тулбар'
+    object actChangeInputTask: TAction
+      Category = 'Input'
       Hint = 'Изменить задачу'
       ImageIndex = 4
-      OnExecute = actChangeTaskExecute
+      OnExecute = actChangeInputTaskExecute
     end
-    object actDeleteTask: TAction
-      Category = 'Тулбар'
+    object actDeleteInputTask: TAction
+      Category = 'Input'
       Hint = 'Удалить задачу'
       ImageIndex = 6
-      OnExecute = actDeleteTaskExecute
+      OnExecute = actDeleteInputTaskExecute
     end
     object actQuit: TAction
       Category = 'Тулбар'
@@ -824,6 +944,36 @@ object fmMain: TfmMain
       Hint = 'Настройка'
       ImageIndex = 0
       OnExecute = actSetupExecute
+    end
+    object actChangeWorkTask: TAction
+      Category = 'Work'
+      ImageIndex = 4
+      OnExecute = actChangeWorkTaskExecute
+    end
+    object actDeleteWorkTask: TAction
+      Category = 'Work'
+      ImageIndex = 6
+      OnExecute = actDeleteWorkTaskExecute
+    end
+    object actChangeTrashTask: TAction
+      Category = 'Trash'
+      ImageIndex = 4
+      OnExecute = actChangeTrashTaskExecute
+    end
+    object actDeleteTrashTask: TAction
+      Category = 'Trash'
+      ImageIndex = 6
+      OnExecute = actDeleteTrashTaskExecute
+    end
+    object actChangeCompletedTask: TAction
+      Category = 'Completed'
+      ImageIndex = 4
+      OnExecute = actChangeCompletedTaskExecute
+    end
+    object actDeleteCompletedTask: TAction
+      Category = 'Completed'
+      ImageIndex = 6
+      OnExecute = actDeleteCompletedTaskExecute
     end
   end
   object qrContexts: TSQLQuery
@@ -840,7 +990,6 @@ object fmMain: TfmMain
     Transaction = Transaction
     Params = <>
     Macros = <>
-    Left = 888
-    Top = 8
+    Left = 880
   end
 end

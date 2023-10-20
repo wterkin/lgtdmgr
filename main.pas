@@ -17,8 +17,14 @@ type
 			{ TfmMain }
 
       TfmMain = class(TForm)
-						actChangeTask : TAction;
-						actDeleteTask : TAction;
+						actChangeInputTask : TAction;
+						actDeleteInputTask : TAction;
+						actChangeWorkTask : TAction;
+						actDeleteWorkTask : TAction;
+						actChangeTrashTask : TAction;
+						actDeleteTrashTask : TAction;
+						actChangeCompletedTask : TAction;
+						actDeleteCompletedTask : TAction;
 						actSetup : TAction;
 						actQuit : TAction;
 						actNewTask : TAction;
@@ -47,20 +53,32 @@ type
 						Label1 : TLabel;
 						Label2 : TLabel;
 					  Panel1 : TPanel;
+						Panel10 : TPanel;
+						Panel11 : TPanel;
 						Panel2 : TPanel;
 						Panel3 : TPanel;
 						Panel4 : TPanel;
 						Panel5 : TPanel;
 						Panel6 : TPanel;
 						Panel7 : TPanel;
+						Panel8 : TPanel;
+						Panel9 : TPanel;
 					  qrWork : TSQLQuery;
 					  qrTrash : TSQLQuery;
 					  qrCompleted : TSQLQuery;
 						SpeedButton1 : TSpeedButton;
+						sbChangeTrashTask : TSpeedButton;
+						sbDeleteTrashTask : TSpeedButton;
+						sbChangeCompletedTask : TSpeedButton;
+						sbDeleteCompletedTask : TSpeedButton;
 						SpeedButton2 : TSpeedButton;
 						SpeedButton3 : TSpeedButton;
 						SpeedButton4 : TSpeedButton;
 						SpeedButton5 : TSpeedButton;
+						SpeedButton6 : TSpeedButton;
+						SpeedButton7 : TSpeedButton;
+						sbChangeWorkTask : TSpeedButton;
+						sbDeleteWorkTask : TSpeedButton;
 						Splitter1 : TSplitter;
 					  Splitter2 : TSplitter;
 						Splitter3 : TSplitter;
@@ -70,8 +88,14 @@ type
 						qrTaskExt : TSQLQuery;
 					  Transaction : TSQLTransaction;
 					  StatusBar : TStatusBar;
-				procedure actChangeTaskExecute(Sender : TObject);
-				procedure actDeleteTaskExecute(Sender : TObject);
+				procedure actChangeCompletedTaskExecute(Sender : TObject);
+    procedure actChangeInputTaskExecute(Sender : TObject);
+		procedure actChangeTrashTaskExecute(Sender : TObject);
+				procedure actChangeWorkTaskExecute(Sender : TObject);
+				procedure actDeleteCompletedTaskExecute(Sender : TObject);
+				procedure actDeleteInputTaskExecute(Sender : TObject);
+				procedure actDeleteTrashTaskExecute(Sender : TObject);
+				procedure actDeleteWorkTaskExecute(Sender : TObject);
         procedure actNewTaskExecute(Sender : TObject);
         procedure actQuitExecute(Sender : TObject);
 				procedure actSetupExecute(Sender : TObject);
@@ -251,7 +275,7 @@ begin
     moContextsCombo.fill();
     cbContexts.ItemIndex := miContext;
     reopenTable();
-    actChangeTask.Enabled := False;
+    actChangeInputTask.Enabled := False;
 
     dbgInput.Columns[0].Width := ciDateColumnWidth;
     dbgInput.Columns[1].Width := dbgInput.Width - (ciColumnWidthDiff + ciDateColumnWidth);
@@ -347,7 +371,6 @@ begin
   write;
 end;
 
-
 procedure TfmMain.dbgCompletedCellClick(Column : TColumn);
 begin
 
@@ -355,7 +378,7 @@ begin
   begin
 
     EnableMovingActions();
-    actChangeTask.Enabled := qrCompleted.RecordCount > 0;
+    actChangeInputTask.Enabled := qrCompleted.RecordCount > 0;
     actToCompleted.Enabled := False;
     miLastRecordID := qrCompleted.FieldByName('id').AsInteger;
   end else
@@ -373,7 +396,7 @@ begin
   begin
 
     EnableMovingActions();
-    actChangeTask.Enabled := qrInput.RecordCount > 0;
+    actChangeInputTask.Enabled := qrInput.RecordCount > 0;
     actToInputBox.Enabled := False;
     miLastRecordID := qrInput.FieldByName('id').AsInteger;
   end else
@@ -464,7 +487,7 @@ begin
   begin
 
     EnableMovingActions();
-    actChangeTask.Enabled := qrWork.RecordCount > 0;
+    actChangeInputTask.Enabled := qrWork.RecordCount > 0;
     actToWork.Enabled := False;
     miLastRecordID := qrWork.FieldByName('id').AsInteger;
   end else
@@ -482,7 +505,7 @@ begin
   begin
 
     EnableMovingActions();
-    actChangeTask.Enabled := qrTrash.RecordCount > 0;
+    actChangeInputTask.Enabled := qrTrash.RecordCount > 0;
     actToTrashBin.Enabled := False;
     miLastRecordID := qrTrash.FieldByName('id').AsInteger;
   end else
@@ -537,16 +560,42 @@ begin
 end;
 
 
-procedure TfmMain.actChangeTaskExecute(Sender : TObject);
+procedure TfmMain.actChangeInputTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.viewRecord();
   reopenTable();
 end;
 
-
-procedure TfmMain.actDeleteTaskExecute(Sender : TObject);
+procedure TfmMain.actChangeTrashTaskExecute(Sender : TObject);
 begin
+
+  //
+end;
+
+procedure TfmMain.actChangeCompletedTaskExecute(Sender : TObject);
+begin
+
+  //
+end;
+
+procedure TfmMain.actChangeWorkTaskExecute(Sender : TObject);
+begin
+
+  //
+end;
+
+procedure TfmMain.actDeleteCompletedTaskExecute(Sender : TObject);
+begin
+
+  //
+end;
+
+
+procedure TfmMain.actDeleteInputTaskExecute(Sender : TObject);
+var lsName : String;
+begin
+
 
   try
 
@@ -566,6 +615,18 @@ begin
       MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
 		end;
 	end;
+end;
+
+procedure TfmMain.actDeleteTrashTaskExecute(Sender : TObject);
+begin
+
+  //
+end;
+
+procedure TfmMain.actDeleteWorkTaskExecute(Sender : TObject);
+begin
+
+  //
 end;
 
 
@@ -665,7 +726,7 @@ begin
           end else
           begin
 
-            actChangeTask.Enabled := False;
+            actChangeInputTask.Enabled := False;
 					end;
 
         end;

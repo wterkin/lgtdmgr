@@ -2,10 +2,10 @@ object fmContextEdit: TfmContextEdit
   Left = 563
   Height = 119
   Top = 252
-  Width = 449
+  Width = 361
   Caption = 'Редактирование контекста'
   ClientHeight = 119
-  ClientWidth = 449
+  ClientWidth = 361
   LCLVersion = '2.2.6.0'
   object Panel1: TPanel
     Left = 8
@@ -82,7 +82,7 @@ object fmContextEdit: TfmContextEdit
     Transaction = fmMain.Transaction
     Params = <>
     Macros = <>
-    Left = 376
+    Left = 48
     Top = 8
   end
   object qrContextsEx: TSQLQuery
@@ -91,7 +91,7 @@ object fmContextEdit: TfmContextEdit
     Transaction = fmMain.Transaction
     Params = <>
     Macros = <>
-    Left = 376
-    Top = 64
+    Left = 264
+    Top = 8
   end
 end

@@ -114,7 +114,7 @@ object fmTaskEdit: TfmTaskEdit
       MonthNames = 'Long'
     end
     object Label4: TLabel
-      Left = 440
+      Left = 384
       Height = 25
       Top = 304
       Width = 72
@@ -129,10 +129,10 @@ object fmTaskEdit: TfmTaskEdit
       ParentFont = False
     end
     object cbContexts: TComboBox
-      Left = 524
+      Left = 460
       Height = 26
       Top = 303
-      Width = 100
+      Width = 164
       Font.CharSet = RUSSIAN_CHARSET
       Font.Height = -16
       Font.Name = 'Arial'

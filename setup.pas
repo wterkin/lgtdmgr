@@ -26,14 +26,12 @@ type
 				sbCreateContext : TSpeedButton;
 				sbChangeContext : TSpeedButton;
 				sbDeleteContext : TSpeedButton;
-				procedure dbgContextsCellClick({%H-}Column : TColumn);
         procedure FormShow(Sender : TObject);
         procedure sbCreateContextClick(Sender : TObject);
 				procedure sbChangeContextClick(Sender : TObject);
 				procedure sbDeleteContextClick(Sender : TObject);
     private
 
-        miID : Integer;
         procedure reOpenTable();
     public
 
@@ -59,13 +57,6 @@ begin
 end;
 
 
-procedure TfmSetup.dbgContextsCellClick(Column : TColumn);
-begin
-
-  miID := qrContexts.FieldByName('id').AsInteger;
-end;
-
-
 procedure TfmSetup.FormShow(Sender : TObject);
 begin
 
@@ -74,12 +65,14 @@ end;
 
 
 procedure TfmSetup.sbChangeContextClick(Sender : TObject);
+var liID : Integer;
 begin
 
+  liID := qrContexts.FieldByName('id').AsInteger;
   if not isContextUsing() then
   begin
 
-    fmContextEdit.viewRecord(miID);
+    fmContextEdit.viewRecord(liID);
     reOpenTable();
   end else
   begin
@@ -137,11 +130,7 @@ begin
 
     initializeQuery(qrContexts, csSelectContexts,False);
     qrContexts.Open;
-    if qrContexts.RecordCount > 0 then
-    begin
-
-      miID := qrContexts.FieldByName('id').AsInteger;
-    end else
+    if qrContexts.RecordCount = 0 then
     begin
 
       sbChangeContext.Enabled := False;

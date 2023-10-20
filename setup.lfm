@@ -2,10 +2,10 @@ object fmSetup: TfmSetup
   Left = 500
   Height = 324
   Top = 246
-  Width = 426
+  Width = 306
   Caption = 'Настройка'
   ClientHeight = 324
-  ClientWidth = 426
+  ClientWidth = 306
   OnShow = FormShow
   LCLVersion = '2.2.6.0'
   object Panel1: TPanel
@@ -35,7 +35,6 @@ object fmSetup: TfmSetup
       DataSource = dsContexts
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
-      OnCellClick = dbgContextsCellClick
     end
     object Panel2: TPanel
       Left = 2
@@ -163,13 +162,13 @@ object fmSetup: TfmSetup
     Transaction = fmMain.Transaction
     Params = <>
     Macros = <>
-    Left = 328
+    Left = 120
     Top = 16
   end
   object dsContexts: TDataSource
     DataSet = qrContexts
-    Left = 328
-    Top = 72
+    Left = 184
+    Top = 16
   end
   object qrContextEx: TSQLQuery
     FieldDefs = <>
@@ -177,7 +176,7 @@ object fmSetup: TfmSetup
     Transaction = fmMain.Transaction
     Params = <>
     Macros = <>
-    Left = 328
-    Top = 128
+    Left = 256
+    Top = 16
   end
 end

@@ -129,6 +129,7 @@ begin
   moContextsCombo.setListField('fname');
   lblCreated.Caption := DateToStr(Now);
   moContextsCombo.fill();
+  cbContexts.ItemIndex := MainForm.cbContexts.ItemIndex;
 end;
 
 
