@@ -42,7 +42,7 @@ type
     public
 
       { public declarations }
-      procedure viewRecord();
+      procedure viewRecord(piID : Integer);
       procedure appendRecord();
     end;
 
@@ -199,13 +199,13 @@ begin
 end;
 
 
-procedure TfmTaskEdit.viewRecord();
+procedure TfmTaskEdit.viewRecord(piID : Integer);
 begin
 
   try
 
     initializeQuery(qrTask,'select * from tbltasks where id = :pid');
-    qrTask.ParamByName('pid').AsInteger := MainForm.getLastRecordID();
+    qrTask.ParamByName('pid').AsInteger := piID;
     qrTask.Open();
  	except on E: Exception do
 

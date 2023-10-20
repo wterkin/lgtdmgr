@@ -23,7 +23,7 @@ object fmMain: TfmMain
     ClientWidth = 1104
     TabOrder = 2
     object cbContexts: TComboBox
-      Left = 248
+      Left = 184
       Height = 26
       Top = 5
       Width = 100
@@ -46,7 +46,7 @@ object fmMain: TfmMain
       Text = 'Все'
     end
     object cbPeriod: TComboBox
-      Left = 424
+      Left = 360
       Height = 26
       Top = 5
       Width = 120
@@ -79,26 +79,8 @@ object fmMain: TfmMain
       Images = ImageList
       ImageIndex = 5
     end
-    object SpeedButton2: TSpeedButton
-      Left = 67
-      Height = 32
-      Top = 2
-      Width = 32
-      Action = actDeleteInputTask
-      Images = ImageList
-      ImageIndex = 6
-    end
-    object SpeedButton3: TSpeedButton
-      Left = 35
-      Height = 32
-      Top = 2
-      Width = 32
-      Action = actChangeInputTask
-      Images = ImageList
-      ImageIndex = 4
-    end
     object SpeedButton4: TSpeedButton
-      Left = 131
+      Left = 67
       Height = 32
       Top = 2
       Width = 32
@@ -107,7 +89,7 @@ object fmMain: TfmMain
       ImageIndex = 7
     end
     object SpeedButton5: TSpeedButton
-      Left = 99
+      Left = 35
       Height = 32
       Top = 2
       Width = 32
@@ -116,14 +98,14 @@ object fmMain: TfmMain
       ImageIndex = 0
     end
     object Bevel1: TBevel
-      Left = 168
+      Left = 104
       Height = 32
       Top = 2
       Width = 8
       Shape = bsLeftLine
     end
     object Label1: TLabel
-      Left = 177
+      Left = 113
       Height = 16
       Top = 9
       Width = 68
@@ -137,7 +119,7 @@ object fmMain: TfmMain
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 368
+      Left = 304
       Height = 16
       Top = 9
       Width = 49
@@ -151,7 +133,7 @@ object fmMain: TfmMain
       ParentFont = False
     end
     object Bevel2: TBevel
-      Left = 352
+      Left = 288
       Height = 32
       Top = 2
       Width = 8

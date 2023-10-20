@@ -71,8 +71,6 @@ type
 						sbDeleteTrashTask : TSpeedButton;
 						sbChangeCompletedTask : TSpeedButton;
 						sbDeleteCompletedTask : TSpeedButton;
-						SpeedButton2 : TSpeedButton;
-						SpeedButton3 : TSpeedButton;
 						SpeedButton4 : TSpeedButton;
 						SpeedButton5 : TSpeedButton;
 						SpeedButton6 : TSpeedButton;
@@ -89,8 +87,8 @@ type
 					  Transaction : TSQLTransaction;
 					  StatusBar : TStatusBar;
 				procedure actChangeCompletedTaskExecute(Sender : TObject);
-    procedure actChangeInputTaskExecute(Sender : TObject);
-		procedure actChangeTrashTaskExecute(Sender : TObject);
+        procedure actChangeInputTaskExecute(Sender : TObject);
+		    procedure actChangeTrashTaskExecute(Sender : TObject);
 				procedure actChangeWorkTaskExecute(Sender : TObject);
 				procedure actDeleteCompletedTaskExecute(Sender : TObject);
 				procedure actDeleteInputTaskExecute(Sender : TObject);
@@ -117,7 +115,6 @@ type
 								Shift : TShiftState);
       private
 
-        miLastRecordID : Integer;
         moContextsCombo : TEasyLookupCombo;
         msDataBasePath : String;
         miContext : Integer;
@@ -125,9 +122,9 @@ type
         procedure reopenTable();
         procedure EnableMovingActions(pblEnabled : Boolean = True);
         function  getSelectedPeriodBegin() : TDate;
+        function deleteTask(piID : Integer) : Boolean;
       public
 
-        function getLastRecordID() : Integer;
         procedure processError(psDesc, psDetail : String);
         procedure processException(psDesc : String; poException : Exception);
         procedure changeState(piState: Integer);
@@ -378,9 +375,6 @@ begin
   begin
 
     EnableMovingActions();
-    actChangeInputTask.Enabled := qrCompleted.RecordCount > 0;
-    actToCompleted.Enabled := False;
-    miLastRecordID := qrCompleted.FieldByName('id').AsInteger;
   end else
   begin
 
@@ -392,18 +386,7 @@ end;
 procedure TfmMain.dbgInputCellClick(Column : TColumn);
 begin
 
-  if qrInput.RecordCount > 0 then
-  begin
-
-    EnableMovingActions();
-    actChangeInputTask.Enabled := qrInput.RecordCount > 0;
-    actToInputBox.Enabled := False;
-    miLastRecordID := qrInput.FieldByName('id').AsInteger;
-  end else
-  begin
-
-    EnableMovingActions(False);
-	end;
+  EnableMovingActions(qrWork.RecordCount > 0);
 end;
 
 
@@ -483,36 +466,14 @@ end;
 procedure TfmMain.dbgWorkCellClick(Column : TColumn);
 begin
 
-  if qrWork.RecordCount > 0 then
-  begin
-
-    EnableMovingActions();
-    actChangeInputTask.Enabled := qrWork.RecordCount > 0;
-    actToWork.Enabled := False;
-    miLastRecordID := qrWork.FieldByName('id').AsInteger;
-  end else
-  begin
-
-    EnableMovingActions(False);
-	end;
+  EnableMovingActions(qrWork.RecordCount > 0);
 end;
 
 
 procedure TfmMain.dbgTrashCellClick(Column : TColumn);
 begin
 
-  if qrTrash.RecordCount > 0 then
-  begin
-
-    EnableMovingActions();
-    actChangeInputTask.Enabled := qrTrash.RecordCount > 0;
-    actToTrashBin.Enabled := False;
-    miLastRecordID := qrTrash.FieldByName('id').AsInteger;
-  end else
-  begin
-
-    EnableMovingActions(False);
-	end;
+  EnableMovingActions(qrTrash.RecordCount > 0);
 end;
 
 
@@ -563,70 +524,76 @@ end;
 procedure TfmMain.actChangeInputTaskExecute(Sender : TObject);
 begin
 
-  fmTaskEdit.viewRecord();
+  fmTaskEdit.viewRecord(qrInput.FieldByName('id').AsInteger);
   reopenTable();
 end;
+
 
 procedure TfmMain.actChangeTrashTaskExecute(Sender : TObject);
 begin
 
-  //
+  fmTaskEdit.viewRecord(qrTrash.FieldByName('id').AsInteger);
+  reopenTable();
 end;
+
 
 procedure TfmMain.actChangeCompletedTaskExecute(Sender : TObject);
 begin
 
-  //
+  fmTaskEdit.viewRecord(qrCompleted.FieldByName('id').AsInteger);
+  reopenTable();
 end;
+
 
 procedure TfmMain.actChangeWorkTaskExecute(Sender : TObject);
 begin
 
-  //
+  fmTaskEdit.viewRecord(qrWork.FieldByName('id').AsInteger);
+  reopenTable();
 end;
+
 
 procedure TfmMain.actDeleteCompletedTaskExecute(Sender : TObject);
 begin
 
-  //
+  if not deleteTask(qrCompleted.FieldByName('id').AsInteger) then
+  begin
+
+    notify('Внимание!', 'Удаление задачи не удалось из-за ошибки.');
+	end;
 end;
 
 
 procedure TfmMain.actDeleteInputTaskExecute(Sender : TObject);
-var lsName : String;
 begin
 
+  if not deleteTask(qrInput.FieldByName('id').AsInteger) then
+  begin
 
-  try
-
-    if askYesOrNo('Вы действительно хотите удалить эту задачу?') then
-    begin
-
-      initializeQuery(qrTaskExt,'delete from tbltasks where id = :pid');
-      qrTaskExt.ParamByName('pid').AsInteger := miLastRecordID;
-      qrTaskExt.ExecSQL;
-      Transaction.Commit;
-      reopenTable();
-		end;
-	except on E: Exception do
-    begin
-
-      MainForm.Transaction.Rollback;
-      MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
-		end;
+    notify('Внимание!', 'Удаление задачи не удалось из-за ошибки.');
 	end;
 end;
+
 
 procedure TfmMain.actDeleteTrashTaskExecute(Sender : TObject);
 begin
 
-  //
+  if not deleteTask(qrTrash.FieldByName('id').AsInteger) then
+  begin
+
+    notify('Внимание!', 'Удаление задачи не удалось из-за ошибки.');
+	end;
 end;
+
 
 procedure TfmMain.actDeleteWorkTaskExecute(Sender : TObject);
 begin
 
-  //
+  if not deleteTask(qrWork.FieldByName('id').AsInteger) then
+  begin
+
+    notify('Внимание!', 'Удаление задачи не удалось из-за ошибки.');
+	end;
 end;
 
 
@@ -679,61 +646,32 @@ begin
     qrInput.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
     qrInput.ParamByName('pdatebegin').AsDate := ldtDateBegin;
     qrInput.Open();
+    actChangeInputTask.Enabled := qrInput.RecordCount > 0;
+    actDeleteInputTask.Enabled := qrInput.RecordCount > 0;
 
     initializeQuery(qrWork, csMainSQL, False);
     qrWork.ParamByName('pstate').AsInteger := ciWorkType;
     qrWork.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
     qrWork.ParamByName('pdatebegin').AsDate := ldtDateBegin;
     qrWork.Open();
+    actChangeWorkTask.Enabled := qrWork.RecordCount > 0;
+    actDeleteWorkTask.Enabled := qrWork.RecordCount > 0;
 
     initializeQuery(qrTrash, csMainSQL, False);
     qrTrash.ParamByName('pstate').AsInteger := ciTrashType;
     qrTrash.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
     qrTrash.ParamByName('pdatebegin').AsDate := ldtDateBegin;
     qrTrash.Open();
+    actChangeTrashTask.Enabled := qrTrash.RecordCount > 0;
+    actDeleteTrashTask.Enabled := qrTrash.RecordCount > 0;
 
     initializeQuery(qrCompleted, csMainSQL, False);
     qrCompleted.ParamByName('pstate').AsInteger := ciDoneType;
     qrCompleted.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
     qrCompleted.ParamByName('pdatebegin').AsDate := ldtDateBegin;
     qrCompleted.Open();
-    (*
-    if qrInput.RecordCount > 0 then
-    begin
-
-      miLastRecordID := qrInput.FieldByName('id').AsInteger;
-    end else
-    begin
-
-      if qrWork.RecordCount > 0 then
-      begin
-
-        miLastRecordID := qrWork.FieldByName('id').AsInteger;
-			end else
-      begin
-
-        if qrTrash.RecordCount >0 then
-        begin
-
-          miLastRecordID := qrTrash.FieldByName('id').AsInteger;
-        end else
-        begin
-
-          if qrCompleted.RecordCount >0 then
-          begin
-
-            miLastRecordID := qrCompleted.FieldByName('id').AsInteger;
-          end else
-          begin
-
-            actChangeInputTask.Enabled := False;
-					end;
-
-        end;
-			end;
-		end;
-    *)
-		//i:=qrCompleted.RecordCount;
+    actChangeCompletedTask.Enabled := qrCompleted.RecordCount > 0;
+    actDeleteCompletedTask.Enabled := qrCompleted.RecordCount > 0;
 	except on E : Exception do
 
     fatalError('Ошибка!', E.Message);
@@ -784,10 +722,30 @@ begin
 end;
 
 
-function TfmMain.getLastRecordID() : Integer;
+function TfmMain.deleteTask(piID : Integer) : Boolean;
 begin
 
-  Result := miLastRecordID
+  Result := False;
+  try
+
+    if askYesOrNo('Вы действительно хотите удалить эту задачу?') then
+    begin
+
+      initializeQuery(qrTaskExt,'delete from tbltasks where id = :pid');
+      qrTaskExt.ParamByName('pid').AsInteger := piID;
+      qrTaskExt.ExecSQL;
+      Transaction.Commit;
+      reopenTable();
+      Result := True;
+		end;
+	except on E: Exception do
+    begin
+
+      MainForm.Transaction.Rollback;
+      MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
+		end;
+	end;
+
 end;
 
 
