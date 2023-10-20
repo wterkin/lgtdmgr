@@ -119,19 +119,20 @@ type
         moContextsCombo : TEasyLookupCombo;
         msDataBasePath : String;
         miContext : Integer;
+
         procedure createDatabaseIfNeeded();
         procedure reopenTable();
         procedure EnableMovingActions(pblEnabled : Boolean = True);
         function  getSelectedPeriodBegin() : TDate;
-        function deleteTask(piID : Integer) : Boolean;
+        function  deleteTask(piID : Integer; psName : String) : Boolean;
+        procedure changeState(piState: Integer);
+        procedure loadConfig();
+        procedure saveConfig();
       public
 
         procedure processError(psDesc, psDetail : String);
         procedure processException(psDesc : String; poException : Exception);
-        procedure changeState(piState: Integer);
         function getLastRecordID() : Integer;
-        procedure loadConfig();
-        procedure saveConfig();
       end;
 
 
@@ -275,7 +276,6 @@ begin
     moContextsCombo.fill();
     cbContexts.ItemIndex := miContext;
     reopenTable();
-    actChangeInputTask.Enabled := False;
 
     dbgInput.Columns[0].Width := ciDateColumnWidth;
     dbgInput.Columns[1].Width := dbgInput.Width - (ciColumnWidthDiff + ciDateColumnWidth);
@@ -377,6 +377,7 @@ begin
 
   miLastRecordID := qrCompleted.FieldByName('id').AsInteger;
   EnableMovingActions(qrCompleted.RecordCount > 0);
+  actToCompleted.Enabled := False;
 end;
 
 
@@ -385,6 +386,7 @@ begin
 
   miLastRecordID := qrInput.FieldByName('id').AsInteger;
   EnableMovingActions(qrInput.RecordCount > 0);
+  actToInputBox.Enabled := False;
 end;
 
 
@@ -466,6 +468,7 @@ begin
 
   miLastRecordID := qrWork.FieldByName('id').AsInteger;
   EnableMovingActions(qrWork.RecordCount > 0);
+  actToWork.Enabled := False;
 end;
 
 
@@ -474,6 +477,7 @@ begin
 
   miLastRecordID := qrTrash.FieldByName('id').AsInteger;
   EnableMovingActions(qrTrash.RecordCount > 0);
+  actToTrashBin.Enabled := False;
 end;
 
 
@@ -556,7 +560,8 @@ end;
 procedure TfmMain.actDeleteCompletedTaskExecute(Sender : TObject);
 begin
 
-  if not deleteTask(qrCompleted.FieldByName('id').AsInteger) then
+  if not deleteTask(qrCompleted.FieldByName('id').AsInteger,
+                    qrCompleted.FieldByName('fname').AsString) then
   begin
 
     notify('Внимание!', 'Удаление задачи не удалось из-за ошибки.');
@@ -567,7 +572,8 @@ end;
 procedure TfmMain.actDeleteInputTaskExecute(Sender : TObject);
 begin
 
-  if not deleteTask(qrInput.FieldByName('id').AsInteger) then
+  if not deleteTask(qrInput.FieldByName('id').AsInteger,
+                    qrInput.FieldByName('fname').AsString) then
   begin
 
     notify('Внимание!', 'Удаление задачи не удалось из-за ошибки.');
@@ -578,7 +584,8 @@ end;
 procedure TfmMain.actDeleteTrashTaskExecute(Sender : TObject);
 begin
 
-  if not deleteTask(qrTrash.FieldByName('id').AsInteger) then
+  if not deleteTask(qrTrash.FieldByName('id').AsInteger,
+                    qrTrash.FieldByName('fname').AsString) then
   begin
 
     notify('Внимание!', 'Удаление задачи не удалось из-за ошибки.');
@@ -589,7 +596,8 @@ end;
 procedure TfmMain.actDeleteWorkTaskExecute(Sender : TObject);
 begin
 
-  if not deleteTask(qrWork.FieldByName('id').AsInteger) then
+  if not deleteTask(qrWork.FieldByName('id').AsInteger,
+                    qrWork.FieldByName('fname').AsString) then
   begin
 
     notify('Внимание!', 'Удаление задачи не удалось из-за ошибки.');
@@ -632,8 +640,10 @@ const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext,'#13+
                   '        fdeadline, fcreated, fupdated'#13+
 						      '  from tbltasks'#13+
                   ' where     (fstate = :pstate)'#13+
+                  '       and (fstatus = 1)'#13+
                   '       and (fcontext = :pcontext)'#13+
                   '       and (fcreated > :pdatebegin)';
+
 var ldtDateBegin : TDate;
 begin
 
@@ -672,6 +682,7 @@ begin
     qrCompleted.Open();
     actChangeCompletedTask.Enabled := qrCompleted.RecordCount > 0;
     actDeleteCompletedTask.Enabled := qrCompleted.RecordCount > 0;
+    EnableMovingActions(False);
 	except on E : Exception do
 
     fatalError('Ошибка!', E.Message);
@@ -722,16 +733,17 @@ begin
 end;
 
 
-function TfmMain.deleteTask(piID : Integer) : Boolean;
+function TfmMain.deleteTask(piID : Integer; psName : String) : Boolean;
 begin
 
   Result := False;
   try
 
-    if askYesOrNo('Вы действительно хотите удалить эту задачу?') then
+
+    if askYesOrNo('Вы действительно хотите удалить задачу "' + psName + '" ?') then
     begin
 
-      initializeQuery(qrTaskExt,'delete from tbltasks where id = :pid');
+      initializeQuery(qrTaskExt,'update tbltasks set fstatus = 0 where id = :pid');
       qrTaskExt.ParamByName('pid').AsInteger := piID;
       qrTaskExt.ExecSQL;
       Transaction.Commit;
