@@ -115,6 +115,7 @@ type
 								Shift : TShiftState);
       private
 
+        miLastRecordID : Integer;
         moContextsCombo : TEasyLookupCombo;
         msDataBasePath : String;
         miContext : Integer;
@@ -128,6 +129,7 @@ type
         procedure processError(psDesc, psDetail : String);
         procedure processException(psDesc : String; poException : Exception);
         procedure changeState(piState: Integer);
+        function getLastRecordID() : Integer;
         procedure loadConfig();
         procedure saveConfig();
       end;
@@ -254,6 +256,7 @@ begin
     loadConfig();
     createDatabaseIfNeeded();
 
+    miLastRecordID := -1;
     qrInput.Active := False;
     qrWork.Active := False;
     qrTrash.Active := False;
@@ -368,25 +371,20 @@ begin
   write;
 end;
 
+
 procedure TfmMain.dbgCompletedCellClick(Column : TColumn);
 begin
 
-  if qrCompleted.RecordCount > 0 then
-  begin
-
-    EnableMovingActions();
-  end else
-  begin
-
-    EnableMovingActions(False);
-  end
+  miLastRecordID := qrCompleted.FieldByName('id').AsInteger;
+  EnableMovingActions(qrCompleted.RecordCount > 0);
 end;
 
 
 procedure TfmMain.dbgInputCellClick(Column : TColumn);
 begin
 
-  EnableMovingActions(qrWork.RecordCount > 0);
+  miLastRecordID := qrInput.FieldByName('id').AsInteger;
+  EnableMovingActions(qrInput.RecordCount > 0);
 end;
 
 
@@ -466,6 +464,7 @@ end;
 procedure TfmMain.dbgWorkCellClick(Column : TColumn);
 begin
 
+  miLastRecordID := qrWork.FieldByName('id').AsInteger;
   EnableMovingActions(qrWork.RecordCount > 0);
 end;
 
@@ -473,6 +472,7 @@ end;
 procedure TfmMain.dbgTrashCellClick(Column : TColumn);
 begin
 
+  miLastRecordID := qrTrash.FieldByName('id').AsInteger;
   EnableMovingActions(qrTrash.RecordCount > 0);
 end;
 
@@ -781,6 +781,13 @@ begin
       MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
 		end;
 	end;
+end;
+
+
+function TfmMain.getLastRecordID : Integer;
+begin
+
+  Result := miLastRecordID;
 end;
 
 
