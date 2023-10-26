@@ -156,7 +156,7 @@ const ciInputType = 1;
       ciThisWeekColor = $2D7000;
       ciSomeDayColor = $99310F;
       csIniFile = 'lgtdmgr.ini';
-      csVersion = '1.0RC1';
+      csVersion = '1.0RC2';
 
 var fmMain : TfmMain;
     MainForm : TfmMain;
@@ -364,6 +364,24 @@ begin
           inc(liIndex);
           cbContexts.ItemIndex := liIndex;
           cbContexts.OnChange(Nil);
+				end;
+			end;
+      VK_ADD: begin
+
+        if cbPeriod.ItemIndex < cbPeriod.Items.Count -1 then
+        begin
+
+          cbPeriod.ItemIndex := cbPeriod.ItemIndex + 1;
+          cbPeriodChange(Nil);
+				end;
+			end;
+      VK_SUBTRACT: begin
+
+        if cbPeriod.ItemIndex > 0 then
+        begin
+
+          cbPeriod.ItemIndex := cbPeriod.ItemIndex - 1;
+          cbPeriodChange(Nil);
 				end;
 			end;
 		end;
