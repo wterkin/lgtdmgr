@@ -156,7 +156,7 @@ const ciInputType = 1;
       ciThisWeekColor = $2D7000;
       ciSomeDayColor = $99310F;
       csIniFile = 'lgtdmgr.ini';
-      csVersion = '1.0RC2';
+      csVersion = '1.0';
 
 var fmMain : TfmMain;
     MainForm : TfmMain;
