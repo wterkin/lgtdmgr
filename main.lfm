@@ -1,11 +1,11 @@
 object fmMain: TfmMain
-  Left = 459
+  Left = 461
   Height = 763
-  Top = 155
-  Width = 1104
+  Top = 178
+  Width = 1116
   Caption = 'GTD Manager'
   ClientHeight = 763
-  ClientWidth = 1104
+  ClientWidth = 1116
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
@@ -15,12 +15,12 @@ object fmMain: TfmMain
     Left = 0
     Height = 36
     Top = 0
-    Width = 1104
+    Width = 1116
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ClientHeight = 36
-    ClientWidth = 1104
+    ClientWidth = 1116
     TabOrder = 2
     object cbContexts: TComboBox
       Left = 184
@@ -70,7 +70,7 @@ object fmMain: TfmMain
       TabOrder = 1
       Text = 'За неделю'
     end
-    object SpeedButton1: TSpeedButton
+    object sbNewTask: TSpeedButton
       Left = 3
       Height = 32
       Top = 2
@@ -79,7 +79,7 @@ object fmMain: TfmMain
       Images = ImageList
       ImageIndex = 5
     end
-    object SpeedButton4: TSpeedButton
+    object sbQuit: TSpeedButton
       Left = 67
       Height = 32
       Top = 2
@@ -88,7 +88,7 @@ object fmMain: TfmMain
       Images = ImageList
       ImageIndex = 7
     end
-    object SpeedButton5: TSpeedButton
+    object sbSetup: TSpeedButton
       Left = 35
       Height = 32
       Top = 2
@@ -139,12 +139,43 @@ object fmMain: TfmMain
       Width = 8
       Shape = bsLeftLine
     end
+    object Bevel3: TBevel
+      Left = 488
+      Height = 32
+      Top = 2
+      Width = 8
+      Shape = bsLeftLine
+    end
+    object edTaskName: TEdit
+      Left = 496
+      Height = 23
+      Top = 7
+      Width = 481
+      Anchors = [akTop, akLeft, akRight]
+      OnChange = edTaskNameChange
+      TabOrder = 2
+      TextHint = 'Наименование задачи'
+    end
+    object bbtSave: TBitBtn
+      Left = 980
+      Height = 25
+      Top = 5
+      Width = 131
+      Anchors = [akTop, akRight]
+      Caption = 'Сохранить'
+      Default = True
+      Enabled = False
+      Images = ImageList
+      ImageIndex = 1
+      OnClick = bbtSaveClick
+      TabOrder = 3
+    end
   end
   object StatusBar: TStatusBar
     Left = 0
     Height = 23
     Top = 740
-    Width = 1104
+    Width = 1116
     Panels = <>
     ParentShowHint = False
     ShowHint = True
@@ -154,7 +185,7 @@ object fmMain: TfmMain
     Left = 0
     Height = 8
     Top = 361
-    Width = 1104
+    Width = 1116
     Align = alTop
     Beveled = True
     ResizeAnchor = akTop
@@ -163,12 +194,12 @@ object fmMain: TfmMain
     Left = 0
     Height = 325
     Top = 36
-    Width = 1104
+    Width = 1116
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ClientHeight = 325
-    ClientWidth = 1104
+    ClientWidth = 1116
     TabOrder = 0
     object Splitter1: TSplitter
       Left = 512
@@ -231,7 +262,7 @@ object fmMain: TfmMain
         ClientHeight = 36
         ClientWidth = 506
         TabOrder = 1
-        object SpeedButton6: TSpeedButton
+        object sbChangeInputTask: TSpeedButton
           Left = 2
           Height = 32
           Top = 2
@@ -240,7 +271,7 @@ object fmMain: TfmMain
           Images = ImageList
           ImageIndex = 4
         end
-        object SpeedButton7: TSpeedButton
+        object sbDeleteInputTask: TSpeedButton
           Left = 33
           Height = 32
           Top = 2
@@ -272,18 +303,18 @@ object fmMain: TfmMain
       Left = 520
       Height = 321
       Top = 2
-      Width = 582
+      Width = 594
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       ClientHeight = 321
-      ClientWidth = 582
+      ClientWidth = 594
       TabOrder = 2
       object dbgWork: TDBGrid
         Left = 2
         Height = 281
         Top = 38
-        Width = 578
+        Width = 590
         Align = alClient
         AutoEdit = False
         Color = clWindow
@@ -314,12 +345,12 @@ object fmMain: TfmMain
         Left = 2
         Height = 36
         Top = 2
-        Width = 578
+        Width = 590
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvLowered
         ClientHeight = 36
-        ClientWidth = 578
+        ClientWidth = 590
         TabOrder = 1
         object sbChangeWorkTask: TSpeedButton
           Left = 2
@@ -340,12 +371,13 @@ object fmMain: TfmMain
           ImageIndex = 6
         end
         object bbtToWork: TBitBtn
-          Left = 64
+          Left = 66
           Height = 32
           Top = 2
-          Width = 512
+          Width = 522
           Action = actToWork
           Align = alRight
+          Anchors = [akTop, akLeft, akRight, akBottom]
           Font.CharSet = RUSSIAN_CHARSET
           Font.Height = -16
           Font.Name = 'Tahoma'
@@ -363,12 +395,12 @@ object fmMain: TfmMain
     Left = 0
     Height = 371
     Top = 369
-    Width = 1104
+    Width = 1116
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ClientHeight = 371
-    ClientWidth = 1104
+    ClientWidth = 1116
     TabOrder = 1
     object Panel6: TPanel
       Left = 2
@@ -464,18 +496,18 @@ object fmMain: TfmMain
       Left = 520
       Height = 367
       Top = 2
-      Width = 582
+      Width = 594
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       ClientHeight = 367
-      ClientWidth = 582
+      ClientWidth = 594
       TabOrder = 1
       object dbgCompleted: TDBGrid
         Left = 2
         Height = 327
         Top = 38
-        Width = 578
+        Width = 590
         Align = alClient
         AutoEdit = False
         Color = clWindow
@@ -506,12 +538,12 @@ object fmMain: TfmMain
         Left = 2
         Height = 36
         Top = 2
-        Width = 578
+        Width = 590
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvLowered
         ClientHeight = 36
-        ClientWidth = 578
+        ClientWidth = 590
         TabOrder = 1
         object sbChangeCompletedTask: TSpeedButton
           Left = 2
@@ -532,12 +564,13 @@ object fmMain: TfmMain
           ImageIndex = 6
         end
         object bbtToDone: TBitBtn
-          Left = 64
+          Left = 66
           Height = 32
           Top = 2
-          Width = 512
+          Width = 522
           Action = actToCompleted
           Align = alRight
+          Anchors = [akTop, akLeft, akRight, akBottom]
           Font.CharSet = RUSSIAN_CHARSET
           Font.Height = -16
           Font.Name = 'Tahoma'
@@ -565,12 +598,14 @@ object fmMain: TfmMain
     KeepConnection = False
     Transaction = Transaction
     AlwaysUseBigint = False
-    Left = 552
+    Left = 600
+    Top = 56
   end
   object Transaction: TSQLTransaction
     Active = False
     Database = SQLite
-    Left = 608
+    Left = 656
+    Top = 56
   end
   object qrInput: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
@@ -655,7 +690,8 @@ object fmMain: TfmMain
   object ImageList: TImageList
     Height = 22
     Width = 22
-    Left = 672
+    Left = 720
+    Top = 56
     Bitmap = {
       4C7A0A0000001600000016000000311A00000000000078DAED9C075814E7BAC7
       41398989B92639DE6B3C31399A98764F8A1A0BA0688CF5E8B52BD6686C68C482
@@ -872,7 +908,8 @@ object fmMain: TfmMain
   end
   object ActionList: TActionList
     Images = ImageList
-    Left = 728
+    Left = 920
+    Top = 56
     object actToInputBox: TAction
       Category = 'Действия'
       Caption = 'Во входящие (F1)'
@@ -964,14 +1001,16 @@ object fmMain: TfmMain
     Transaction = Transaction
     Params = <>
     Macros = <>
-    Left = 784
+    Left = 976
+    Top = 56
   end
-  object qrTaskExt: TSQLQuery
+  object qrTaskEx: TSQLQuery
     FieldDefs = <>
     Database = SQLite
     Transaction = Transaction
     Params = <>
     Macros = <>
-    Left = 880
+    Left = 1040
+    Top = 56
   end
 end

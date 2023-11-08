@@ -46,18 +46,7 @@ type
       procedure appendRecord();
     end;
 
-var
-    fmTaskEdit : TfmTaskEdit;
-
-implementation
-
-uses main;
-
-{$R *.lfm}
-
-{ TfmTaskEdit }
-procedure TfmTaskEdit.bbtOkClick(Sender : TObject);
-const csInsertSQL =
+const csInsertTaskSQL =
         'insert into tbltasks ('#13+
 		    '                      fcontext,'#13+
 		    '                      fname,'#13+
@@ -76,7 +65,19 @@ const csInsertSQL =
 		    '                      1,'#13+
 		    '                      :pcreated'#13+
 		    '                  );'#13;
-      csUpdateSQL =
+
+var
+    fmTaskEdit : TfmTaskEdit;
+
+implementation
+
+uses main;
+
+{$R *.lfm}
+
+{ TfmTaskEdit }
+procedure TfmTaskEdit.bbtOkClick(Sender : TObject);
+const csUpdateSQL =
         'UPDATE tbltasks'#13+
         '  SET fcontext = :pcontext,'#13+
         '      fname = :pname,'#13+
@@ -93,7 +94,7 @@ begin
       if moMode = dmInsert then
       begin
 
-        initializeQuery(qrTaskEx,csInsertSQL);
+        initializeQuery(qrTaskEx,csInsertTaskSQL);
 
       end else
       begin

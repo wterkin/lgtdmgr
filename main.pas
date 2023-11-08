@@ -5,17 +5,16 @@ unit main;
 interface
 
 uses
-      Classes, SysUtils, SQLite3Conn, SQLDB, DB, Forms, Controls, Graphics,
-			Dialogs, ExtCtrls, ComCtrls, DBGrids, StdCtrls, Buttons, ActnList, Windows
-      , DateUtils
+      Classes, SysUtils, SQLite3Conn, SQLDB, DB, Forms, Controls, Graphics
+			, Dialogs, ExtCtrls, ComCtrls, DBGrids, StdCtrls, Buttons, ActnList
+      , DateUtils, Grids, Windows
       , task_edit, setup
       , tapp , tdb, tmsg, tlookup, tini
-      , Grids;
+      ;
 
 type
 
 			{ TfmMain }
-
       TfmMain = class(TForm)
 						actChangeInputTask : TAction;
 						actDeleteInputTask : TAction;
@@ -39,6 +38,8 @@ type
 						bbtToWork : TBitBtn;
 						Bevel1 : TBevel;
 						Bevel2 : TBevel;
+						Bevel3 : TBevel;
+						bbtSave : TBitBtn;
 					  cbContexts : TComboBox;
 					  cbPeriod : TComboBox;
 						dbgCompleted : TDBGrid;
@@ -49,6 +50,7 @@ type
 					  dsWork : TDataSource;
 					  dsTrash : TDataSource;
 					  dsCompleted : TDataSource;
+						edTaskName : TEdit;
 					  ImageList : TImageList;
 						Label1 : TLabel;
 						Label2 : TLabel;
@@ -66,15 +68,15 @@ type
 					  qrWork : TSQLQuery;
 					  qrTrash : TSQLQuery;
 					  qrCompleted : TSQLQuery;
-						SpeedButton1 : TSpeedButton;
+						sbNewTask : TSpeedButton;
 						sbChangeTrashTask : TSpeedButton;
 						sbDeleteTrashTask : TSpeedButton;
 						sbChangeCompletedTask : TSpeedButton;
 						sbDeleteCompletedTask : TSpeedButton;
-						SpeedButton4 : TSpeedButton;
-						SpeedButton5 : TSpeedButton;
-						SpeedButton6 : TSpeedButton;
-						SpeedButton7 : TSpeedButton;
+						sbQuit : TSpeedButton;
+						sbSetup : TSpeedButton;
+						sbChangeInputTask : TSpeedButton;
+						sbDeleteInputTask : TSpeedButton;
 						sbChangeWorkTask : TSpeedButton;
 						sbDeleteWorkTask : TSpeedButton;
 						Splitter1 : TSplitter;
@@ -83,7 +85,7 @@ type
 					  SQLite : TSQLite3Connection;
 					  qrInput : TSQLQuery;
 						qrContexts : TSQLQuery;
-						qrTaskExt : TSQLQuery;
+						qrTaskEx : TSQLQuery;
 					  Transaction : TSQLTransaction;
 					  StatusBar : TStatusBar;
 				procedure actChangeCompletedTaskExecute(Sender : TObject);
@@ -101,27 +103,29 @@ type
 		    procedure actToInputBoxExecute(Sender : TObject);
 				procedure actToTrashBinExecute(Sender : TObject);
 				procedure actToWorkExecute(Sender : TObject);
+				procedure bbtSaveClick(Sender : TObject);
 				procedure cbContextsChange(Sender : TObject);
 				procedure cbPeriodChange(Sender : TObject);
 				procedure dbgCompletedCellClick({%H-}Column : TColumn);
 				procedure dbgInputCellClick({%H-}Column : TColumn);
 				procedure dbgInputPrepareCanvas(sender : TObject; {%H-}DataCol : Integer;
-						{%H-}Column : TColumn; {%H-}AState : TGridDrawState);
+					        {%H-}Column : TColumn; {%H-}AState : TGridDrawState);
 				procedure dbgWorkCellClick({%H-}Column : TColumn);
 				procedure dbgTrashCellClick({%H-}Column : TColumn);
+				procedure edTaskNameChange(Sender : TObject);
 				procedure FormClose(Sender : TObject; var {%H-}CloseAction : TCloseAction);
 		    procedure FormCreate(Sender : TObject);
 				procedure FormKeyDown(Sender : TObject; var Key : Word;
-								Shift : TShiftState);
+								  Shift : TShiftState);
       private
 
-        miLastRecordID : Integer;
+        miLastRecordID  : Integer;
         moContextsCombo : TEasyLookupCombo;
-        msDataBasePath : String;
-        miContext : Integer;
+        msDataBasePath  : String;
+        miContext       : Integer;
 
         procedure createDatabaseIfNeeded();
-        procedure reopenTable();
+        procedure reopenTables();
         procedure EnableMovingActions(pblEnabled : Boolean = True);
         function  getSelectedPeriodBegin() : TDate;
         function  deleteTask(piID : Integer; psName : String) : Boolean;
@@ -136,29 +140,29 @@ type
       end;
 
 
-const ciInputType = 1;
-      ciWorkType = 2;
-      ciTrashType = 3;
-      ciDoneType = 4;
+const ciInputType        = 1;
+      ciWorkType         = 2;
+      ciTrashType        = 3;
+      ciDoneType         = 4;
 
-      ciTodayTasks = 0;
-      ciWeekTasks = 1;
-      ciMonthTasks = 2;
-      ciYearTasks = 3;
-      ciAllTasks = 4;
+      ciTodayTasks       = 0;
+      ciWeekTasks        = 1;
+      ciMonthTasks       = 2;
+      ciYearTasks        = 3;
+      ciAllTasks         = 4;
 
-      ciColumnWidthDiff = 40;
+      ciColumnWidthDiff  = 40;
       csDatabaseFileName = 'lgtdmgr.db';
-      ciDateColumnWidth = 84;
+      ciDateColumnWidth  = 84;
 
-      ciExpiredColor = $5200C1;
-      ciLastDayColor = $047299;
-      ciThisWeekColor = $2D7000;
-      ciSomeDayColor = $99310F;
-      csIniFile = 'lgtdmgr.ini';
-      csVersion = '1.0';
+      ciExpiredColor     = $5200C1;
+      ciLastDayColor     = $047299;
+      ciThisWeekColor    = $2D7000;
+      ciSomeDayColor     = $99310F;
+      csIniFile          = 'lgtdmgr.ini';
+      csVersion          = '1.1';
 
-var fmMain : TfmMain;
+var fmMain   : TfmMain;
     MainForm : TfmMain;
 
 
@@ -275,26 +279,30 @@ begin
     moContextsCombo.setListField('fname');
     moContextsCombo.fill();
     cbContexts.ItemIndex := miContext;
-    reopenTable();
+    reopenTables();
 
     dbgInput.Columns[0].Width := ciDateColumnWidth;
     dbgInput.Columns[1].Width := dbgInput.Width - (ciColumnWidthDiff + ciDateColumnWidth);
     dbgInput.SelectedColor := $DDDDDD;
-    dbgInput.FocusColor:=clNavy;
+    dbgInput.FocusColor := clNavy;
     dbgWork.Columns[0].Width := ciDateColumnWidth;
     dbgWork.Columns[1].Width := dbgWork.Width - (ciColumnWidthDiff + ciDateColumnWidth);
     dbgWork.SelectedColor := $DDDDDD;
-    dbgWork.FocusColor:=clNavy;
+    dbgWork.FocusColor := clNavy;
     dbgTrash.Columns[0].Width := ciDateColumnWidth;
     dbgTrash.Columns[1].Width := dbgTrash.Width - (ciColumnWidthDiff + ciDateColumnWidth);
     dbgTrash.SelectedColor := $DDDDDD;
-    dbgTrash.FocusColor:=clNavy;
+    dbgTrash.FocusColor := clNavy;
     dbgCompleted.Columns[0].Width := ciDateColumnWidth;
     dbgCompleted.Columns[1].Width := dbgCompleted.Width - (ciColumnWidthDiff + ciDateColumnWidth);
     dbgCompleted.SelectedColor := $DDDDDD;
-    dbgCompleted.FocusColor:=clNavy;
-	finally
+    dbgCompleted.FocusColor := clNavy;
+ 	except on E: Exception do
+    begin
 
+      processException('В процессе запуска программы возникла исключительная ситуация: ', E);
+      Application.Terminate;
+		end;
 	end;
 end;
 
@@ -417,10 +425,6 @@ var ldtDeadLine : TDate;
 begin
 
   loGrid := sender as TDBGrid;
-  if loGrid.DataSource.DataSet.FieldByName('fname').AsString = 'Картошка' then
-
-    write;
-
   if not loGrid.DataSource.DataSet.FieldByName('fdeadline').IsNull then
   begin
 
@@ -499,6 +503,13 @@ begin
 end;
 
 
+procedure TfmMain.edTaskNameChange(Sender : TObject);
+begin
+
+  bbtSave.Enabled := Length(Trim(edTaskName.Text)) > 0;
+end;
+
+
 procedure TfmMain.FormClose(Sender : TObject; var CloseAction : TCloseAction);
 begin
 
@@ -531,7 +542,7 @@ procedure TfmMain.actSetupExecute(Sender : TObject);
 begin
 
   fmSetup.ShowModal();
-  reopenTable();
+  reopenTables();
 end;
 
 
@@ -539,7 +550,7 @@ procedure TfmMain.actNewTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.appendRecord();
-  reopenTable();
+  reopenTables();
 end;
 
 
@@ -547,7 +558,7 @@ procedure TfmMain.actChangeInputTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.viewRecord(qrInput.FieldByName('id').AsInteger);
-  reopenTable();
+  reopenTables();
 end;
 
 
@@ -555,7 +566,7 @@ procedure TfmMain.actChangeTrashTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.viewRecord(qrTrash.FieldByName('id').AsInteger);
-  reopenTable();
+  reopenTables();
 end;
 
 
@@ -563,7 +574,7 @@ procedure TfmMain.actChangeCompletedTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.viewRecord(qrCompleted.FieldByName('id').AsInteger);
-  reopenTable();
+  reopenTables();
 end;
 
 
@@ -571,7 +582,7 @@ procedure TfmMain.actChangeWorkTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.viewRecord(qrWork.FieldByName('id').AsInteger);
-  reopenTable();
+  reopenTables();
 end;
 
 
@@ -637,21 +648,44 @@ begin
 end;
 
 
+procedure TfmMain.bbtSaveClick(Sender : TObject);
+begin
+
+  try
+
+    initializeQuery(qrTaskEx,csInsertTaskSQL);
+	  qrTaskEx.ParamByName('pname').Text := edTaskName.Text;
+	  qrTaskEx.ParamByName('ptext').Text := '';
+	  qrTaskEx.ParamByName('pcontext').AsInteger := moContextsCombo.getIntKey();
+	  qrTaskEx.ParamByName('pcreated').AsDateTime := Now;
+    qrTaskEx.ExecSQL;
+    Transaction.Commit;
+    reopenTables();
+ 	except on E: Exception do
+    begin
+      Transaction.Rollback;
+      processException('В процессе работы возникла исключительная ситуация: ', E);
+		end;
+	end;
+  edTaskName.Clear;
+end;
+
+
 procedure TfmMain.cbContextsChange(Sender : TObject);
 begin
 
-  reopenTable();
+  reopenTables();
 end;
 
 
 procedure TfmMain.cbPeriodChange(Sender : TObject);
 begin
 
-  reopenTable();
+  reopenTables();
 end;
 
 
-procedure TfmMain.reopenTable;
+procedure TfmMain.reopenTables;
 const csMainSQL = 'select  id, cast(fname as varchar) as fname, ftext,'#13+
                   '        strftime(''%d-%m-%Y'', fcreated) as fdate,'#13+
                   '        strftime(''%h:%m'', fcreated) as ftime,'#13+
@@ -703,7 +737,7 @@ begin
     EnableMovingActions(False);
 	except on E : Exception do
 
-    fatalError('Ошибка!', E.Message);
+    processException('В процессе работы программы возникла исключительная ситуация!', E);
 	end;
 end;
 
@@ -761,11 +795,11 @@ begin
     if askYesOrNo('Вы действительно хотите удалить задачу "' + psName + '" ?') then
     begin
 
-      initializeQuery(qrTaskExt,'update tbltasks set fstatus = 0 where id = :pid');
-      qrTaskExt.ParamByName('pid').AsInteger := piID;
-      qrTaskExt.ExecSQL;
+      initializeQuery(qrTaskEx,'update tbltasks set fstatus = 0 where id = :pid');
+      qrTaskEx.ParamByName('pid').AsInteger := piID;
+      qrTaskEx.ExecSQL;
       Transaction.Commit;
-      reopenTable();
+      reopenTables();
       Result := True;
 		end;
 	except on E: Exception do
@@ -798,12 +832,12 @@ begin
 
   try
 
-    initializeQuery(qrTaskExt, 'update tbltasks set fstate=:pstate where id=:pid');
-    qrTaskExt.ParamByName('pstate').AsInteger := piState;
-    qrTaskExt.ParamByName('pid').AsInteger := miLastRecordID;
-    qrTaskExt.ExecSQL;
+    initializeQuery(qrTaskEx, 'update tbltasks set fstate=:pstate where id=:pid');
+    qrTaskEx.ParamByName('pstate').AsInteger := piState;
+    qrTaskEx.ParamByName('pid').AsInteger := miLastRecordID;
+    qrTaskEx.ExecSQL;
     Transaction.Commit;
-    reopenTable();
+    reopenTables();
 	except on E: Exception do
     begin
 
