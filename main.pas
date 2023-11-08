@@ -133,6 +133,7 @@ type
 
         procedure createDatabaseIfNeeded();
         procedure reopenTables();
+        procedure reopenTablesWithFilter();
         procedure EnableMovingActions(pblEnabled : Boolean = True);
         function  getSelectedPeriodBegin() : TDate;
         function  deleteTask(piID : Integer; psName : String) : Boolean;
@@ -170,7 +171,7 @@ const ciInputType        = 1;
       ciThisWeekColor    = $2D7000;
       ciSomeDayColor     = $99310F;
       csIniFile          = 'lgtdmgr.ini';
-      csVersion          = '1.2';
+      csVersion          = '1.3';
 
 var fmMain   : TfmMain;
     MainForm : TfmMain;
@@ -597,7 +598,15 @@ procedure TfmMain.actChangeInputTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.viewRecord(qrInput.FieldByName('id').AsInteger);
-  reopenTables();
+  if bbtFilter.ImageIndex = ciFilterOffIcon then
+  begin
+
+    reopenTablesWithFilter();
+  end else
+  begin
+
+  	reopenTables();
+	end;
 end;
 
 
@@ -605,7 +614,15 @@ procedure TfmMain.actChangeTrashTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.viewRecord(qrTrash.FieldByName('id').AsInteger);
-  reopenTables();
+  if bbtFilter.ImageIndex = ciFilterOffIcon then
+  begin
+
+    reopenTablesWithFilter();
+  end else
+  begin
+
+  	reopenTables();
+	end;
 end;
 
 
@@ -613,7 +630,15 @@ procedure TfmMain.actChangeCompletedTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.viewRecord(qrCompleted.FieldByName('id').AsInteger);
-  reopenTables();
+  if bbtFilter.ImageIndex = ciFilterOffIcon then
+  begin
+
+    reopenTablesWithFilter();
+  end else
+  begin
+
+  	reopenTables();
+	end;
 end;
 
 
@@ -621,7 +646,15 @@ procedure TfmMain.actChangeWorkTaskExecute(Sender : TObject);
 begin
 
   fmTaskEdit.viewRecord(qrWork.FieldByName('id').AsInteger);
-  reopenTables();
+  if bbtFilter.ImageIndex = ciFilterOffIcon then
+  begin
+
+    reopenTablesWithFilter();
+  end else
+  begin
+
+  	reopenTables();
+	end;
 end;
 
 
@@ -696,6 +729,10 @@ begin
     // *** Фильтр выключен. Включаем.
     bbtFilter.ImageIndex := ciFilterOffIcon;
     edFilter.Enabled := False;
+    cbContexts.Enabled := False;
+    cbPeriod.Enabled := False;
+    reopenTablesWithFilter();
+
   end else
   begin
 
@@ -705,6 +742,9 @@ begin
       // *** Фильтр включен. Выключаем.
       bbtFilter.ImageIndex := ciFilterOnIcon;
       edFilter.Enabled := True;
+      cbContexts.Enabled := True;
+      cbPeriod.Enabled := True;
+      reopenTables();
     end;
   end;
 end;
@@ -804,6 +844,59 @@ begin
 end;
 
 
+procedure TfmMain.reopenTablesWithFilter;
+const csFilterSQL = 'select  id, cast(fname as varchar) as fname, ftext,'#13+
+                    '        strftime(''%d-%m-%Y'', fcreated) as fdate,'#13+
+                    '        strftime(''%h:%m'', fcreated) as ftime,'#13+
+                    '        fdeadline, fcreated, fupdated'#13+
+						        '  from tbltasks'#13+
+                    ' where     (fstate = :pstate)'#13+
+                    '       and (fstatus = 1)'#13+
+                    '       and ((fname like :ptext)'#13+
+                    '         or (ftext like :ptext))';
+
+var lsFilter : String;
+begin
+
+  lsFilter := '%' + edFilter.Text + '%';
+  try
+
+    restartTransaction(Transaction);
+    initializeQuery(qrInput, csFilterSQL, False);
+    qrInput.ParamByName('pstate').AsInteger := ciInputType;
+    qrInput.ParamByName('ptext').AsString := lsFilter;
+    qrInput.Open();
+    actChangeInputTask.Enabled := qrInput.RecordCount > 0;
+    actDeleteInputTask.Enabled := qrInput.RecordCount > 0;
+
+    initializeQuery(qrWork, csFilterSQL, False);
+    qrWork.ParamByName('pstate').AsInteger := ciWorkType;
+    qrWork.ParamByName('ptext').AsString := lsFilter;
+    qrWork.Open();
+    actChangeWorkTask.Enabled := qrWork.RecordCount > 0;
+    actDeleteWorkTask.Enabled := qrWork.RecordCount > 0;
+
+    initializeQuery(qrTrash, csFilterSQL, False);
+    qrTrash.ParamByName('pstate').AsInteger := ciTrashType;
+    qrTrash.ParamByName('ptext').AsString := lsFilter;
+    qrTrash.Open();
+    actChangeTrashTask.Enabled := qrTrash.RecordCount > 0;
+    actDeleteTrashTask.Enabled := qrTrash.RecordCount > 0;
+
+    initializeQuery(qrCompleted, csFilterSQL, False);
+    qrCompleted.ParamByName('pstate').AsInteger := ciDoneType;
+    qrCompleted.ParamByName('ptext').AsString := lsFilter;
+    qrCompleted.Open();
+    actChangeCompletedTask.Enabled := qrCompleted.RecordCount > 0;
+    actDeleteCompletedTask.Enabled := qrCompleted.RecordCount > 0;
+    EnableMovingActions(False);
+	except on E : Exception do
+
+    processException('В процессе работы программы возникла исключительная ситуация!', E);
+	end;
+end;
+
+
 procedure TfmMain.EnableMovingActions(pblEnabled : Boolean);
 begin
 
@@ -861,7 +954,15 @@ begin
       qrTaskEx.ParamByName('pid').AsInteger := piID;
       qrTaskEx.ExecSQL;
       Transaction.Commit;
-      reopenTables();
+      if bbtFilter.ImageIndex = ciFilterOffIcon then
+      begin
+
+        reopenTablesWithFilter();
+      end else
+      begin
+
+      	reopenTables();
+    	end;
       Result := True;
 		end;
 	except on E: Exception do
