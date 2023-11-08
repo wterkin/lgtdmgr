@@ -9,7 +9,7 @@ uses
 			, Dialogs, ExtCtrls, ComCtrls, DBGrids, StdCtrls, Buttons, ActnList
       , DateUtils, Grids, Windows
       , task_edit, setup
-      , tapp , tdb, tmsg, tlookup, tini
+      , tapp , tdb, tmsg, tlookup, tini, tstr
       ;
 
 type
@@ -40,6 +40,8 @@ type
 						Bevel2 : TBevel;
 						Bevel3 : TBevel;
 						bbtSave : TBitBtn;
+						Bevel4 : TBevel;
+						bbtFilter : TBitBtn;
 					  cbContexts : TComboBox;
 					  cbPeriod : TComboBox;
 						dbgCompleted : TDBGrid;
@@ -50,6 +52,7 @@ type
 					  dsWork : TDataSource;
 					  dsTrash : TDataSource;
 					  dsCompleted : TDataSource;
+						edFilter : TEdit;
 						edTaskName : TEdit;
 					  ImageList : TImageList;
 						Label1 : TLabel;
@@ -103,6 +106,7 @@ type
 		    procedure actToInputBoxExecute(Sender : TObject);
 				procedure actToTrashBinExecute(Sender : TObject);
 				procedure actToWorkExecute(Sender : TObject);
+				procedure bbtFilterClick(Sender : TObject);
 				procedure bbtSaveClick(Sender : TObject);
 				procedure cbContextsChange(Sender : TObject);
 				procedure cbPeriodChange(Sender : TObject);
@@ -112,6 +116,7 @@ type
 					        {%H-}Column : TColumn; {%H-}AState : TGridDrawState);
 				procedure dbgWorkCellClick({%H-}Column : TColumn);
 				procedure dbgTrashCellClick({%H-}Column : TColumn);
+				procedure edFilterChange(Sender : TObject);
 				procedure edTaskNameChange(Sender : TObject);
 				procedure FormClose(Sender : TObject; var {%H-}CloseAction : TCloseAction);
 		    procedure FormCreate(Sender : TObject);
@@ -152,6 +157,9 @@ const ciInputType        = 1;
       ciMonthTasks       = 2;
       ciYearTasks        = 3;
       ciAllTasks         = 4;
+
+      ciFilterOnIcon     = 11;
+      ciFilterOffIcon    = 10;
 
       ciColumnWidthDiff  = 34;
       csDatabaseFileName = 'lgtdmgr.db';
@@ -349,7 +357,15 @@ begin
           actToCompletedExecute(Nil);
         end;
 			end;
-      VK_PRIOR: begin
+      VK_F12: begin
+
+        if bbtFilter.IsEnabled then
+        begin
+
+          bbtFilterClick(Self);
+				end;
+			end;
+			VK_PRIOR: begin
 
         if liIndex > 0 then
         begin
@@ -519,6 +535,13 @@ begin
 end;
 
 
+procedure TfmMain.edFilterChange(Sender : TObject);
+begin
+
+  bbtFilter.Enabled := not isEmpty(edFilter.Text);
+end;
+
+
 procedure TfmMain.edTaskNameChange(Sender : TObject);
 begin
 
@@ -661,6 +684,29 @@ procedure TfmMain.actToWorkExecute(Sender : TObject);
 begin
 
   changeState(ciWorkType);
+end;
+
+
+procedure TfmMain.bbtFilterClick(Sender : TObject);
+begin
+
+  if bbtFilter.ImageIndex = ciFilterOnIcon then
+  begin
+
+    // *** Фильтр выключен. Включаем.
+    bbtFilter.ImageIndex := ciFilterOffIcon;
+    edFilter.Enabled := False;
+  end else
+  begin
+
+    if bbtFilter.ImageIndex = ciFilterOffIcon then
+    begin
+
+      // *** Фильтр включен. Выключаем.
+      bbtFilter.ImageIndex := ciFilterOnIcon;
+      edFilter.Enabled := True;
+    end;
+  end;
 end;
 
 
