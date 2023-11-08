@@ -10,6 +10,7 @@ object fmMain: TfmMain
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
+  OnResize = FormResize
   LCLVersion = '2.2.6.0'
   object Panel1: TPanel
     Left = 0
@@ -207,6 +208,7 @@ object fmMain: TfmMain
       Top = 2
       Width = 8
       Beveled = True
+      OnMoved = Splitter1Moved
     end
     object Panel3: TPanel
       Left = 2
@@ -287,6 +289,7 @@ object fmMain: TfmMain
           Width = 440
           Action = actToInputBox
           Align = alRight
+          Anchors = [akTop, akLeft, akRight, akBottom]
           Font.CharSet = RUSSIAN_CHARSET
           Font.Height = -16
           Font.Name = 'Tahoma'
@@ -480,6 +483,7 @@ object fmMain: TfmMain
           Width = 440
           Action = actToTrashBin
           Align = alRight
+          Anchors = [akTop, akLeft, akRight, akBottom]
           Font.CharSet = RUSSIAN_CHARSET
           Font.Height = -16
           Font.Name = 'Tahoma'
@@ -589,6 +593,7 @@ object fmMain: TfmMain
       Top = 2
       Width = 8
       Beveled = True
+      OnMoved = Splitter1Moved
     end
   end
   object SQLite: TSQLite3Connection

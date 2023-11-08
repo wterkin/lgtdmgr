@@ -117,6 +117,8 @@ type
 		    procedure FormCreate(Sender : TObject);
 				procedure FormKeyDown(Sender : TObject; var Key : Word;
 								  Shift : TShiftState);
+				procedure FormResize(Sender : TObject);
+				procedure Splitter1Moved(Sender : TObject);
       private
 
         miLastRecordID  : Integer;
@@ -151,7 +153,7 @@ const ciInputType        = 1;
       ciYearTasks        = 3;
       ciAllTasks         = 4;
 
-      ciColumnWidthDiff  = 40;
+      ciColumnWidthDiff  = 34;
       csDatabaseFileName = 'lgtdmgr.db';
       ciDateColumnWidth  = 84;
 
@@ -160,7 +162,7 @@ const ciInputType        = 1;
       ciThisWeekColor    = $2D7000;
       ciSomeDayColor     = $99310F;
       csIniFile          = 'lgtdmgr.ini';
-      csVersion          = '1.1';
+      csVersion          = '1.2';
 
 var fmMain   : TfmMain;
     MainForm : TfmMain;
@@ -281,22 +283,15 @@ begin
     cbContexts.ItemIndex := miContext;
     reopenTables();
 
-    dbgInput.Columns[0].Width := ciDateColumnWidth;
-    dbgInput.Columns[1].Width := dbgInput.Width - (ciColumnWidthDiff + ciDateColumnWidth);
     dbgInput.SelectedColor := $DDDDDD;
     dbgInput.FocusColor := clNavy;
-    dbgWork.Columns[0].Width := ciDateColumnWidth;
-    dbgWork.Columns[1].Width := dbgWork.Width - (ciColumnWidthDiff + ciDateColumnWidth);
     dbgWork.SelectedColor := $DDDDDD;
     dbgWork.FocusColor := clNavy;
-    dbgTrash.Columns[0].Width := ciDateColumnWidth;
-    dbgTrash.Columns[1].Width := dbgTrash.Width - (ciColumnWidthDiff + ciDateColumnWidth);
     dbgTrash.SelectedColor := $DDDDDD;
     dbgTrash.FocusColor := clNavy;
-    dbgCompleted.Columns[0].Width := ciDateColumnWidth;
-    dbgCompleted.Columns[1].Width := dbgCompleted.Width - (ciColumnWidthDiff + ciDateColumnWidth);
     dbgCompleted.SelectedColor := $DDDDDD;
     dbgCompleted.FocusColor := clNavy;
+    FormResize(Self);
  	except on E: Exception do
     begin
 
@@ -395,6 +390,27 @@ begin
 		end;
   end;
   write;
+end;
+
+
+procedure TfmMain.FormResize(Sender : TObject);
+begin
+
+  dbgInput.Columns[0].Width := ciDateColumnWidth;
+  dbgInput.Columns[1].Width := dbgInput.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+  dbgWork.Columns[0].Width := ciDateColumnWidth;
+  dbgWork.Columns[1].Width := dbgWork.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+  dbgTrash.Columns[0].Width := ciDateColumnWidth;
+  dbgTrash.Columns[1].Width := dbgTrash.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+  dbgCompleted.Columns[0].Width := ciDateColumnWidth;
+  dbgCompleted.Columns[1].Width := dbgCompleted.Width - (ciColumnWidthDiff + ciDateColumnWidth);
+end;
+
+
+procedure TfmMain.Splitter1Moved(Sender : TObject);
+begin
+
+  FormResize(Self);
 end;
 
 
