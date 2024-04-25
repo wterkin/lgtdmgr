@@ -54,7 +54,8 @@ const csInsertTaskSQL =
 		    '                      fdeadline,'#13+
 		    '                      fstate,'#13+
 		    '                      fstatus,'#13+
-		    '                      fcreated'#13+
+		    '                      fcreated,'#13+
+        '                      fupdated'#13+
 		    '                  )'#13+
 		    '                  VALUES ('#13+
 		    '                      :pcontext,'#13+
@@ -63,7 +64,8 @@ const csInsertTaskSQL =
 		    '                      :pdeadline,'#13+
 		    '                      1,'#13+
 		    '                      1,'#13+
-		    '                      :pcreated'#13+
+		    '                      :pcreated,'#13+
+		    '                      :pupdated'#13+
 		    '                  );'#13;
 
 var
@@ -154,6 +156,7 @@ begin
   begin
 
     qrTaskEx.ParamByName('pcreated').AsDateTime := Now;
+    qrTaskEx.ParamByName('pupdated').AsDateTime := Now;
 	end;
 end;
 

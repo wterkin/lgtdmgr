@@ -22,10 +22,11 @@ object fmMain: TfmMain
     BevelOuter = bvLowered
     ClientHeight = 67
     ClientWidth = 1031
-    TabOrder = 2
+    TabOrder = 0
     object cbContexts: TComboBox
       Left = 192
       Height = 26
+      Hint = 'PageUp / PageDown'
       Top = 5
       Width = 120
       Font.CharSet = RUSSIAN_CHARSET
@@ -42,13 +43,16 @@ object fmMain: TfmMain
       )
       OnChange = cbContextsChange
       ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
       Style = csDropDownList
-      TabOrder = 0
+      TabOrder = 4
       Text = 'Все'
     end
     object cbPeriod: TComboBox
       Left = 390
       Height = 26
+      Hint = 'Numpad + / -'
       Top = 5
       Width = 120
       Font.CharSet = RUSSIAN_CHARSET
@@ -67,8 +71,10 @@ object fmMain: TfmMain
       )
       OnChange = cbPeriodChange
       ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
       Style = csDropDownList
-      TabOrder = 1
+      TabOrder = 5
       Text = 'За неделю'
     end
     object sbNewTask: TSpeedButton
@@ -79,6 +85,8 @@ object fmMain: TfmMain
       Action = actNewTask
       Images = ImageList
       ImageIndex = 5
+      ShowHint = True
+      ParentShowHint = False
     end
     object sbQuit: TSpeedButton
       Left = 67
@@ -88,6 +96,8 @@ object fmMain: TfmMain
       Action = actQuit
       Images = ImageList
       ImageIndex = 7
+      ShowHint = True
+      ParentShowHint = False
     end
     object sbSetup: TSpeedButton
       Left = 35
@@ -97,6 +107,8 @@ object fmMain: TfmMain
       Action = actSetup
       Images = ImageList
       ImageIndex = 0
+      ShowHint = True
+      ParentShowHint = False
     end
     object Bevel1: TBevel
       Left = 104
@@ -154,7 +166,7 @@ object fmMain: TfmMain
       Width = 396
       Anchors = [akTop, akLeft, akRight]
       OnChange = edTaskNameChange
-      TabOrder = 2
+      TabOrder = 0
       TextHint = 'Наименование задачи'
     end
     object bbtSave: TBitBtn
@@ -176,7 +188,7 @@ object fmMain: TfmMain
       ImageIndex = 1
       OnClick = bbtSaveClick
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 1
     end
     object Bevel4: TBevel
       Left = 515
@@ -191,7 +203,7 @@ object fmMain: TfmMain
       Top = 40
       Width = 392
       OnChange = edFilterChange
-      TabOrder = 4
+      TabOrder = 2
       TextHint = 'Текст, по которому будет осуществляться фильтрация'
     end
     object bbtFilter: TBitBtn
@@ -211,7 +223,7 @@ object fmMain: TfmMain
       ImageIndex = 11
       OnClick = bbtFilterClick
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 3
     end
   end
   object StatusBar: TStatusBar
@@ -219,6 +231,7 @@ object fmMain: TfmMain
     Height = 23
     Top = 740
     Width = 1031
+    AutoHint = True
     Panels = <>
     ParentShowHint = False
     ShowHint = True
@@ -243,7 +256,7 @@ object fmMain: TfmMain
     BevelOuter = bvLowered
     ClientHeight = 325
     ClientWidth = 1031
-    TabOrder = 0
+    TabOrder = 1
     object Splitter1: TSplitter
       Left = 512
       Height = 321
@@ -315,6 +328,8 @@ object fmMain: TfmMain
           Action = actChangeInputTask
           Images = ImageList
           ImageIndex = 4
+          ShowHint = True
+          ParentShowHint = False
         end
         object sbDeleteInputTask: TSpeedButton
           Left = 33
@@ -324,6 +339,8 @@ object fmMain: TfmMain
           Action = actDeleteInputTask
           Images = ImageList
           ImageIndex = 6
+          ShowHint = True
+          ParentShowHint = False
         end
         object bbtToInput: TBitBtn
           Left = 64
@@ -341,6 +358,8 @@ object fmMain: TfmMain
           Images = ImageList
           ImageIndex = 3
           ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 0
         end
       end
@@ -407,6 +426,8 @@ object fmMain: TfmMain
           Action = actChangeWorkTask
           Images = ImageList
           ImageIndex = 4
+          ShowHint = True
+          ParentShowHint = False
         end
         object sbDeleteWorkTask: TSpeedButton
           Left = 33
@@ -416,6 +437,8 @@ object fmMain: TfmMain
           Action = actDeleteWorkTask
           Images = ImageList
           ImageIndex = 6
+          ShowHint = True
+          ParentShowHint = False
         end
         object bbtToWork: TBitBtn
           Left = 66
@@ -433,6 +456,8 @@ object fmMain: TfmMain
           Images = ImageList
           ImageIndex = 9
           ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 0
         end
       end
@@ -448,7 +473,7 @@ object fmMain: TfmMain
     BevelOuter = bvLowered
     ClientHeight = 340
     ClientWidth = 1031
-    TabOrder = 1
+    TabOrder = 2
     object Panel6: TPanel
       Left = 2
       Height = 336
@@ -511,6 +536,8 @@ object fmMain: TfmMain
           Action = actChangeTrashTask
           Images = ImageList
           ImageIndex = 4
+          ShowHint = True
+          ParentShowHint = False
         end
         object sbDeleteTrashTask: TSpeedButton
           Left = 33
@@ -520,6 +547,8 @@ object fmMain: TfmMain
           Action = actDeleteTrashTask
           Images = ImageList
           ImageIndex = 6
+          ShowHint = True
+          ParentShowHint = False
         end
         object bbtToTrash: TBitBtn
           Left = 64
@@ -537,6 +566,8 @@ object fmMain: TfmMain
           Images = ImageList
           ImageIndex = 2
           ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 0
         end
       end
@@ -603,6 +634,8 @@ object fmMain: TfmMain
           Action = actChangeCompletedTask
           Images = ImageList
           ImageIndex = 4
+          ShowHint = True
+          ParentShowHint = False
         end
         object sbDeleteCompletedTask: TSpeedButton
           Left = 33
@@ -612,12 +645,14 @@ object fmMain: TfmMain
           Action = actDeleteCompletedTask
           Images = ImageList
           ImageIndex = 6
+          ShowHint = True
+          ParentShowHint = False
         end
         object bbtToDone: TBitBtn
-          Left = 66
+          Left = 64
           Height = 32
           Top = 2
-          Width = 437
+          Width = 439
           Action = actToCompleted
           Align = alRight
           Anchors = [akTop, akLeft, akRight, akBottom]
@@ -629,6 +664,8 @@ object fmMain: TfmMain
           Images = ImageList
           ImageIndex = 1
           ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 0
         end
       end

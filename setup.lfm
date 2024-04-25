@@ -87,6 +87,7 @@ object fmSetup: TfmSetup
     Height = 30
     Top = 280
     Width = 158
+    Cancel = True
     Caption = 'Закрыть'
     Glyph.Data = {
       C6070000424DC607000000000000360000002800000016000000160000000100

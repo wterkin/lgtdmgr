@@ -175,11 +175,12 @@ object fmTaskEdit: TfmTaskEdit
     end
   end
   object bbtOk: TBitBtn
-    Left = 327
+    Left = 328
     Height = 30
-    Top = 400
+    Top = 408
     Width = 155
     Caption = 'Принять'
+    Default = True
     Font.CharSet = RUSSIAN_CHARSET
     Font.Height = -16
     Font.Name = 'Tahoma'
@@ -192,10 +193,11 @@ object fmTaskEdit: TfmTaskEdit
     TabOrder = 1
   end
   object bbtCancel: TBitBtn
-    Left = 487
+    Left = 488
     Height = 30
-    Top = 400
+    Top = 408
     Width = 155
+    Cancel = True
     Caption = 'Отмена'
     Font.CharSet = RUSSIAN_CHARSET
     Font.Height = -16
