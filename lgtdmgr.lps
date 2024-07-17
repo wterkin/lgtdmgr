@@ -19,9 +19,10 @@
         <ComponentName Value="fmMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="589"/>
-        <CursorPos X="5" Y="591"/>
-        <FoldState Value=" T3lD0$115 pkBoY06817 pjSl409[94VkL0o]TiZkH0I3 PUi70 TJlE1gI"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="228"/>
+        <CursorPos Y="236"/>
+        <FoldState Value=" T3n50l1 pjAkK0B4 pidjM06C]9ajc0D8]R5k2043]9M]I75]93jS04P"/>
         <UsageCount Value="202"/>
         <Bookmarks Count="2">
           <Item0 Y="916" ID="2"/>
@@ -36,10 +37,9 @@
         <ComponentName Value="fmTaskEdit"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="147"/>
-        <CursorPos Y="159"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="56"/>
+        <CursorPos Y="139"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -50,7 +50,8 @@
         <ComponentName Value="fmSetup"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="49"/>
         <UsageCount Value="188"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -61,7 +62,7 @@
         <ComponentName Value="fmContextEdit"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="25"/>
         <CursorPos X="56" Y="42"/>
         <UsageCount Value="130"/>
@@ -118,10 +119,11 @@
       </Unit>
       <Unit>
         <Filename Value="..\tlib5\tini.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="234"/>
-        <CursorPos Y="238"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="108"/>
+        <CursorPos X="3" Y="111"/>
         <UsageCount Value="65"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="D:\langs\lazarus-2.2.6\fpc\3.2.2\source\rtl\win\wininc\defines.inc"/>
@@ -135,30 +137,6 @@
       <Backend Value="{DEB953A3-D333-41C7-9F55-F7AFA6DA4C99}"/>
     </Debugger>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="135" Column="19" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="136" Column="44" TopLine="123"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="700" TopLine="693"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="822" TopLine="737"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="824" TopLine="816"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="825" TopLine="816"/>
-      </Position>
       <Position>
         <Filename Value="main.pas"/>
         <Caret Line="827" TopLine="816"/>
@@ -253,6 +231,30 @@
       <Position>
         <Filename Value="task_edit.pas"/>
         <Caret Line="39" Column="17" TopLine="28"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="142" Column="32" TopLine="137"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="1038" TopLine="1025"/>
+      </Position>
+      <Position>
+        <Filename Value="..\tlib5\tini.pas"/>
+        <Caret Line="34" Column="19" TopLine="24"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="174" Column="32" TopLine="172"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="236" TopLine="228"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="237" TopLine="228"/>
       </Position>
     </JumpHistory>
     <RunParams>

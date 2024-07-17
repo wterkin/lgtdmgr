@@ -11,7 +11,6 @@ object fmMain: TfmMain
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnResize = FormResize
-  LCLVersion = '2.2.6.0'
   object Panel1: TPanel
     Left = 0
     Height = 67
@@ -41,13 +40,13 @@ object fmMain: TfmMain
         'Работа'
         'Дом'
       )
-      OnChange = cbContextsChange
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
       Style = csDropDownList
       TabOrder = 4
       Text = 'Все'
+      OnChange = cbContextsChange
     end
     object cbPeriod: TComboBox
       Left = 390
@@ -69,13 +68,13 @@ object fmMain: TfmMain
         'За год'
         'Все'
       )
-      OnChange = cbPeriodChange
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
       Style = csDropDownList
       TabOrder = 5
       Text = 'За неделю'
+      OnChange = cbPeriodChange
     end
     object sbNewTask: TSpeedButton
       Left = 3
@@ -165,9 +164,9 @@ object fmMain: TfmMain
       Top = 40
       Width = 396
       Anchors = [akTop, akLeft, akRight]
-      OnChange = edTaskNameChange
       TabOrder = 0
       TextHint = 'Наименование задачи'
+      OnChange = edTaskNameChange
     end
     object bbtSave: TBitBtn
       Left = 400
@@ -202,9 +201,9 @@ object fmMain: TfmMain
       Height = 23
       Top = 40
       Width = 392
-      OnChange = edFilterChange
       TabOrder = 2
       TextHint = 'Текст, по которому будет осуществляться фильтрация'
+      OnChange = edFilterChange
     end
     object bbtFilter: TBitBtn
       Left = 912
