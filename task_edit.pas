@@ -6,7 +6,7 @@ interface
 
 uses
     Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Buttons,
-		StdCtrls, DateTimePicker, SQLDB, DateUtils
+    StdCtrls, DateTimePicker, SQLDB, DateUtils
     ,tdb, tlookup
     ;
 
@@ -73,7 +73,7 @@ var
 
 implementation
 
-uses main;
+uses newmain;
 
 {$R *.lfm}
 
@@ -105,13 +105,13 @@ begin
   		end;
   		StoreData();
       qrTaskEx.ExecSQL;
-      MainForm.Transaction.Commit;
+      NewMainForm.Transaction.Commit;
       ModalResult := mrOk;
   	except on E: Exception do
       begin
 
-        MainForm.Transaction.Rollback;
-        MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
+        NewMainForm.Transaction.Rollback;
+        NewMainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
 			end;
 		end;
 	end;
@@ -126,13 +126,13 @@ begin
   dtpDeadLine.Date := NullDate;
   moContextsCombo := TEasyLookupCombo.Create();
   moContextsCombo.setComboBox(cbContexts);
-  moContextsCombo.setQuery(MainForm.qrContexts);
+  moContextsCombo.setQuery(NewMainForm.qrContexts);
   moContextsCombo.setSQL('select * from tblcontexts where fstatus>0');
   moContextsCombo.setKeyField('id');
   moContextsCombo.setListField('fname');
   lblCreated.Caption := DateToStr(Now);
   moContextsCombo.fill();
-  cbContexts.ItemIndex := MainForm.cbContexts.ItemIndex;
+  cbContexts.ItemIndex := NewMainForm.cbContexts.ItemIndex;
 end;
 
 
@@ -150,7 +150,7 @@ begin
   if moMode = dmUpdate then
   begin
 
-    qrTaskEx.ParamByName('pid').AsInteger := MainForm.getLastRecordID();
+    qrTaskEx.ParamByName('pid').AsInteger := NewMainForm.getLastRecordID();
     qrTaskEx.ParamByName('pupdated').AsDateTime := Now;
   end else
   begin
@@ -187,7 +187,7 @@ begin
 	liContextKey := qrTask.FieldByName('fcontext').AsInteger;
   moContextsCombo := TEasyLookupCombo.Create();
   moContextsCombo.setComboBox(cbContexts);
-  moContextsCombo.setQuery(MainForm.qrContexts);
+  moContextsCombo.setQuery(NewMainForm.qrContexts);
   moContextsCombo.setSQL('select * from tblcontexts where fstatus>0');
   moContextsCombo.setKeyField('id');
   moContextsCombo.setListField('fname');
@@ -211,12 +211,12 @@ begin
     initializeQuery(qrTask,'select * from tbltasks where id = :pid');
     qrTask.ParamByName('pid').AsInteger := piID;
     qrTask.Open();
- 	except on E: Exception do
+  except on E: Exception do
 
-    MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
-	end;
-	moMode := dmUpdate;
-	LoadData();
+    NewMainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
+  end;
+  moMode := dmUpdate;
+  LoadData();
   ShowModal;
 end;
 
@@ -225,7 +225,7 @@ procedure TfmTaskEdit.appendRecord();
 begin
 
   moMode := dmInsert;
-	InitData();
+  InitData();
   ShowModal;
 end;
 

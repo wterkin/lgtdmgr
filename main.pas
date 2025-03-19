@@ -24,6 +24,7 @@ type
 	actDeleteTrashTask : TAction;
 	actChangeCompletedTask : TAction;
 	actDeleteCompletedTask : TAction;
+        actSave: TAction;
 	actSetup : TAction;
 	actQuit : TAction;
 	actNewTask : TAction;
@@ -99,6 +100,7 @@ type
 	procedure actDeleteInputTaskExecute(Sender : TObject);
 	procedure actDeleteTrashTaskExecute(Sender : TObject);
 	procedure actDeleteWorkTaskExecute(Sender : TObject);
+        procedure actSaveExecute(Sender: TObject);
         procedure actNewTaskExecute(Sender : TObject);
         procedure actQuitExecute(Sender : TObject);
 	procedure actSetupExecute(Sender : TObject);
@@ -703,6 +705,11 @@ begin
 
     notify('Внимание!', 'Удаление задачи не удалось из-за ошибки.');
 	end;
+end;
+
+procedure TfmMain.actSaveExecute(Sender: TObject);
+begin
+
 end;
 
 

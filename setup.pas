@@ -44,7 +44,7 @@ var
 implementation
 
 
-uses main;
+uses newmain;
 {$R *.lfm}
 
 { TfmSetup }
@@ -100,13 +100,13 @@ begin
         initializeQuery(qrContextEx, 'update tblcontexts set fstatus = 0 where id = :pid');
         qrContextEx.ParamByName('pid').AsInteger := liID;
         qrContextEx.ExecSQL();
-        MainForm.Transaction.Commit;
+        NewMainForm.Transaction.Commit;
         reOpenTable();
     	except on E: Exception do
         begin
 
-          MainForm.Transaction.Rollback;
-          MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
+          NewMainForm.Transaction.Rollback;
+          NewMainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
     	  end;
     	end;
 
@@ -139,8 +139,8 @@ begin
 	except on E: Exception do
     begin
 
-      MainForm.Transaction.Rollback;
-      MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
+      NewMainForm.Transaction.Rollback;
+      NewMainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
     end;
   end;
 end;
@@ -163,8 +163,8 @@ begin
 	except on E: Exception do
     begin
 
-      MainForm.Transaction.Rollback;
-      MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
+      NewMainForm.Transaction.Rollback;
+      NewMainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
 	  end;
 	end;
 end;

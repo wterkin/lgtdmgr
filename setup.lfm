@@ -7,7 +7,6 @@ object fmSetup: TfmSetup
   ClientHeight = 324
   ClientWidth = 306
   OnShow = FormShow
-  LCLVersion = '2.2.6.0'
   object Panel1: TPanel
     Left = 8
     Height = 266
@@ -52,7 +51,7 @@ object fmSetup: TfmSetup
         Height = 32
         Top = 2
         Width = 33
-        Images = fmMain.ImageList
+        Images = fmNewMain.ImageList
         ImageIndex = 5
         OnClick = sbCreateContextClick
         ShowHint = True
@@ -63,7 +62,7 @@ object fmSetup: TfmSetup
         Height = 32
         Top = 2
         Width = 33
-        Images = fmMain.ImageList
+        Images = fmNewMain.ImageList
         ImageIndex = 4
         OnClick = sbChangeContextClick
         ShowHint = True
@@ -74,7 +73,7 @@ object fmSetup: TfmSetup
         Height = 32
         Top = 2
         Width = 33
-        Images = fmMain.ImageList
+        Images = fmNewMain.ImageList
         ImageIndex = 6
         OnClick = sbDeleteContextClick
         ShowHint = True
@@ -159,8 +158,8 @@ object fmSetup: TfmSetup
   end
   object qrContexts: TSQLQuery
     FieldDefs = <>
-    Database = fmMain.SQLite
-    Transaction = fmMain.Transaction
+    Database = fmNewMain.SQLite
+    Transaction = fmNewMain.Transaction
     Params = <>
     Macros = <>
     Left = 120
@@ -168,13 +167,13 @@ object fmSetup: TfmSetup
   end
   object dsContexts: TDataSource
     DataSet = qrContexts
-    Left = 184
+    Left = 192
     Top = 16
   end
   object qrContextEx: TSQLQuery
     FieldDefs = <>
-    Database = fmMain.SQLite
-    Transaction = fmMain.Transaction
+    Database = fmNewMain.SQLite
+    Transaction = fmNewMain.Transaction
     Params = <>
     Macros = <>
     Left = 256

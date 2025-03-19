@@ -6,7 +6,6 @@ object fmContextEdit: TfmContextEdit
   Caption = 'Редактирование контекста'
   ClientHeight = 119
   ClientWidth = 361
-  LCLVersion = '2.2.6.0'
   object Panel1: TPanel
     Left = 8
     Height = 104
@@ -78,8 +77,8 @@ object fmContextEdit: TfmContextEdit
   end
   object qrContexts: TSQLQuery
     FieldDefs = <>
-    Database = fmMain.SQLite
-    Transaction = fmMain.Transaction
+    Database = fmNewMain.SQLite
+    Transaction = fmNewMain.Transaction
     Params = <>
     Macros = <>
     Left = 48
@@ -87,11 +86,11 @@ object fmContextEdit: TfmContextEdit
   end
   object qrContextsEx: TSQLQuery
     FieldDefs = <>
-    Database = fmMain.SQLite
-    Transaction = fmMain.Transaction
+    Database = fmNewMain.SQLite
+    Transaction = fmNewMain.Transaction
     Params = <>
     Macros = <>
-    Left = 264
+    Left = 272
     Top = 8
   end
 end

@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses main;
+uses newmain;
 
 {$R *.lfm}
 
@@ -80,13 +80,13 @@ begin
   		end;
   		StoreData();
       qrContextsEx.ExecSQL;
-      MainForm.Transaction.Commit;
+      NewMainForm.Transaction.Commit;
       ModalResult := mrOk;
   	except on E: Exception do
       begin
 
-        MainForm.Transaction.Rollback;
-        MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
+        NewMainForm.Transaction.Rollback;
+        NewMainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
 			end;
 		end;
 	end;
@@ -141,7 +141,7 @@ begin
     qrContexts.Open();
  	except on E: Exception do
 
-    MainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
+    NewMainForm.processException('В процессе работы возникла исключительная ситуация: ', E);
 	end;
 	moMode := dmUpdate;
 	LoadData();
@@ -153,7 +153,7 @@ procedure TfmContextEdit.appendRecord;
 begin
 
   moMode := dmInsert;
-	InitData();
+  InitData();
   ShowModal;
 end;
 

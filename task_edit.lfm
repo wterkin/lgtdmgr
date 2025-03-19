@@ -7,7 +7,6 @@ object fmTaskEdit: TfmTaskEdit
   Caption = 'Свойства задачи'
   ClientHeight = 444
   ClientWidth = 653
-  LCLVersion = '2.2.6.0'
   object Panel1: TPanel
     Left = 8
     Height = 392
@@ -212,8 +211,8 @@ object fmTaskEdit: TfmTaskEdit
   end
   object qrTask: TSQLQuery
     FieldDefs = <>
-    Database = fmMain.SQLite
-    Transaction = fmMain.Transaction
+    Database = fmNewMain.SQLite
+    Transaction = fmNewMain.Transaction
     Params = <>
     Macros = <>
     Left = 24
@@ -221,8 +220,8 @@ object fmTaskEdit: TfmTaskEdit
   end
   object qrTaskEx: TSQLQuery
     FieldDefs = <>
-    Database = fmMain.SQLite
-    Transaction = fmMain.Transaction
+    Database = fmNewMain.SQLite
+    Transaction = fmNewMain.Transaction
     Params = <>
     Macros = <>
     Left = 88
